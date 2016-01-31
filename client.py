@@ -15,8 +15,7 @@ def print_conversation_header(pkt):
         http_referer = "0"
         http_host = "0"
         # TCP traf
-        if protocol == "TCP": 
-            http = "0"
+        if protocol == "TCP":
             http = pkt.http.request
             if http == "1":
                 http_referer = pkt.http.referer
