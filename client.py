@@ -1,4 +1,4 @@
-# /usr/bin/python
+#!/usr/bin/python
 import pyshark
 
 cap = pyshark.LiveCapture(interface='eth0', bpf_filter='ip')
