@@ -8,6 +8,7 @@ cap = pyshark.LiveCapture(interface='eth0', bpf_filter='src net 192 and (tcp dst
 # Define tmp pcap
 tmpfiles = glob.glob('/tmp/wireshark*')
 
+
 def print_conversation_header(pkt):
     try:
         protocol = pkt.transport_layer
@@ -15,15 +16,15 @@ def print_conversation_header(pkt):
         src_port = pkt[pkt.transport_layer].srcport
         dst_addr = pkt.ip.dst
         dst_port = pkt[pkt.transport_layer].dstport
-# UDP traf
+        # UDP traf
         if protocol == "UDP":
             print '%s  %s:%s --> %s:%s' % (protocol, src_addr, src_port, dst_addr, dst_port)
-# DNS request
+            # DNS request
             if pkt.dns.qry_name:
                 print 'DNS Request from %s: %s' % (pkt.ip.src, pkt.dns.qry_name)
             elif pkt.dns.resp_name:
                 print 'DNS Response from %s: %s' % (pkt.ip.src, pkt.dns.resp_name)
-# TCP traf
+        # TCP traf
         if protocol == "TCP":
             # http_referer = pkt.http.referer
             http_host = pkt.http.host
