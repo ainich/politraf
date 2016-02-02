@@ -15,8 +15,6 @@ def print_conversation_header(pkt):
     src_port = pkt[pkt.transport_layer].srcport
     dst_addr = pkt.ip.dst
     dst_port = pkt[pkt.transport_layer].dstport
-    #sslcheck = "SSL"
-    #httpcheck = "HTTP"
 
     # UDP traf
     if protocol == "UDP":
@@ -26,6 +24,7 @@ def print_conversation_header(pkt):
             print 'DNS Request from %s: %s' % (pkt.ip.src, pkt.dns.qry_name)
         elif pkt.dns.resp_name:
             print 'DNS Response from %s: %s' % (pkt.ip.src, pkt.dns.resp_name)
+    # TCP traf
     else:
         if "SSL" in pkt:
             print 'SSL %s  %s:%s --> %s:%s' % (protocol, src_addr, src_port, dst_addr, dst_port)
@@ -39,8 +38,9 @@ def print_conversation_header(pkt):
 
 
 while True:
-    i = 0
-    while i < 1024:
-        cap.apply_on_packets(print_conversation_header)
-        i += 1
-    os.remove(tmpfiles)
+    try:
+        cap.apply_on_packets(print_conversation_header, timeout=60)
+    except Exception as e:
+        pass
+    for f in tmpfiles:
+        os.remove(f)
