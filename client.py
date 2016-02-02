@@ -5,8 +5,6 @@ import os
 import glob
 
 cap = pyshark.LiveCapture(interface='eth0', bpf_filter='src net 192.168.1 and (tcp dst portrange 1-1024 or udp dst port 53)')
-# Define tmp pcap
-tmpfiles = glob.glob('/tmp/wireshark*')
 
 
 def print_conversation_header(pkt):
@@ -38,9 +36,11 @@ def print_conversation_header(pkt):
 
 
 while True:
-    try:
-        cap.apply_on_packets(print_conversation_header, timeout=60)
-    except Exception as e:
-        pass
+    # Define tmp pcap
+    tmpfiles = glob.glob('/tmp/wireshark*')
     for f in tmpfiles:
         os.remove(f)
+    try:
+        cap.apply_on_packets(print_conversation_header, timeout=180)
+    except Exception as e:
+        pass
