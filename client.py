@@ -15,6 +15,8 @@ def print_conversation_header(pkt):
     src_port = pkt[pkt.transport_layer].srcport
     dst_addr = pkt.ip.dst
     dst_port = pkt[pkt.transport_layer].dstport
+    #sslcheck = "SSL"
+    #httpcheck = "HTTP"
 
     # UDP traf
     if protocol == "UDP":
@@ -25,25 +27,20 @@ def print_conversation_header(pkt):
         elif pkt.dns.resp_name:
             print 'DNS Response from %s: %s' % (pkt.ip.src, pkt.dns.resp_name)
     else:
-        printed = False
-        try:
-            if pkt.ssl is not None:
-                print 'SSL %s  %s:%s --> %s:%s' % (protocol, src_addr, src_port, dst_addr, dst_port)
-                printed = True
-        except AttributeError as e:
-            pass
-        try:
-            if pkt.http is not None:
-                http_host = pkt.http.host
-                print 'HTTP %s  %s:%s %s --> %s:%s' % (protocol, src_addr, src_port, http_host, dst_addr, dst_port)
-                printed = True
-        except AttributeError as e:
-            pass
-        if not printed:
+        if "SSL" in pkt:
+            print 'SSL %s  %s:%s --> %s:%s' % (protocol, src_addr, src_port, dst_addr, dst_port)
+
+        elif "HTTP" in pkt:
+            http_host = pkt.http.host
+            print 'HTTP %s  %s:%s %s --> %s:%s' % (protocol, src_addr, src_port, http_host, dst_addr, dst_port)
+
+        else:
             print '%s  %s:%s --> %s:%s' % (protocol, src_addr, src_port, dst_addr, dst_port)
 
 
 while True:
-    #for f in tmpfiles:
-        #os.remove(f)
-    cap.apply_on_packets(print_conversation_header)
+    i = 0
+    while i < 1024:
+        cap.apply_on_packets(print_conversation_header)
+        i += 1
+    os.remove(tmpfiles)
