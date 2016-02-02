@@ -3,7 +3,11 @@
 import pyshark
 import os
 import glob
+import requests
+import json
 
+
+# PyShark config
 cap = pyshark.LiveCapture(interface='eth0', bpf_filter='src net 192.168.1 and (tcp dst portrange 1-1024 or udp dst port 53)')
 
 
@@ -16,24 +20,28 @@ def print_conversation_header(pkt):
 
     # UDP traf
     if protocol == "UDP":
-        print '%s  %s:%s --> %s:%s' % (protocol, src_addr, src_port, dst_addr, dst_port)
+        #msg = '%s %s %s %s %s' % (protocol, src_addr, src_port, dst_addr, dst_port)
+        #print msg
         # DNS request
         if pkt.dns.qry_name:
-            print 'DNS Request from %s: %s' % (pkt.ip.src, pkt.dns.qry_name)
+            msg = '%s %s %s %s %s %s' % (protocol, src_addr, src_port, dst_addr, dst_port, pkt.dns.qry_name)
+            print msg
         elif pkt.dns.resp_name:
-            print 'DNS Response from %s: %s' % (pkt.ip.src, pkt.dns.resp_name)
+            msg = '%s %s %s %s %s %s' % (protocol, src_addr, src_port, dst_addr, dst_port, pkt.dns.resp_name)
+            print msg
     # TCP traf
     else:
         if "SSL" in pkt:
-            print 'SSL %s  %s:%s --> %s:%s' % (protocol, src_addr, src_port, dst_addr, dst_port)
-
+            msg = '%s %s %s %s %s %s' % (protocol, src_addr, src_port, dst_addr, dst_port, "none")
+            print msg
         elif "HTTP" in pkt:
             http_host = pkt.http.host
-            print 'HTTP %s  %s:%s %s --> %s:%s' % (protocol, src_addr, src_port, http_host, dst_addr, dst_port)
-
+            msg = '%s %s %s %s %s %s' % (protocol, src_addr, src_port, dst_addr, dst_port, http_host)
+            print msg
         else:
-            print '%s  %s:%s --> %s:%s' % (protocol, src_addr, src_port, dst_addr, dst_port)
-
+            msg = '%s %s %s %s %s %s' % (protocol, src_addr, src_port, dst_addr, dst_port, "none")
+            print msg
+    requests.post("http://10.1.1.222:5002", data=msg, timeout=160)
 
 while True:
     # Define tmp pcap
