@@ -4,7 +4,6 @@ import pyshark
 import os
 import glob
 import requests
-import json
 
 
 # PyShark config
