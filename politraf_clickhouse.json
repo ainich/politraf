@@ -48,7 +48,7 @@
   "rows": [
     {
       "collapse": false,
-      "height": 214,
+      "height": 159,
       "panels": [
         {
           "aliasColors": {},
@@ -93,7 +93,7 @@
               "formattedQuery": "<font color=\"darkorange\">SELECT</font> <font color=\"darkcyan\">$timeSeries</font> <font color=\"darkorange\">as</font> t, total, used <font color=\"darkorange\">FROM</font> <font color=\"darkcyan\">$table</font> <font color=\"darkorange\">WHERE</font> <font color=\"darkcyan\">$timeFilter</font> <font color=\"darkorange\">ORDER BY</font> t",
               "intervalFactor": 1,
               "query": "SELECT $timeSeries as t, total, used FROM $table WHERE $timeFilter ORDER BY t",
-              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 2) * 2) * 1000 as t, total, used FROM sys_stat.diskstats WHERE event_date >= toDate(1500279664) AND timestamp >= toDateTime(1500279664) ORDER BY t",
+              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 1) * 1) * 1000 as t, total, used FROM sys_stat.diskstats WHERE event_date >= toDate(1500283322) AND timestamp >= toDateTime(1500283322) ORDER BY t",
               "refId": "B",
               "resultFormat": "time_series",
               "table": "diskstats",
@@ -145,7 +145,7 @@
           "error": false,
           "fill": 1,
           "grid": {},
-          "id": 5,
+          "id": 11,
           "legend": {
             "alignAsTable": false,
             "avg": true,
@@ -179,56 +179,11 @@
               "dateLoading": false,
               "dateTimeColDataType": "timestamp",
               "datetimeLoading": false,
-              "formattedQuery": "<font color=\"darkorange\">SELECT</font> <font color=\"darkcyan\">$timeSeries</font> <font color=\"darkorange\">as</font> t, cpu_percent <font color=\"darkorange\">as</font> average <font color=\"darkorange\">FROM</font> <font color=\"darkcyan\">$table</font> <font color=\"darkorange\">WHERE</font> cpu_id<font color=\"yellow\">=</font><font color=\"cornflowerblue\">0</font> <font color=\"yellow\">AND</font> <font color=\"darkcyan\">$timeFilter</font> <font color=\"darkorange\">ORDER BY</font> t",
+              "formattedQuery": "<font color=\"darkorange\">SELECT</font> <font color=\"darkcyan\">$timeSeries</font> <font color=\"darkorange\">as</font> t, cpu_percent <font color=\"darkorange\">as</font> average <font color=\"darkorange\">FROM</font> <font color=\"darkcyan\">$table</font> <font color=\"darkorange\">WHERE</font> <font color=\"darkcyan\">$timeFilter</font> <font color=\"darkorange\">ORDER BY</font> t",
               "intervalFactor": 1,
-              "query": "SELECT $timeSeries as t, cpu_percent as average FROM $table WHERE cpu_id=0 AND $timeFilter ORDER BY t",
-              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 2) * 2) * 1000 as t, cpu_percent as average FROM sys_stat.cpustats WHERE cpu_id=0 AND event_date >= toDate(1500279664) AND timestamp >= toDateTime(1500279664) ORDER BY t",
-              "refId": "B",
-              "resultFormat": "time_series",
-              "table": "cpustats",
-              "tableLoading": false
-            },
-            {
-              "database": "sys_stat",
-              "dateColDataType": "event_date",
-              "dateLoading": false,
-              "dateTimeColDataType": "timestamp",
-              "datetimeLoading": false,
-              "formattedQuery": "<font color=\"darkorange\">SELECT</font> <font color=\"darkcyan\">$timeSeries</font> <font color=\"darkorange\">as</font> t, cpu_percent <font color=\"darkorange\">as</font> average <font color=\"darkorange\">FROM</font> <font color=\"darkcyan\">$table</font> <font color=\"darkorange\">WHERE</font> cpu_id<font color=\"yellow\">=</font><font color=\"cornflowerblue\">1</font> <font color=\"yellow\">AND</font> <font color=\"darkcyan\">$timeFilter</font> <font color=\"darkorange\">ORDER BY</font> t",
-              "intervalFactor": 1,
-              "query": "SELECT $timeSeries as t, cpu_percent as average FROM $table WHERE cpu_id=1 AND $timeFilter ORDER BY t",
-              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 2) * 2) * 1000 as t, cpu_percent as average FROM sys_stat.cpustats WHERE cpu_id=1 AND event_date >= toDate(1500279664) AND timestamp >= toDateTime(1500279664) ORDER BY t",
-              "refId": "A",
-              "resultFormat": "time_series",
-              "table": "cpustats",
-              "tableLoading": false
-            },
-            {
-              "database": "sys_stat",
-              "dateColDataType": "event_date",
-              "dateLoading": false,
-              "dateTimeColDataType": "timestamp",
-              "datetimeLoading": false,
-              "formattedQuery": "<font color=\"darkorange\">SELECT</font> <font color=\"darkcyan\">$timeSeries</font> <font color=\"darkorange\">as</font> t, cpu_percent <font color=\"darkorange\">as</font> average <font color=\"darkorange\">FROM</font> <font color=\"darkcyan\">$table</font> <font color=\"darkorange\">WHERE</font> cpu_id<font color=\"yellow\">=</font><font color=\"cornflowerblue\">2</font> <font color=\"yellow\">AND</font> <font color=\"darkcyan\">$timeFilter</font> <font color=\"darkorange\">ORDER BY</font> t",
-              "intervalFactor": 1,
-              "query": "SELECT $timeSeries as t, cpu_percent as average FROM $table WHERE cpu_id=2 AND $timeFilter ORDER BY t",
-              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 2) * 2) * 1000 as t, cpu_percent as average FROM sys_stat.cpustats WHERE cpu_id=2 AND event_date >= toDate(1500279664) AND timestamp >= toDateTime(1500279664) ORDER BY t",
-              "refId": "C",
-              "resultFormat": "time_series",
-              "table": "cpustats",
-              "tableLoading": false
-            },
-            {
-              "database": "sys_stat",
-              "dateColDataType": "event_date",
-              "dateLoading": false,
-              "dateTimeColDataType": "timestamp",
-              "datetimeLoading": false,
-              "formattedQuery": "<font color=\"darkorange\">SELECT</font> <font color=\"darkcyan\">$timeSeries</font> <font color=\"darkorange\">as</font> t, cpu_percent <font color=\"darkorange\">as</font> average <font color=\"darkorange\">FROM</font> <font color=\"darkcyan\">$table</font> <font color=\"darkorange\">WHERE</font> cpu_id<font color=\"yellow\">=</font><font color=\"cornflowerblue\">3</font> <font color=\"yellow\">AND</font> <font color=\"darkcyan\">$timeFilter</font> <font color=\"darkorange\">ORDER BY</font> t",
-              "intervalFactor": 1,
-              "query": "SELECT $timeSeries as t, cpu_percent as average FROM $table WHERE cpu_id=3 AND $timeFilter ORDER BY t",
-              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 2) * 2) * 1000 as t, cpu_percent as average FROM sys_stat.cpustats WHERE cpu_id=3 AND event_date >= toDate(1500279664) AND timestamp >= toDateTime(1500279664) ORDER BY t",
-              "refId": "D",
+              "query": "SELECT $timeSeries as t, cpu_percent as average FROM $table WHERE $timeFilter ORDER BY t",
+              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 1) * 1) * 1000 as t, cpu_percent as average FROM sys_stat.cpustats WHERE event_date >= toDate(1500283322) AND timestamp >= toDateTime(1500283322) ORDER BY t",
+              "refId": "E",
               "resultFormat": "time_series",
               "table": "cpustats",
               "tableLoading": false
@@ -314,7 +269,7 @@
               "formattedQuery": "<font color=\"darkorange\">SELECT</font> <font color=\"darkcyan\">$timeSeries</font> <font color=\"darkorange\">as</font> t, total, used  <font color=\"darkorange\">FROM</font> <font color=\"darkcyan\">$table</font> <font color=\"darkorange\">WHERE</font> <font color=\"darkcyan\">$timeFilter</font> <font color=\"darkorange\">ORDER BY</font> t",
               "intervalFactor": 1,
               "query": "SELECT $timeSeries as t, total, used  FROM $table WHERE $timeFilter ORDER BY t",
-              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 2) * 2) * 1000 as t, total, used  FROM sys_stat.memstats WHERE event_date >= toDate(1500279664) AND timestamp >= toDateTime(1500279664) ORDER BY t",
+              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 1) * 1) * 1000 as t, total, used  FROM sys_stat.memstats WHERE event_date >= toDate(1500283322) AND timestamp >= toDateTime(1500283322) ORDER BY t",
               "refId": "B",
               "resultFormat": "time_series",
               "table": "memstats",
@@ -386,7 +341,7 @@
             "max": false,
             "min": false,
             "rightSide": true,
-            "show": true,
+            "show": false,
             "total": false,
             "values": false
           },
@@ -413,7 +368,7 @@
               "formattedQuery": "<font color=\"darkorange\">SELECT</font> <font color=\"darkcyan\">$timeSeries</font> <font color=\"darkorange\">as</font> t, <font color=\"navajowhite\">count</font>(<font color=\"yellow\">*</font>) <font color=\"darkorange\">FROM</font> <font color=\"darkcyan\">$table</font> <font color=\"darkorange\">WHERE</font>  <font color=\"darkcyan\">$timeFilter</font> <font color=\"darkorange\">GROUP BY</font> t <font color=\"darkorange\">ORDER BY</font> t",
               "intervalFactor": 1,
               "query": "SELECT $timeSeries as t, count(*) FROM $table WHERE  $timeFilter GROUP BY t ORDER BY t",
-              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 2) * 2) * 1000 as t, count(*) FROM conn_stat.connstats WHERE  event_date >= toDate(1500279664) AND timestamp >= toDateTime(1500279664) GROUP BY t ORDER BY t",
+              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 1) * 1) * 1000 as t, count(*) FROM conn_stat.connstats WHERE  event_date >= toDate(1500283322) AND timestamp >= toDateTime(1500283322) GROUP BY t ORDER BY t",
               "refId": "A",
               "resultFormat": "time_series",
               "table": "connstats",
@@ -548,14 +503,15 @@
               "formattedQuery": "<font color=\"darkorange\">SELECT</font> <font color=\"darkcyan\">$timeSeries</font>, <font color=\"yellow\">*</font> <font color=\"darkorange\">FROM</font> <font color=\"darkcyan\">$table</font> <font color=\"darkorange\">WHERE</font> <font color=\"darkcyan\">$timeFilter</font> <font color=\"darkorange\">ORDER BY</font> <font color=\"darkcyan\">$timeSeries</font>",
               "intervalFactor": 1,
               "query": "SELECT $timeSeries, * FROM $table WHERE $timeFilter ORDER BY $timeSeries",
-              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 2) * 2) * 1000, * FROM conn_stat.connstats WHERE event_date >= toDate(1500279664) AND timestamp >= toDateTime(1500279664) ORDER BY (intDiv(toUInt32(timestamp), 2) * 2) * 1000",
+              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 1) * 1) * 1000, * FROM conn_stat.connstats WHERE event_date >= toDate(1500283322) AND timestamp >= toDateTime(1500283322) ORDER BY (intDiv(toUInt32(timestamp), 1) * 1) * 1000",
               "refId": "A",
               "resultFormat": "time_series",
               "table": "connstats",
               "tableLoading": false
             }
           ],
-          "title": "Connection table",
+          "timeFrom": "5m",
+          "title": "Connections table",
           "transform": "timeseries_to_columns",
           "type": "table"
         }
@@ -575,7 +531,7 @@
     "list": []
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {
@@ -606,5 +562,5 @@
   },
   "timezone": "browser",
   "title": "politraf_clickhouse",
-  "version": 1
+  "version": 4
 }
