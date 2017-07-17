@@ -8,7 +8,7 @@
   * config.yaml - configuration file (interface, capture filter - https://wiki.wireshark.org/CaptureFilters)
 * Install (Debian, **Python 3 required**)
   ```
-  apt-get install tshark
+  sudo apt-get install tshark
   pip install infi.clickhouse_orm
   pip install pyshark
   pip install pyyaml
