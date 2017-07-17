@@ -11,3 +11,4 @@
   * mkdir /etc/politraf
   * cp config.yaml /etc/politraf/
 * clickhouse - https://clickhouse.yandex/docs/en/getting_started/index.html#installation
+* grafana - http://docs.grafana.org/installation/
