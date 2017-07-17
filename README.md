@@ -24,19 +24,7 @@
   
   Ubuntu | Debian
   ------------ | -------------
-  17.04  zesty | stretch / sid
-  16.10  yakkety | stretch / sid
   16.04  xenial | stretch / sid
-  15.10  wily | jessie  / sid
-  15.04  vivid | jessie  / sid
-  14.10  utopic | jessie  / sid
   14.04  trusty | jessie  / sid
-  13.10  saucy | wheezy  / sid
-  13.04  raring | wheezy  / sid
-  12.10  quantal | wheezy  / sid
-  12.04  precise | wheezy  / sid
-  11.10  oneiric | wheezy  / sid
-  11.04  natty | squeeze / sid
-  10.10  maverick | squeeze / sid
-  10.04  lucid | squeeze / sid
+  
 * grafana - http://docs.grafana.org/installation/
