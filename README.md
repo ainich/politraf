@@ -3,7 +3,7 @@
   * connstat.py - connections statistic to clickhouse
   * constat.service and systat.service - config for systemd
   * politraf_clickhouse.json - grafana dashboard (Grafana 4.4)
-  * config.yaml - configuration file
+  * config.yaml - configuration file (interface, capture filter - https://wiki.wireshark.org/CaptureFilters)
 * install (Debian, **Python 3 required**)
   * apt-get install tshark
   * pip install infi.clickhouse_orm
