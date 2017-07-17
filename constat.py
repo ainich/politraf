@@ -2,7 +2,6 @@
 # -*- coding: utf-8
 import pyshark
 import os
-import glob
 from infi.clickhouse_orm import models, fields, engines
 from pytz import timezone
 from datetime import datetime, date, time
@@ -76,10 +75,6 @@ def print_conversation_header(pkt):
 
 
 while True:
-    # Define tmp pcap
-    #tmpfiles = glob.glob('/tmp/wireshark*')
-    #for f in tmpfiles:
-    #    os.remove(f)
     try:
         cap.apply_on_packets(print_conversation_header)
 
