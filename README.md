@@ -7,3 +7,4 @@
   * apt-get install tshark
   * pip install infi.clickhouse_orm
   * pip install pyshark
+* clickhouse - https://clickhouse.yandex/docs/en/getting_started/index.html#installation
