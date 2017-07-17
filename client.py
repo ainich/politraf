@@ -1,13 +1,35 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8
 import pyshark
 import os
 import glob
-import requests
-
+from infi.clickhouse_orm import models, fields, engines
+from pytz import timezone
+from datetime import datetime, date, time
+from infi.clickhouse_orm.database import Database
+from infi.clickhouse_orm.models import Model
+from infi.clickhouse_orm.fields import *
+from infi.clickhouse_orm.engines import MergeTree
 
 # PyShark config
-cap = pyshark.LiveCapture(interface='eth0', bpf_filter='src net 192.168.1 and (tcp dst portrange 1-1024 or udp dst port 53)')
+cap = pyshark.LiveCapture(interface='tun0', bpf_filter='tcp dst portrange 1-1024 or udp dst port 53')
+
+class CONNStats(Model):
+
+    event_date = DateField()
+    timestamp = DateTimeField()
+    protocol = StringField()
+    src_addr = StringField()
+    src_port = Float32Field()
+    dst_addr = StringField()
+    dst_port = Float32Field()
+    qry_name = StringField()
+    
+    engine = MergeTree('event_date', ('timestamp', 'protocol', 'src_addr', 'src_port', 'dst_addr', 'dst_port', 'qry_name'))
+
+db = Database('conn_stat')
+db.create_table(CONNStats)
+tz = timezone('Europe/Moscow')
 
 
 def print_conversation_header(pkt):
@@ -19,35 +41,39 @@ def print_conversation_header(pkt):
 
     # UDP traf
     if protocol == "UDP":
-        #msg = '%s %s %s %s %s' % (protocol, src_addr, src_port, dst_addr, dst_port)
-        #print msg
         # DNS request
         if pkt.dns.qry_name:
-            msg = '%s %s %s %s %s %s' % (protocol, src_addr, src_port, dst_addr, dst_port, pkt.dns.qry_name)
-            print msg
+            qry_name = pkt.dns.qry_name
         elif pkt.dns.resp_name:
-            msg = '%s %s %s %s %s %s' % (protocol, src_addr, src_port, dst_addr, dst_port, pkt.dns.resp_name)
-            print msg
+            qry_name = pkt.dns.resp_name
+
     # TCP traf
     else:
         if "SSL" in pkt:
-            msg = '%s %s %s %s %s %s' % (protocol, src_addr, src_port, dst_addr, dst_port, "none")
-            print msg
+            qry_name = "none"
+            
         elif "HTTP" in pkt:
-            http_host = pkt.http.host
-            msg = '%s %s %s %s %s %s' % (protocol, src_addr, src_port, dst_addr, dst_port, http_host)
-            print msg
+            qry_name = pkt.http.host
+            
         else:
-            msg = '%s %s %s %s %s %s' % (protocol, src_addr, src_port, dst_addr, dst_port, "none")
-            print msg
-    requests.post("http://10.1.1.222:5002", data=msg, timeout=160)
+            qry_name = "none"
+
+    timestamp = datetime.datetime.now(tz)
+    today = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d')
+    #print (today, timestamp, protocol, src_addr, src_port, dst_addr, dst_port, qry_name)
+    db.insert([
+        CONNStats(event_date=today, timestamp=timestamp, protocol=protocol, src_addr=src_addr, src_port=src_port, dst_addr=dst_addr, dst_port=dst_port, qry_name=qry_name)
+        ])
+
 
 while True:
     # Define tmp pcap
-    tmpfiles = glob.glob('/tmp/wireshark*')
-    for f in tmpfiles:
-        os.remove(f)
+    #tmpfiles = glob.glob('/tmp/wireshark*')
+    #for f in tmpfiles:
+    #    os.remove(f)
     try:
-        cap.apply_on_packets(print_conversation_header, timeout=180)
+        cap.apply_on_packets(print_conversation_header)
+
     except Exception as e:
-        pass
+        print(e)
+        break
