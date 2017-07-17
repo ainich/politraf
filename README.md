@@ -7,4 +7,7 @@
   * apt-get install tshark
   * pip install infi.clickhouse_orm
   * pip install pyshark
+  * pip install pyyaml
+  * mkdir /etc/politraf
+  * cp config.yaml /etc/politraf/
 * clickhouse - https://clickhouse.yandex/docs/en/getting_started/index.html#installation

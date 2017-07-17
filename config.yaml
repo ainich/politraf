@@ -1,0 +1,4 @@
+# politraf config
+interface: tun0
+# tshark filter
+bpf_filter: 'tcp dst portrange 1-1024 or udp dst port 53'

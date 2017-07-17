@@ -10,9 +10,18 @@ from infi.clickhouse_orm.database import Database
 from infi.clickhouse_orm.models import Model
 from infi.clickhouse_orm.fields import *
 from infi.clickhouse_orm.engines import MergeTree
+import yaml
+
+with open("/etc/politraf/config.yaml", 'r') as stream:
+    try:
+        config = (yaml.load(stream))
+        interface = config['interface']
+        bpf_filter = config['bpf_filter']
+    except yaml.YAMLError as exc:
+        print(exc)
 
 # PyShark config
-cap = pyshark.LiveCapture(interface='tun0', bpf_filter='tcp dst portrange 1-1024 or udp dst port 53')
+cap = pyshark.LiveCapture(interface=interface, bpf_filter=bpf_filter)
 
 class CONNStats(Model):
 
