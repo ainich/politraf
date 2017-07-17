@@ -10,5 +10,8 @@
   * pip install pyyaml
   * mkdir /etc/politraf
   * cp config.yaml /etc/politraf/
+  * mkdir /usr/local/bin/politraf
+  * cp systat.py constat.py /usr/local/bin/politraf
+  * chmod +x /usr/local/bin/politraf/systat.py /usr/local/bin/politraf/constat.py
 * clickhouse - https://clickhouse.yandex/docs/en/getting_started/index.html#installation
 * grafana - http://docs.grafana.org/installation/
