@@ -21,6 +21,7 @@
   * service systat (start|stop|status)
   * service constat (start|stop|status)
 * clickhouse - https://clickhouse.yandex/docs/en/getting_started/index.html#installation
+  
   Ubuntu | Debian
   ------------ | -------------
   17.04  zesty | stretch / sid
