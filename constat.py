@@ -11,6 +11,7 @@ from infi.clickhouse_orm.fields import *
 from infi.clickhouse_orm.engines import MergeTree
 import yaml
 
+# Read config
 with open("/etc/politraf/config.yaml", 'r') as stream:
     try:
         config = (yaml.load(stream))

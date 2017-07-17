@@ -41,10 +41,6 @@ db.create_table(CPUStats)
 db.create_table(MEMStats)
 db.create_table(DISKStats)
 
-#psutil.cpu_percent(percpu=True) # first sample should be discarded
-#psutil.virtual_memory()
-#psutil.disk_usage('/')
-
 while True:
     try:
         time.sleep(10)
