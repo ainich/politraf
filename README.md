@@ -4,7 +4,7 @@
   * constat.service and systat.service - config for systemd
   * politraf_clickhouse.json - grafana dashboard (Grafana 4.4)
   * config.yaml - configuration file
-* install (Debian)
+* install (Debian, Python 3 required)
   * apt-get install tshark
   * pip install infi.clickhouse_orm
   * pip install pyshark
