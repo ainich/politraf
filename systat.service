@@ -1,0 +1,11 @@
+[Unit]
+Description=System stat to clickhouse
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/local/bin/politraf/systat.py
+
+[Install]
+WantedBy=multi-user.target

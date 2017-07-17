@@ -1,0 +1,11 @@
+[Unit]
+Description=Connections stat to clickhouse
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/local/bin/politraf/constat.py
+
+[Install]
+WantedBy=multi-user.target
