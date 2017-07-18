@@ -6,5 +6,5 @@ interface: tun0
 # Medium TCP AND UDP
 bpf_filter: 'tcp or udp'
 #
-# AlienVault API key
-avkey:
+# AlienVault open threat exchange API key
+otx_key: 
