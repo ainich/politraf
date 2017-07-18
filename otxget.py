@@ -22,7 +22,7 @@ import yaml
 with open("/etc/politraf/config.yaml", 'r') as stream:
     try:
         config = (yaml.load(stream))
-        OTX_KEY: = config['otx_key']
+        OTX_KEY = config['otx_key']
     except yaml.YAMLError as exc:
         print(exc)
 
