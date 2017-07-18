@@ -23,7 +23,6 @@
   * service systat (start|stop|status)
   * service constat (start|stop|status)
 
-  ![Clickhouse](https://politraf.ru/static/img/ch.svg)
 * Clickhouse - https://clickhouse.yandex/docs/en/getting_started/index.html#installation
   
   Ubuntu | Debian
@@ -31,6 +30,5 @@
   16.04  xenial | stretch / sid
   14.04  trusty | jessie  / sid
   
-  ![Grafana](https://politraf.ru/static/img/gr.svg)
 * Grafana - http://docs.grafana.org/installation/
   * Clickhouse datasource for Grafana - https://grafana.com/plugins/vertamedia-clickhouse-datasource
