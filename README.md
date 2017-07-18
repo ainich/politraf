@@ -9,9 +9,9 @@
 * Install (Debian, **Python 3 required**)
   ```
   sudo apt-get install tshark
-  pip install infi.clickhouse_orm
-  pip install pyshark
-  pip install pyyaml
+  pip3 install infi.clickhouse_orm
+  pip3 install pyshark
+  pip3 install pyyaml
   mkdir /etc/politraf
   cp config.yaml /etc/politraf/
   mkdir /usr/local/bin/politraf
@@ -32,3 +32,5 @@
   
 * Grafana - http://docs.grafana.org/installation/
   * Clickhouse datasource for Grafana - https://grafana.com/plugins/vertamedia-clickhouse-datasource
+
+* OTX AlienVault API - https://github.com/AlienVault-OTX/OTX-Python-SDK
