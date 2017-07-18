@@ -16,6 +16,15 @@ import os
 import sys
 import traceback
 import argparse
+import yaml
+
+# Read config
+with open("/etc/politraf/config.yaml", 'r') as stream:
+    try:
+        config = (yaml.load(stream))
+        OTX_KEY: = config['otx_key']
+    except yaml.YAMLError as exc:
+        print(exc)
 
 OTX_KEY = 'd584b841455ab5bc6c38418793c4ada615ace8af8f6e0ad8a5f4fa506b55b498'
 
