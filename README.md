@@ -1,4 +1,4 @@
-![Clickhouse](https://politraf.ru/static/img/ch.svg) ![Grafana](https://politraf.ru/static/img/gr.svg)
+![Clickhouse](https://politraf.ru/static/img/ch.svg) and ![Grafana](https://politraf.ru/static/img/gr.svg)
 
 ![Politraf](https://politraf.ru/static/img/politraf.jpg)
 
