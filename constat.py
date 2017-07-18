@@ -51,22 +51,21 @@ def print_conversation_header(pkt):
     # UDP traf
     if protocol == "UDP":
         # DNS request
-        if pkt.dns.qry_name:
-            qry_name = pkt.dns.qry_name
-        elif pkt.dns.resp_name:
-            qry_name = pkt.dns.resp_name
-
-    # TCP traf
-    else:
-        if "SSL" in pkt:
-            qry_name = "none"
-            
-        elif "HTTP" in pkt:
-            qry_name = pkt.http.host
-            
+        if "dns" in pkt:
+            if pkt.dns.qry_name:
+                qry_name = pkt.dns.qry_name
         else:
             qry_name = "none"
 
+    # TCP traf
+    if protocol == "TCP":
+        if "SSL" in pkt:
+            qry_name = "none"
+        elif "HTTP" in pkt:
+            qry_name = pkt.http.host
+        else:
+            qry_name = "none"
+            
     timestamp = datetime.datetime.now(tz)
     today = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d')
     #print (today, timestamp, protocol, src_addr, src_port, dst_addr, dst_port, qry_name)
@@ -78,8 +77,7 @@ def print_conversation_header(pkt):
 while True:
     try:
         cap.apply_on_packets(print_conversation_header)
-
     except Exception as e:
         print(e)
-        break
+        pass
         
