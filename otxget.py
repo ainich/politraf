@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: iso-8859-1 -*-
 # -*- coding: utf-8 -*-
 #
@@ -9,14 +9,19 @@
 # https://otx.alienvault.com
 
 from OTXv2 import OTXv2
-# from pandas.io.json import json_normalize
-# from datetime import datetime, timedelta
 import re
 import os
 import sys
 import traceback
 import argparse
 import yaml
+from infi.clickhouse_orm import models, fields, engines
+from pytz import timezone
+from datetime import datetime, date, time
+from infi.clickhouse_orm.database import Database
+from infi.clickhouse_orm.models import Model
+from infi.clickhouse_orm.fields import *
+from infi.clickhouse_orm.engines import MergeTree
 
 # Read config
 with open("/etc/politraf/config.yaml", 'r') as stream:
@@ -26,11 +31,20 @@ with open("/etc/politraf/config.yaml", 'r') as stream:
     except yaml.YAMLError as exc:
         print(exc)
 
-OTX_KEY = 'd584b841455ab5bc6c38418793c4ada615ace8af8f6e0ad8a5f4fa506b55b498'
+class IOC_OTX(Model):
 
-HASH_WHITELIST = ['e617348b8947f28e2a280dd93c75a6ad','125da188e26bd119ce8cad7eeb1fc2dfa147ad47',
-                  '06f7826c2862d184a49e3672c0aa6097b11e7771a4bf613ec37941236c1a8e20']
-DOMAIN_WHITELIST = ['proofpoint.com']
+    event_date = DateField()
+    timestamp = DateTimeField()
+    indicator = StringField()
+    name = StringField()
+    references = StringField()
+    
+    engine = MergeTree('event_date', ('timestamp', 'indicator', 'name', 'references'))
+
+db = Database('ioc')
+db.create_table(IOC_OTX)
+tz = timezone('Europe/Moscow')
+
 
 class WhiteListedIOC(Exception): pass
 
@@ -67,9 +81,7 @@ class OTXReceiver():
 
     def write_iocs(self, ioc_folder):
 
-        hash_ioc_file = os.path.join(ioc_folder, "otx-hash-iocs.{0}".format(self.extension))
-        filename_ioc_file = os.path.join(ioc_folder, "otx-filename-iocs.{0}".format(self.extension))
-        c2_ioc_file = os.path.join(ioc_folder, "otx-c2-iocs.{0}".format(self.extension))
+        today = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d')
 
         print ("Processing indicators ...")
         for event in self.events:
@@ -77,69 +89,65 @@ class OTXReceiver():
                 for indicator in event["indicators"]:
 
                     try:
-                        if indicator["type"] in ('FileHash-MD5', 'FileHash-SHA1', 'FileHash-SHA256'):
-
-                            # Whitelisting
-                            if indicator["indicator"] in HASH_WHITELIST:
-                                raise WhiteListedIOC
-
-                            hash = indicator["indicator"]
-                            if self.hash_upper:
-                                hash = indicator["indicator"].upper()
-
-                            self.hash_iocs += "{0}{3}{1} {2}\n".format(
-                                hash,
-                                event["name"].encode('unicode-escape'),
-                                " / ".join(event["references"])[:80],
-                                self.separator)
-
-                        if indicator["type"] == 'FilePath':
-
-                            filename = indicator["indicator"]
-                            if self.filename_regex_out:
-                                filename = my_escape(indicator["indicator"])
-
-                            self.filename_iocs += "{0}{3}{1} {2}\n".format(
-                                filename,
-                                event["name"].encode('unicode-escape'),
-                                " / ".join(event["references"])[:80],
-                                self.separator)
+#                        if indicator["type"] in ('FileHash-MD5', 'FileHash-SHA1', 'FileHash-SHA256'):
+#
+#                            # Whitelisting
+#                            if indicator["indicator"] in HASH_WHITELIST:
+#                                raise WhiteListedIOC
+#
+#                            hash = indicator["indicator"]
+#                            if self.hash_upper:
+#                                hash = indicator["indicator"].upper()
+#
+#                            self.hash_iocs += "{0}{3}{1} {2}\n".format(
+#                                hash,
+#                                event["name"].encode('unicode-escape'),
+#                                " / ".join(event["references"])[:80],
+#                                self.separator)
+#
+#                        if indicator["type"] == 'FilePath':
+#
+#                            filename = indicator["indicator"]
+#                            if self.filename_regex_out:
+#                                filename = my_escape(indicator["indicator"])
+#
+#                            self.filename_iocs += "{0}{3}{1} {2}\n".format(
+#                                filename,
+#                                event["name"].encode('unicode-escape'),
+#                                " / ".join(event["references"])[:80],
+#                                self.separator)
 
                         if indicator["type"] in ('domain', 'hostname', 'IPv4', 'IPv6', 'CIDR'):
+                            indicator = indicator["indicator"]
+                            name = event["name"]
+                            references = event["references"][0]
+                            #print (indicator, name, references)
+                            timestamp = datetime.datetime.now(tz)
+                            today = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d')
+                            db.insert([IOC_OTX(event_date=today, timestamp=timestamp, indicator=indicator, name=name, references=references)])
 
-                            for domain in DOMAIN_WHITELIST:
-                                if domain in indicator["indicator"]:
-                                    print (indicator["indicator"])
-                                    raise WhiteListedIOC
-
-                            self.c2_iocs += "{0}{3}{1} {2}\n".format(
-                                indicator["indicator"],
-                                event["name"].encode('unicode-escape'),
-                                " / ".join(event["references"])[:80],
-                                self.separator)
-
-                    except WhiteListedIOC as e:
+                    except Exception as e:
                         pass
 
             except Exception as e:
                 traceback.print_exc()
 
         # Write to files
-        with open(hash_ioc_file, "w") as hash_fh:
-            if self.use_csv_header:
-                hash_fh.write('hash{0}description\n'.format(self.separator))
-            hash_fh.write(self.hash_iocs)
-            print ("{0} hash iocs written to {1}").format(self.hash_iocs.count('\n'), hash_ioc_file)
-        with open(filename_ioc_file, "w") as fn_fh:
-            if self.use_csv_header:
-                fn_fh.write('filename{0}description\n'.format(self.separator))
-            fn_fh.write(self.filename_iocs)
-            print ("{0} filename iocs written to {1}".format(self.filename_iocs.count('\n'), filename_ioc_file))
-        with open(c2_ioc_file, "w") as c2_fh:
-            if self.use_csv_header:
-                c2_fh.write('host{0}description\n'.format(self.separator))
-            c2_fh.write(self.c2_iocs)
-            print ("{0} c2 iocs written to {1}".format(self.c2_iocs.count('\n'), c2_ioc_file))
+#        with open(hash_ioc_file, "w") as hash_fh:
+#            if self.use_csv_header:
+#                hash_fh.write('hash{0}description\n'.format(self.separator))
+#            hash_fh.write(self.hash_iocs)
+#            print ("{0} hash iocs written to {1}").format(self.hash_iocs.count('\n'), hash_ioc_file)
+#        with open(filename_ioc_file, "w") as fn_fh:
+#            if self.use_csv_header:
+#                fn_fh.write('filename{0}description\n'.format(self.separator))
+#            fn_fh.write(self.filename_iocs)
+#            print ("{0} filename iocs written to {1}".format(self.filename_iocs.count('\n'), filename_ioc_file))
+#        with open(c2_ioc_file, "w") as c2_fh:
+#            if self.use_csv_header:
+#                c2_fh.write('host{0}description\n'.format(self.separator))
+#            c2_fh.write(self.c2_iocs)
+#            print ("{0} c2 iocs written to {1}".format(self.c2_iocs.count('\n'), c2_ioc_file))
 
 
 def my_escape(string):
