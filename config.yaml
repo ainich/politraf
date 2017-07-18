@@ -1,4 +1,4 @@
-# politraf config
+# Politraf config
 interface: tun0
 # tshark filter
 # Light TCP 1-1024 and UDP 53
