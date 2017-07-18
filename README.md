@@ -1,3 +1,5 @@
+![Clickhouse](https://politraf.ru/static/img/ch.svg) ![Grafana](https://politraf.ru/static/img/gr.svg)
+
 ![Politraf](https://politraf.ru/static/img/politraf.jpg)
 
 * Politraf
@@ -22,6 +24,7 @@
 * Services
   * service systat (start|stop|status)
   * service constat (start|stop|status)
+
 * Clickhouse - https://clickhouse.yandex/docs/en/getting_started/index.html#installation
   
   Ubuntu | Debian
