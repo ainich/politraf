@@ -19,9 +19,8 @@
   pip3 install pyyaml
   mkdir /etc/politraf
   cp config.yaml /etc/politraf/
-  mkdir /usr/local/bin/politraf
-  cp systat.py constat.py otxget.py /usr/local/bin/politraf
-  chmod +x /usr/local/bin/politraf/systat.py /usr/local/bin/politraf/constat.py /usr/local/bin/politraf/otxget.py
+  mkdir /opt/politraf
+  cp systat.py constat.py otxget.py /opt/politraf
   cp constat.service systat.service /etc/systemd/system/
   ```
 
