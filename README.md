@@ -7,6 +7,10 @@
   * constat.service and systat.service - config for systemd
   * politraf_clickhouse.json - grafana dashboard (Grafana 4.4)
   * config.yaml - configuration file (interface, capture filter - https://wiki.wireshark.org/CaptureFilters)
+  * Services
+   * service systat (start|stop|status)
+   * service constat (start|stop|status)
+
 * Install (Debian, **Python 3 required**)
   ```
   sudo apt-get install tshark
@@ -20,9 +24,6 @@
   chmod +x /usr/local/bin/politraf/systat.py /usr/local/bin/politraf/constat.py /usr/local/bin/politraf/otxget.py
   cp constat.service systat.service /etc/systemd/system/
   ```
-* Services
-  * service systat (start|stop|status)
-  * service constat (start|stop|status)
 
 * Clickhouse - https://clickhouse.yandex/docs/en/getting_started/index.html#installation
   
@@ -34,4 +35,6 @@
 * Grafana - http://docs.grafana.org/installation/
   * Clickhouse datasource for Grafana - https://grafana.com/plugins/vertamedia-clickhouse-datasource
 
-* OTX AlienVault API - https://github.com/AlienVault-OTX/OTX-Python-SDK
+* OTX AlienVault
+  * Create an account and select your feeds
+  * Set API key in /etc/politraf.cfg
