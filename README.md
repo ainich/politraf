@@ -16,8 +16,8 @@
   mkdir /etc/politraf
   cp config.yaml /etc/politraf/
   mkdir /usr/local/bin/politraf
-  cp systat.py constat.py /usr/local/bin/politraf
-  chmod +x /usr/local/bin/politraf/systat.py /usr/local/bin/politraf/constat.py
+  cp systat.py constat.py otxget.py /usr/local/bin/politraf
+  chmod +x /usr/local/bin/politraf/systat.py /usr/local/bin/politraf/constat.py /usr/local/bin/politraf/otxget.py
   cp constat.service systat.service /etc/systemd/system/
   ```
 * Services
