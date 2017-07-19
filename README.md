@@ -8,8 +8,8 @@
   * politraf_clickhouse.json - grafana dashboard (Grafana 4.4)
   * config.yaml - configuration file (interface, capture filter - https://wiki.wireshark.org/CaptureFilters)
   * Services
-   * service systat (start|stop|status)
-   * service constat (start|stop|status)
+    * service systat (start|stop|status)
+    * service constat (start|stop|status)
 
 * Install (Debian, **Python 3 required**)
   ```
