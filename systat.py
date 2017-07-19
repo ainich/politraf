@@ -50,7 +50,7 @@ if __name__ == '__main__':
             mem = psutil.virtual_memory()
             disk = psutil.disk_usage('/')
             tz = pytz.timezone('Europe/Moscow')
-            timestamp = datetime.now(tz)
+            timestamp = datetime.now()
             today = datetime.strftime(datetime.now(), '%Y-%m-%d')
             db.insert([
                 CPUStats(event_date=today, timestamp=timestamp, cpu_id=cpu_id, cpu_percent=cpu_percent)

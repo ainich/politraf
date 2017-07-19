@@ -66,7 +66,7 @@ def print_conversation_header(pkt):
         else:
             qry_name = "none"
             
-    timestamp = datetime.datetime.now(tz)
+    timestamp = datetime.datetime.now()
     today = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d')
     #print (today, timestamp, protocol, src_addr, src_port, dst_addr, dst_port, qry_name)
     db.insert([

@@ -72,7 +72,7 @@ class OTXReceiver():
                             name = event["name"]
                             references = event["references"][0]
                             #print (indicator, name, references)
-                            timestamp = datetime.datetime.now(tz)
+                            timestamp = datetime.datetime.now()
                             today = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d')
                             db.insert([IOC_OTX(event_date=today, timestamp=timestamp, indicator=indicator, name=name, references=references)])
 
