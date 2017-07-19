@@ -22,9 +22,9 @@
   mkdir /opt/politraf
   cp systat.py constat.py otxget.py /opt/politraf
   cp constat.service systat.service /etc/systemd/system/
-
-  set crontab -e string 0 2 * * * /opt/politraf/otxget.py
   ```
+  crontab -e
+    * add line - 0 2 * * * /opt/politraf/otxget.py
 
 * Clickhouse - https://clickhouse.yandex/docs/en/getting_started/index.html#installation
   
