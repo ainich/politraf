@@ -73,11 +73,12 @@ def print_conversation_header(pkt):
         CONNStats(event_date=today, timestamp=timestamp, protocol=protocol, src_addr=src_addr, src_port=src_port, dst_addr=dst_addr, dst_port=dst_port, qry_name=qry_name)
         ])
 
+if __name__ == '__main__':
 
-while True:
-    try:
-        cap.apply_on_packets(print_conversation_header)
-    except Exception as e:
-        print(e)
-        pass
+    while True:
+        try:
+            cap.apply_on_packets(print_conversation_header)
+        except Exception as e:
+            print(e)
+            pass
         

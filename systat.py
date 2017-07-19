@@ -41,26 +41,28 @@ db.create_table(CPUStats)
 db.create_table(MEMStats)
 db.create_table(DISKStats)
 
-while True:
-    try:
-        time.sleep(10)
-        stats = psutil.cpu_percent(percpu=True)
-        mem = psutil.virtual_memory()
-        disk = psutil.disk_usage('/')
-        tz = pytz.timezone('Europe/Moscow')
-        timestamp = datetime.now(tz)
-        today = datetime.strftime(datetime.now(), '%Y-%m-%d')
-        db.insert([
-            CPUStats(event_date=today, timestamp=timestamp, cpu_id=cpu_id, cpu_percent=cpu_percent)
-            for cpu_id, cpu_percent in enumerate(stats)
-        ])
-        db.insert([
-            MEMStats(event_date=today, timestamp=timestamp, total=mem[0], used=mem[3])
-        ])
-        db.insert([
-            DISKStats(event_date=today, timestamp=timestamp, total=disk[0], used=disk[1])
-        ])
-    except Exception as e:
-        print(e)
-        break
+if __name__ == '__main__':
+    
+    while True:
+        try:
+            time.sleep(10)
+            stats = psutil.cpu_percent(percpu=True)
+            mem = psutil.virtual_memory()
+            disk = psutil.disk_usage('/')
+            tz = pytz.timezone('Europe/Moscow')
+            timestamp = datetime.now(tz)
+            today = datetime.strftime(datetime.now(), '%Y-%m-%d')
+            db.insert([
+                CPUStats(event_date=today, timestamp=timestamp, cpu_id=cpu_id, cpu_percent=cpu_percent)
+                for cpu_id, cpu_percent in enumerate(stats)
+            ])
+            db.insert([
+                MEMStats(event_date=today, timestamp=timestamp, total=mem[0], used=mem[3])
+            ])
+            db.insert([
+                DISKStats(event_date=today, timestamp=timestamp, total=disk[0], used=disk[1])
+            ])
+        except Exception as e:
+            print(e)
+            break
         
