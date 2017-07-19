@@ -34,7 +34,8 @@
   14.04  trusty | jessie  / sid
   
 * Grafana - http://docs.grafana.org/installation/
-  * Clickhouse datasource for Grafana - https://grafana.com/plugins/vertamedia-clickhouse-datasource
+  * Install Clickhouse datasource for Grafana - https://grafana.com/plugins/vertamedia-clickhouse-datasource
+  * Add datasource named Clickhouse
 
 * OTX AlienVault
   * Create an account and select your feeds
