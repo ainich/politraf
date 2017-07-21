@@ -80,5 +80,5 @@ if __name__ == '__main__':
             cap.apply_on_packets(print_conversation_header)
         except Exception as e:
             print(e)
-            pass
+            break
         
