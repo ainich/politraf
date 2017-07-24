@@ -48,9 +48,6 @@ class IOCStats(Model):
 
     engine = MergeTree('event_date', ('timestamp', 'protocol', 'src_addr', 'src_port', 'dst_addr', 'dst_port', 'qry_name', 'indicator', 'name', 'references'))
 
-#db = Database('conn_stat')
-#db.create_table(CONNStats)
-
 
 db = Database('ioc')
 db.create_table(IOCStats)
@@ -82,41 +79,8 @@ class OTXWatch():
                         IOCStats(event_date=today, timestamp=timestamp, protocol=row.protocol, src_addr=row.src_addr, src_port=row.src_port, dst_addr=row.dst_addr, dst_port=row.dst_port, qry_name=row.qry_name, indicator=ioc.indicator, name=ioc.name, references=ioc.references)
                         ])    
 
-#    def check_iocs(self):
-#
-#        today = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d')
-#
-#        print ("Processing indicators ...")
-#        for event in self.events:
-#            try:
-#                for indicator in event["indicators"]:
-#
-#                    try:
-#                        
-#                        if indicator["type"] in ('domain', 'hostname', 'IPv4', 'IPv6', 'CIDR'):
-#                            indicator = indicator["indicator"]
-#                            name = event["name"]
-#                            references = event["references"][0]
-#                            #print (indicator, name, references)
-#                            timestamp = datetime.datetime.now()
-#                            today = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d')
-#                            db.insert([IOC_OTX(event_date=today, timestamp=timestamp, indicator=indicator, name=name, references=references)])
-#
-#                    except Exception as e:
-#                        pass
-#
-#            except Exception as e:
-#                traceback.print_exc()
 
 if __name__ == '__main__':
 
-    # Retrieve the traffic events
+    # Retrieve the traffic events, check and write
     traf_receiver = OTXWatch()
-
-    # Retrieve the events and store the IOCs
-    # otx_receiver.get_iocs_last(int(args.l))
-    traf_receiver.get_traf_last()
-
-    # Write IOC files
-#    traf_receiver.check_iocs()
-
