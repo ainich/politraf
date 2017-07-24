@@ -74,11 +74,12 @@ def print_conversation_header(pkt):
         ])
 
 if __name__ == '__main__':
-
-    while True:
+    
+    running = True
+    while running:
         try:
             cap.apply_on_packets(print_conversation_header)
         except Exception as e:
             print(e)
-            break
+            running = False
         

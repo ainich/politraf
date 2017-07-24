@@ -43,7 +43,8 @@ db.create_table(DISKStats)
 
 if __name__ == '__main__':
     
-    while True:
+    running = True
+    while running:
         try:
             time.sleep(10)
             stats = psutil.cpu_percent(percpu=True)
@@ -64,5 +65,5 @@ if __name__ == '__main__':
             ])
         except Exception as e:
             print(e)
-            break
+            running = False
         
