@@ -24,6 +24,12 @@
     },
     {
       "type": "panel",
+      "id": "singlestat",
+      "name": "Singlestat",
+      "version": ""
+    },
+    {
+      "type": "panel",
       "id": "table",
       "name": "Table",
       "version": ""
@@ -48,8 +54,178 @@
   "rows": [
     {
       "collapse": false,
-      "height": 159,
+      "height": 112,
       "panels": [
+        {
+          "cacheTimeout": null,
+          "colorBackground": true,
+          "colorValue": false,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "datasource": "${DS_CLICKHOUSE}",
+          "format": "none",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "hideTimeOverride": true,
+          "id": 13,
+          "interval": null,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "span": 1,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": false
+          },
+          "tableColumn": "",
+          "targets": [
+            {
+              "database": "ioc",
+              "dateColDataType": "event_date",
+              "dateLoading": false,
+              "dateTimeColDataType": "timestamp",
+              "datetimeLoading": false,
+              "formattedQuery": "<font color=\"darkorange\">SELECT</font> <font color=\"darkcyan\">$timeSeries</font> <font color=\"darkorange\">as</font> t, <font color=\"navajowhite\">count</font>(<font color=\"yellow\">*</font>) <font color=\"darkorange\">FROM</font> <font color=\"darkcyan\">$table</font> <font color=\"darkorange\">WHERE</font> <font color=\"darkcyan\">$timeFilter</font> <font color=\"darkorange\">GROUP BY</font> t <font color=\"darkorange\">ORDER BY</font> t",
+              "intervalFactor": 1,
+              "query": "SELECT $timeSeries as t, count(*) FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 900) * 900) * 1000 as t, count(*) FROM ioc.ioc_otx WHERE event_date >= toDate(1500803265) AND timestamp >= toDateTime(1500803265) GROUP BY t ORDER BY t",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "table": "ioc_otx",
+              "tableLoading": false
+            }
+          ],
+          "thresholds": "0, 40000",
+          "timeFrom": "1d",
+          "title": "OTX IOC",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "total"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": true,
+          "colorValue": false,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "datasource": "${DS_CLICKHOUSE}",
+          "format": "none",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "id": 15,
+          "interval": null,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "span": 1,
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": false,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": false
+          },
+          "tableColumn": "",
+          "targets": [
+            {
+              "database": "ioc",
+              "dateColDataType": "event_date",
+              "dateLoading": false,
+              "dateTimeColDataType": "timestamp",
+              "datetimeLoading": false,
+              "formattedQuery": "<font color=\"darkorange\">SELECT</font> <font color=\"darkcyan\">$timeSeries</font> <font color=\"darkorange\">as</font> t, <font color=\"navajowhite\">count</font>(<font color=\"yellow\">*</font>) <font color=\"darkorange\">FROM</font> <font color=\"darkcyan\">$table</font> <font color=\"darkorange\">WHERE</font> <font color=\"darkcyan\">$timeFilter</font> <font color=\"darkorange\">GROUP BY</font> t <font color=\"darkorange\">ORDER BY</font> t",
+              "intervalFactor": 1,
+              "query": "SELECT $timeSeries as t, count(*) FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 30) * 30) * 1000 as t, count(*) FROM ioc.iocstats WHERE event_date >= toDate(1500886065) AND timestamp >= toDateTime(1500886065) GROUP BY t ORDER BY t",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "table": "iocstats",
+              "tableLoading": false
+            }
+          ],
+          "thresholds": "0",
+          "title": "Alert",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "total"
+        },
         {
           "aliasColors": {},
           "bars": false,
@@ -66,7 +242,7 @@
             "current": true,
             "max": false,
             "min": false,
-            "show": true,
+            "show": false,
             "total": false,
             "values": true
           },
@@ -80,7 +256,7 @@
           "renderer": "flot",
           "seriesOverrides": [],
           "spaceLength": 10,
-          "span": 4,
+          "span": 3,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -93,7 +269,7 @@
               "formattedQuery": "<font color=\"darkorange\">SELECT</font> <font color=\"darkcyan\">$timeSeries</font> <font color=\"darkorange\">as</font> t, total, used <font color=\"darkorange\">FROM</font> <font color=\"darkcyan\">$table</font> <font color=\"darkorange\">WHERE</font> <font color=\"darkcyan\">$timeFilter</font> <font color=\"darkorange\">ORDER BY</font> t",
               "intervalFactor": 1,
               "query": "SELECT $timeSeries as t, total, used FROM $table WHERE $timeFilter ORDER BY t",
-              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 1) * 1) * 1000 as t, total, used FROM sys_stat.diskstats WHERE event_date >= toDate(1500293177) AND timestamp >= toDateTime(1500293177) ORDER BY t",
+              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 5) * 5) * 1000 as t, total, used FROM sys_stat.diskstats WHERE event_date >= toDate(1500886065) AND timestamp >= toDateTime(1500886065) ORDER BY t",
               "refId": "B",
               "resultFormat": "time_series",
               "table": "diskstats",
@@ -155,7 +331,7 @@
             "max": true,
             "min": false,
             "rightSide": false,
-            "show": true,
+            "show": false,
             "total": false,
             "values": true
           },
@@ -169,7 +345,7 @@
           "renderer": "flot",
           "seriesOverrides": [],
           "spaceLength": 10,
-          "span": 4,
+          "span": 2,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -182,7 +358,7 @@
               "formattedQuery": "<font color=\"darkorange\">SELECT</font> <font color=\"darkcyan\">$timeSeries</font> <font color=\"darkorange\">as</font> t, cpu_percent <font color=\"darkorange\">as</font> load <font color=\"darkorange\">FROM</font> <font color=\"darkcyan\">$table</font> <font color=\"darkorange\">WHERE</font> <font color=\"darkcyan\">$timeFilter</font> <font color=\"darkorange\">ORDER BY</font> t",
               "intervalFactor": 1,
               "query": "SELECT $timeSeries as t, cpu_percent as load FROM $table WHERE $timeFilter ORDER BY t",
-              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 1) * 1) * 1000 as t, cpu_percent as load FROM sys_stat.cpustats WHERE event_date >= toDate(1500293177) AND timestamp >= toDateTime(1500293177) ORDER BY t",
+              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 10) * 10) * 1000 as t, cpu_percent as load FROM sys_stat.cpustats WHERE event_date >= toDate(1500886065) AND timestamp >= toDateTime(1500886065) ORDER BY t",
               "refId": "E",
               "resultFormat": "time_series",
               "table": "cpustats",
@@ -238,11 +414,13 @@
           "grid": {},
           "id": 6,
           "legend": {
+            "alignAsTable": false,
             "avg": false,
             "current": true,
             "max": false,
             "min": false,
-            "show": true,
+            "rightSide": false,
+            "show": false,
             "total": false,
             "values": true
           },
@@ -256,7 +434,7 @@
           "renderer": "flot",
           "seriesOverrides": [],
           "spaceLength": 10,
-          "span": 4,
+          "span": 2,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -269,7 +447,7 @@
               "formattedQuery": "<font color=\"darkorange\">SELECT</font> <font color=\"darkcyan\">$timeSeries</font> <font color=\"darkorange\">as</font> t, total, used  <font color=\"darkorange\">FROM</font> <font color=\"darkcyan\">$table</font> <font color=\"darkorange\">WHERE</font> <font color=\"darkcyan\">$timeFilter</font> <font color=\"darkorange\">ORDER BY</font> t",
               "intervalFactor": 1,
               "query": "SELECT $timeSeries as t, total, used  FROM $table WHERE $timeFilter ORDER BY t",
-              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 1) * 1) * 1000 as t, total, used  FROM sys_stat.memstats WHERE event_date >= toDate(1500293177) AND timestamp >= toDateTime(1500293177) ORDER BY t",
+              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 10) * 10) * 1000 as t, total, used  FROM sys_stat.memstats WHERE event_date >= toDate(1500886065) AND timestamp >= toDateTime(1500886065) ORDER BY t",
               "refId": "B",
               "resultFormat": "time_series",
               "table": "memstats",
@@ -310,19 +488,7 @@
               "show": true
             }
           ]
-        }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
-      "title": "New row",
-      "titleSize": "h6"
-    },
-    {
-      "collapse": false,
-      "height": 204.4375,
-      "panels": [
+        },
         {
           "aliasColors": {},
           "bars": false,
@@ -355,7 +521,7 @@
           "renderer": "flot",
           "seriesOverrides": [],
           "spaceLength": 10,
-          "span": 6,
+          "span": 3,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -368,7 +534,7 @@
               "formattedQuery": "<font color=\"darkorange\">SELECT</font> <font color=\"darkcyan\">$timeSeries</font> <font color=\"darkorange\">as</font> t, <font color=\"navajowhite\">count</font>(<font color=\"yellow\">*</font>) <font color=\"darkorange\">FROM</font> <font color=\"darkcyan\">$table</font> <font color=\"darkorange\">WHERE</font>  <font color=\"darkcyan\">$timeFilter</font> <font color=\"darkorange\">GROUP BY</font> t <font color=\"darkorange\">ORDER BY</font> t",
               "intervalFactor": 1,
               "query": "SELECT $timeSeries as t, count(*) FROM $table WHERE  $timeFilter GROUP BY t ORDER BY t",
-              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 1) * 1) * 1000 as t, count(*) FROM conn_stat.connstats WHERE  event_date >= toDate(1500293177) AND timestamp >= toDateTime(1500293177) GROUP BY t ORDER BY t",
+              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 5) * 5) * 1000 as t, count(*) FROM conn_stat.connstats WHERE  event_date >= toDate(1500886065) AND timestamp >= toDateTime(1500886065) GROUP BY t ORDER BY t",
               "refId": "A",
               "resultFormat": "time_series",
               "table": "connstats",
@@ -411,14 +577,155 @@
               "show": true
             }
           ]
-        },
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "New row",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": false,
+      "height": 234,
+      "panels": [
         {
           "columns": [],
           "datasource": "${DS_CLICKHOUSE}",
           "fontSize": "100%",
-          "id": 10,
+          "id": 14,
           "links": [],
           "pageSize": null,
+          "scroll": true,
+          "showHeader": true,
+          "sort": {
+            "col": 0,
+            "desc": true
+          },
+          "span": 12,
+          "styles": [
+            {
+              "alias": "Time",
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "pattern": "Time",
+              "type": "date"
+            },
+            {
+              "alias": "",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "pattern": "event_date",
+              "thresholds": [],
+              "type": "hidden",
+              "unit": "short"
+            },
+            {
+              "alias": "",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "pattern": "timestamp",
+              "thresholds": [],
+              "type": "hidden",
+              "unit": "short"
+            },
+            {
+              "alias": "",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 0,
+              "pattern": "src_port",
+              "thresholds": [],
+              "type": "number",
+              "unit": "none"
+            },
+            {
+              "alias": "",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 0,
+              "pattern": "dst_port",
+              "thresholds": [],
+              "type": "number",
+              "unit": "none"
+            },
+            {
+              "alias": "",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "decimals": 2,
+              "pattern": "/.*/",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "database": "ioc",
+              "dateColDataType": "event_date",
+              "dateLoading": false,
+              "dateTimeColDataType": "timestamp",
+              "datetimeLoading": false,
+              "formattedQuery": "<font color=\"darkorange\">SELECT</font> <font color=\"darkcyan\">$timeSeries</font>, <font color=\"yellow\">*</font> <font color=\"darkorange\">FROM</font> <font color=\"darkcyan\">$table</font> <font color=\"darkorange\">WHERE</font> <font color=\"darkcyan\">$timeFilter</font> <font color=\"darkorange\">ORDER BY</font> <font color=\"darkcyan\">$timeSeries</font>",
+              "intervalFactor": 1,
+              "query": "SELECT $timeSeries, * FROM $table WHERE $timeFilter ORDER BY $timeSeries",
+              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 2) * 2) * 1000, * FROM ioc.iocstats WHERE event_date >= toDate(1500886065) AND timestamp >= toDateTime(1500886065) ORDER BY (intDiv(toUInt32(timestamp), 2) * 2) * 1000",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "table": "iocstats",
+              "tableLoading": false
+            }
+          ],
+          "title": "IOC match",
+          "transform": "timeseries_to_columns",
+          "type": "table"
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Row",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": false,
+      "height": 342,
+      "panels": [
+        {
+          "columns": [],
+          "datasource": "${DS_CLICKHOUSE}",
+          "fontSize": "80%",
+          "id": 12,
+          "links": [],
+          "pageSize": 500,
           "scroll": true,
           "showHeader": true,
           "sort": {
@@ -486,6 +793,154 @@
                 "rgba(237, 129, 40, 0.89)",
                 "rgba(50, 172, 45, 0.97)"
               ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "pattern": "protocol",
+              "thresholds": [],
+              "type": "hidden",
+              "unit": "short"
+            },
+            {
+              "alias": "",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "pattern": "dst_addr",
+              "thresholds": [],
+              "type": "hidden",
+              "unit": "short"
+            },
+            {
+              "alias": "",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "decimals": 2,
+              "pattern": "/.*/",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "database": "conn_stat",
+              "dateColDataType": "event_date",
+              "dateLoading": false,
+              "dateTimeColDataType": "timestamp",
+              "datetimeLoading": false,
+              "formattedQuery": "<font color=\"darkorange\">SELECT</font> <font color=\"darkcyan\">$timeSeries</font>, <font color=\"yellow\">*</font> <font color=\"darkorange\">FROM</font> <font color=\"darkcyan\">$table</font> <font color=\"darkorange\">WHERE</font> <font color=\"darkcyan\">$timeFilter</font> <font color=\"yellow\">AND</font> <font color=\"darkorange\">NOT</font> qry_name<font color=\"yellow\">=</font><font color=\"lightgreen\">'none'</font> <font color=\"darkorange\">ORDER BY</font> <font color=\"darkcyan\">$timeSeries</font>",
+              "intervalFactor": 1,
+              "query": "SELECT $timeSeries, * FROM $table WHERE $timeFilter AND NOT qry_name='none' ORDER BY $timeSeries",
+              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 20) * 20) * 1000, * FROM conn_stat.connstats WHERE event_date >= toDate(1500868065) AND timestamp >= toDateTime(1500868065) AND NOT qry_name='none' ORDER BY (intDiv(toUInt32(timestamp), 20) * 20) * 1000",
+              "refId": "A",
+              "resultFormat": "time_series",
+              "table": "connstats",
+              "tableLoading": false
+            }
+          ],
+          "timeFrom": "6h",
+          "title": "DNS request or hostname in HTTP",
+          "transform": "timeseries_to_columns",
+          "type": "table"
+        },
+        {
+          "columns": [],
+          "datasource": "${DS_CLICKHOUSE}",
+          "fontSize": "80%",
+          "id": 10,
+          "links": [],
+          "pageSize": 500,
+          "scroll": true,
+          "showHeader": true,
+          "sort": {
+            "col": 0,
+            "desc": true
+          },
+          "span": 6,
+          "styles": [
+            {
+              "alias": "Time",
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "pattern": "event_date",
+              "type": "hidden"
+            },
+            {
+              "alias": "",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "pattern": "Time",
+              "thresholds": [],
+              "type": "hidden",
+              "unit": "short"
+            },
+            {
+              "alias": "",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "pattern": "src_port",
+              "thresholds": [],
+              "type": "string",
+              "unit": "short"
+            },
+            {
+              "alias": "",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "pattern": "dst_port",
+              "thresholds": [],
+              "type": "string",
+              "unit": "short"
+            },
+            {
+              "alias": "",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "pattern": "qry_name",
+              "thresholds": [],
+              "type": "hidden",
+              "unit": "short"
+            },
+            {
+              "alias": "",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
               "decimals": 2,
               "pattern": "/.*/",
               "thresholds": [],
@@ -503,7 +958,7 @@
               "formattedQuery": "<font color=\"darkorange\">SELECT</font> <font color=\"darkcyan\">$timeSeries</font>, <font color=\"yellow\">*</font> <font color=\"darkorange\">FROM</font> <font color=\"darkcyan\">$table</font> <font color=\"darkorange\">WHERE</font> <font color=\"darkcyan\">$timeFilter</font> <font color=\"darkorange\">ORDER BY</font> <font color=\"darkcyan\">$timeSeries</font>",
               "intervalFactor": 1,
               "query": "SELECT $timeSeries, * FROM $table WHERE $timeFilter ORDER BY $timeSeries",
-              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 1) * 1) * 1000, * FROM conn_stat.connstats WHERE event_date >= toDate(1500293177) AND timestamp >= toDateTime(1500293177) ORDER BY (intDiv(toUInt32(timestamp), 1) * 1) * 1000",
+              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 1) * 1) * 1000, * FROM conn_stat.connstats WHERE event_date >= toDate(1500889365) AND timestamp >= toDateTime(1500889365) ORDER BY (intDiv(toUInt32(timestamp), 1) * 1) * 1000",
               "refId": "A",
               "resultFormat": "time_series",
               "table": "connstats",
@@ -520,7 +975,7 @@
       "repeatIteration": null,
       "repeatRowId": null,
       "showTitle": false,
-      "title": "Row",
+      "title": "Dashboard Row",
       "titleSize": "h6"
     }
   ],
@@ -531,7 +986,7 @@
     "list": []
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
@@ -562,5 +1017,5 @@
   },
   "timezone": "browser",
   "title": "politraf_clickhouse",
-  "version": 6
+  "version": 43
 }
