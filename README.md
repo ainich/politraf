@@ -4,6 +4,7 @@
   * systat.py - system statistic to clickhouse
   * connstat.py - connections statistic to clickhouse
   * otxget.py - Fetch IOC pulse from OTX AlienVault
+  * iocwatch.py - Check traffic for IOC and report
   * constat.service and systat.service - config for systemd
   * politraf_clickhouse.json - grafana dashboard (Grafana 4.4)
   * config.yaml - configuration file (interface, capture filter - https://wiki.wireshark.org/CaptureFilters)
@@ -25,6 +26,7 @@
   ```
   crontab -e
     * add line - 0 2 * * * /opt/politraf/otxget.py
+    * add line - */5 * * * * /opt/politraf/iocwatch.py
 
 * Clickhouse - https://clickhouse.yandex/docs/en/getting_started/index.html#installation
   
