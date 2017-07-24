@@ -7,20 +7,15 @@
 #
 # Create an account and select your feeds
 # https://otx.alienvault.com
-
+import dbmodels
 from OTXv2 import OTXv2
 import re
 import os
 import sys
 import traceback
 import yaml
-from infi.clickhouse_orm import models, fields, engines
 from pytz import timezone
 from datetime import datetime, date, time
-from infi.clickhouse_orm.database import Database
-from infi.clickhouse_orm.models import Model
-from infi.clickhouse_orm.fields import *
-from infi.clickhouse_orm.engines import MergeTree
 
 # Read config
 with open("/etc/politraf/config.yaml", 'r') as stream:
@@ -30,15 +25,6 @@ with open("/etc/politraf/config.yaml", 'r') as stream:
     except yaml.YAMLError as exc:
         print(exc)
 
-class IOC_OTX(Model):
-
-    event_date = DateField()
-    timestamp = DateTimeField()
-    indicator = StringField()
-    name = StringField()
-    references = StringField()
-    
-    engine = MergeTree('event_date', ('timestamp', 'indicator', 'name', 'references'))
 
 db = Database('ioc')
 db.drop_table(IOC_OTX)

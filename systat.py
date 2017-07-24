@@ -1,40 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8
 
-from infi.clickhouse_orm.database import Database
-from infi.clickhouse_orm.models import Model
-from infi.clickhouse_orm.fields import *
-from infi.clickhouse_orm.engines import MergeTree
+import dbmodels
 from pytz import timezone
 import psutil, time, datetime
 from datetime import datetime
 
-class CPUStats(Model):
-
-    event_date = DateField()
-    timestamp = DateTimeField()
-    cpu_id = UInt16Field()
-    cpu_percent = Float32Field()
-
-    engine = MergeTree('event_date', ('cpu_id', 'cpu_percent', 'timestamp'))
-
-class MEMStats(Model):
-
-    event_date = DateField()
-    timestamp = DateTimeField()
-    total = Float32Field()
-    used = Float32Field()
-
-    engine = MergeTree('event_date', ('total', 'used', 'timestamp'))
-
-class DISKStats(Model):
-
-    event_date = DateField()
-    timestamp = DateTimeField()
-    total = Float32Field()
-    used = Float32Field()
-
-    engine = MergeTree('event_date', ('total', 'used', 'timestamp'))
 
 db = Database('sys_stat')
 db.create_table(CPUStats)

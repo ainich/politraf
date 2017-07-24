@@ -1,52 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8
-
-from infi.clickhouse_orm.database import Database
-from infi.clickhouse_orm.models import Model
-from infi.clickhouse_orm.fields import *
-from infi.clickhouse_orm.engines import MergeTree
+import dbmodels
 from pytz import timezone
 import psutil, datetime
-from pytz import timezone
-
-class IOC_OTX(Model):
-
-    event_date = DateField()
-    timestamp = DateTimeField()
-    indicator = StringField()
-    name = StringField()
-    references = StringField()
-    
-    engine = MergeTree('event_date', ('timestamp', 'indicator', 'name', 'references'))
-
-class CONNStats(Model):
-
-    event_date = DateField()
-    timestamp = DateTimeField()
-    protocol = StringField()
-    src_addr = StringField()
-    src_port = Float32Field()
-    dst_addr = StringField()
-    dst_port = Float32Field()
-    qry_name = StringField()
-    
-    engine = MergeTree('event_date', ('timestamp', 'protocol', 'src_addr', 'src_port', 'dst_addr', 'dst_port', 'qry_name'))
-
-class IOCStats(Model):
-
-    event_date = DateField()
-    timestamp = DateTimeField()
-    protocol = StringField()
-    src_addr = StringField()
-    src_port = Float32Field()
-    dst_addr = StringField()
-    dst_port = Float32Field()
-    qry_name = StringField()
-    indicator = StringField()
-    name = StringField()
-    references = StringField()
-
-    engine = MergeTree('event_date', ('timestamp', 'protocol', 'src_addr', 'src_port', 'dst_addr', 'dst_port', 'qry_name', 'indicator', 'name', 'references'))
 
 
 db = Database('ioc')
@@ -82,5 +38,9 @@ class OTXWatch():
 
 if __name__ == '__main__':
 
-    # Retrieve the traffic events, check and write
+    # Retrieve the traffic events
     traf_receiver = OTXWatch()
+
+    # Retrieve the events and store the IOCs
+    # otx_receiver.get_iocs_last(int(args.l))
+    traf_receiver.get_traf_last()

@@ -1,14 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8
+import dbmodels
 import pyshark
 import os
-from infi.clickhouse_orm import models, fields, engines
 from pytz import timezone
 from datetime import datetime, date, time
-from infi.clickhouse_orm.database import Database
-from infi.clickhouse_orm.models import Model
-from infi.clickhouse_orm.fields import *
-from infi.clickhouse_orm.engines import MergeTree
 import yaml
 
 # Read config
@@ -22,19 +18,6 @@ with open("/etc/politraf/config.yaml", 'r') as stream:
 
 # PyShark config
 cap = pyshark.LiveCapture(interface=interface, bpf_filter=bpf_filter)
-
-class CONNStats(Model):
-
-    event_date = DateField()
-    timestamp = DateTimeField()
-    protocol = StringField()
-    src_addr = StringField()
-    src_port = Float32Field()
-    dst_addr = StringField()
-    dst_port = Float32Field()
-    qry_name = StringField()
-    
-    engine = MergeTree('event_date', ('timestamp', 'protocol', 'src_addr', 'src_port', 'dst_addr', 'dst_port', 'qry_name'))
 
 db = Database('conn_stat')
 db.create_table(CONNStats)
