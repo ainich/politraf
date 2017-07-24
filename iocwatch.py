@@ -41,18 +41,18 @@ db = Database('conn_stat')
 
 # 5 min time
 tz = timezone('Europe/Moscow')
-to_time = datetime.datetime.now(tz)
-from_time = datetime.datetime.now(tz) - datetime.timedelta(minutes=5)
-timestamp = (from_time - datetime.datetime(1970, 1, 1)) / datetime.timedelta(seconds=1)
-timestamp2 = str(timestamp)
-print (from_time)
+to_time = datetime.datetime.now()
+from_time = (datetime.datetime.now(tz) - datetime.timedelta(minutes=5)).replace(microsecond=0)
+timestamp = str(from_time.timestamp())
 
 class OTXWatch():
 
     def get_traf_last(self):
             print ("Starting fetch traffic stat ...")
-            for row in db.select('SELECT timestamp, src_addr, src_port, dst_addr, dst_port, qry_name FROM conn_stat.connstats WHERE timestamp >= toDateTime('+timestamp+') ORDER BY timestamp LIMIT 10'):
-                print (row.timestamp, row.src_addr, row.dst_addr)
+            for row in db.select('SELECT timestamp, src_addr, src_port, dst_addr, dst_port, qry_name FROM conn_stat.connstats WHERE timestamp >= toDateTime('+timestamp+') ORDER BY timestamp'):
+                #print (row.timestamp, row.src_addr, row.dst_addr, type(row.dst_addr))
+                for ioc in db.select('SELECT * FROM ioc.ioc_otx WHERE indicator = \''+row.dst_addr+'\' ORDER BY timestamp'):
+                    print (ioc.name)
             
 
 #    def check_iocs(self):
