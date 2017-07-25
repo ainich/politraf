@@ -7,15 +7,13 @@
 #
 # Create an account and select your feeds
 # https://otx.alienvault.com
+
 import dbmodels
 from OTXv2 import OTXv2
-import re
-import os
-import sys
 import traceback
 import yaml
-from pytz import timezone
-from datetime import datetime, date, time
+import datetime
+
 
 # Read config
 with open("/etc/politraf/config.yaml", 'r') as stream:
@@ -26,10 +24,10 @@ with open("/etc/politraf/config.yaml", 'r') as stream:
         print(exc)
 
 
-db = Database('ioc')
-db.drop_table(IOC_OTX)
-db.create_table(IOC_OTX)
-tz = timezone('Europe/Moscow')
+db = dbmodels.Database('ioc')
+db.drop_table(dbmodels.IOC_OTX)
+db.create_table(dbmodels.IOC_OTX)
+
 
 class OTXReceiver():
 

@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8
+
 import dbmodels
 import pyshark
-import os
-from pytz import timezone
 from datetime import datetime, date, time
 import yaml
 
@@ -19,9 +18,8 @@ with open("/etc/politraf/config.yaml", 'r') as stream:
 # PyShark config
 cap = pyshark.LiveCapture(interface=interface, bpf_filter=bpf_filter)
 
-db = Database('conn_stat')
-db.create_table(CONNStats)
-tz = timezone('Europe/Moscow')
+db = dbmodels.Database('conn_stat')
+#db.create_table(CONNStats)
 
 
 def print_conversation_header(pkt):
@@ -61,7 +59,7 @@ if __name__ == '__main__':
     running = True
     while running:
         try:
-            cap.apply_on_packets(print_conversation_header)
+            cap.apply_on_packets(print_conversation_header, packet_count=50)
         except Exception as e:
             print(e)
             running = False

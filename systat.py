@@ -2,15 +2,14 @@
 # -*- coding: utf-8
 
 import dbmodels
-from pytz import timezone
 import psutil, time, datetime
 from datetime import datetime
 
 
-db = Database('sys_stat')
-db.create_table(CPUStats)
-db.create_table(MEMStats)
-db.create_table(DISKStats)
+db = dbmodels.Database('sys_stat')
+#db.create_table(CPUStats)
+#db.create_table(MEMStats)
+#db.create_table(DISKStats)
 
 if __name__ == '__main__':
     
@@ -21,7 +20,6 @@ if __name__ == '__main__':
             stats = psutil.cpu_percent(percpu=True)
             mem = psutil.virtual_memory()
             disk = psutil.disk_usage('/')
-            tz = pytz.timezone('Europe/Moscow')
             timestamp = datetime.now()
             today = datetime.strftime(datetime.now(), '%Y-%m-%d')
             db.insert([
