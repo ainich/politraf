@@ -25,8 +25,8 @@
   cp constat.service systat.service /etc/systemd/system/
   ```
   crontab -e
-    * add line - 0 2 * * * /opt/politraf/otxget.py
-    * add line - */5 * * * * /opt/politraf/iocwatch.py
+    * add line - 0 2 * * * /opt/politraf/otxget.py >/dev/null 2>&1
+    * add line - */5 * * * * /opt/politraf/iocwatch.py >/dev/null 2>&1
 
 * Clickhouse - https://clickhouse.yandex/docs/en/getting_started/index.html#installation
   
