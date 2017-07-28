@@ -2,8 +2,10 @@
 # -*- coding: utf-8
 
 import dbmodels
-import psutil, time, datetime
-from datetime import datetime
+import psutil
+import datetime
+
+#from datetime import datetime
 
 
 db = dbmodels.Database('sys_stat')

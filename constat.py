@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8
 import dbmodels
+import datetime
 import pyshark
 import os
 from pytz import timezone
-from datetime import datetime
 import yaml
 
 # Read config
@@ -13,15 +13,16 @@ with open("/etc/politraf/config.yaml", 'r') as stream:
         config = (yaml.load(stream))
         interface = config['interface']
         bpf_filter = config['bpf_filter']
-    except yaml.YAMLError as exc:
-        print(exc)
+        time_zone = config['time_zone'] 
+    except yaml.YAMLError as e:
+        print(e)
 
 # PyShark config
 cap = pyshark.LiveCapture(interface=interface, bpf_filter=bpf_filter)
 
 db = dbmodels.Database('conn_stat')
 #db.create_table(CONNStats)
-tz = timezone('Europe/Moscow')
+tz = timezone(time_zone)
 
 
 def print_conversation_header(pkt):
@@ -49,25 +50,20 @@ def print_conversation_header(pkt):
                 else:
                     qry_name = "none"
             
-            timestamp = datetime.now(tz)
-            today = datetime.strftime(datetime.now(), '%Y-%m-%d')
+            timestamp = datetime.datetime.now(tz)
+            today = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d')
             #print (today, timestamp, protocol, src_addr, src_port, dst_addr, dst_port, qry_name)
             db.insert([
                 dbmodels.CONNStats(event_date=today, timestamp=timestamp, protocol=protocol, src_addr=src_addr, src_port=src_port, dst_addr=dst_addr, dst_port=dst_port, qry_name=qry_name)
                 ])
     except Exception as e:
-        #print(e)
-        bad_pkt = pkt
-        print (e, bad_pkt)
-
+        print(e)
+        
 if __name__ == '__main__':
 
-    running = True
-    while running:
-        try:
-            print ("Running tshark with: interface: "+interface+" and bpf_filter: "+bpf_filter)
-            cap.apply_on_packets(print_conversation_header)
-        except Exception as e:
-            print(e)
-            running = False
+    try:
+        print ("Running tshark with: interface: "+interface+" and bpf_filter: "+bpf_filter)
+        cap.apply_on_packets(print_conversation_header)
+    except Exception as e:
+        print(e)
         

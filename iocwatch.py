@@ -3,7 +3,15 @@
 
 import dbmodels
 import datetime
+from pytz import timezone
 
+# Read config
+with open("/etc/politraf/config.yaml", 'r') as stream:
+    try:
+        config = (yaml.load(stream))
+        time_zone = config['time_zone'] 
+    except yaml.YAMLError as e:
+        print(e)
 
 db = dbmodels.Database('ioc')
 db2 = dbmodels.Database('conn_stat')
