@@ -43,10 +43,10 @@
     cp systat.py constat.py otxget.py /opt/politraf
     cp constat.service systat.service /etc/systemd/system/
     systemctl daemon-reload
-      * service systat start
-      * service constat start
-    ```
+    service systat start
+    service constat start
 
     crontab -e
       * add line - 0 2 * * * /opt/politraf/otxget.py >/dev/null 2>&1
       * add line - */1 * * * * /opt/politraf/iocwatch.py >/dev/null 2>&1
+    ```
