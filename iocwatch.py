@@ -46,9 +46,6 @@ def get_traf_last():
 
 if __name__ == '__main__':
 
-    # Retrieve the traffic events
-    #traf_receiver = OTXWatch()
-
     # Retrieve the events and store the IOCs
     # otx_receiver.get_iocs_last(int(args.l))
     get_traf_last()
