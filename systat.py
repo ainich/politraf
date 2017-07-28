@@ -5,8 +5,6 @@ import dbmodels
 import psutil
 import datetime
 
-#from datetime import datetime
-
 
 db = dbmodels.Database('sys_stat')
 #db.create_table(CPUStats)
