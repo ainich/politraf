@@ -58,9 +58,10 @@ class OTXReceiver():
                             #print (indicator, name, references)
                             timestamp = datetime.datetime.now()
                             today = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d')
-                            db.insert([IOC_OTX(event_date=today, timestamp=timestamp, indicator=indicator, name=name, references=references)])
+                            db.insert([dbmodels.IOC_OTX(event_date=today, timestamp=timestamp, indicator=indicator, name=name, references=references)])
 
                     except Exception as e:
+                        print(e)
                         pass
 
             except Exception as e:
