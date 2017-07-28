@@ -47,6 +47,6 @@
     service constat start
 
     crontab -e
-      * add line - 0 2 * * * /opt/politraf/otxget.py >/dev/null 2>&1
-      * add line - */1 * * * * /opt/politraf/iocwatch.py >/dev/null 2>&1
+    0 2 * * * /opt/politraf/otxget.py >/dev/null 2>&1
+    */1 * * * * /opt/politraf/iocwatch.py >/dev/null 2>&1
     ```
