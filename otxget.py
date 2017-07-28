@@ -61,7 +61,7 @@ class OTXReceiver():
                             db.insert([dbmodels.IOC_OTX(event_date=today, timestamp=timestamp, indicator=indicator, name=name, references=references)])
 
                     except Exception as e:
-                        print(e)
+                        #print(e)
                         pass
 
             except Exception as e:

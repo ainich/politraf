@@ -4,6 +4,7 @@
 import dbmodels
 import datetime
 from pytz import timezone
+import yaml
 
 # Read config
 with open("/etc/politraf/config.yaml", 'r') as stream:
@@ -16,18 +17,19 @@ with open("/etc/politraf/config.yaml", 'r') as stream:
 db = dbmodels.Database('ioc')
 db2 = dbmodels.Database('conn_stat')
 #db.create_table(IOCStats)
+tz = timezone(time_zone)
 
 # 5 min time
-to_time = datetime.datetime.now()
-from_time = (datetime.datetime.now() - datetime.timedelta(minutes=5)).replace(microsecond=0)
+to_time = datetime.datetime.now(tz)
+from_time = (datetime.datetime.now(tz) - datetime.timedelta(minutes=1)).replace(microsecond=0)
 from_time_epoch = str(from_time.timestamp())
-today = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d')
+today = datetime.datetime.strftime(datetime.datetime.now(tz), '%Y-%m-%d')
 
 def get_traf_last():
         print ("Starting fetch traffic stat ...")
         for row in db2.select('SELECT * FROM conn_stat.connstats WHERE timestamp >= toDateTime('+from_time_epoch+') ORDER BY timestamp'):
-            #print (row.timestamp, row.src_addr, row.dst_addr, type(row.dst_addr))
-            timestamp = datetime.datetime.now()
+            print (row.timestamp, row.src_addr, row.dst_addr)
+            timestamp = datetime.datetime.now(tz)
             if not row.qry_name == 'none':
                 for ioc in db.select('SELECT * FROM ioc.ioc_otx WHERE indicator = \''+row.qry_name+'\' ORDER BY timestamp'):
                     print (row.src_addr, row.src_port, row.dst_addr, row.dst_port, row.qry_name, ioc.name, ioc.indicator, ioc.references)

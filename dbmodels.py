@@ -3,6 +3,7 @@ from infi.clickhouse_orm.database import Database
 from infi.clickhouse_orm.models import Model
 from infi.clickhouse_orm.fields import *
 from infi.clickhouse_orm.engines import MergeTree
+from infi.clickhouse_orm.engines import Memory
 
 class IOC_OTX(Model):
 
@@ -12,7 +13,8 @@ class IOC_OTX(Model):
     name = StringField()
     references = StringField()
     
-    engine = MergeTree('event_date', ('timestamp', 'indicator', 'name', 'references'))
+    #engine = MergeTree('event_date', ('timestamp', 'indicator', 'name', 'references'))
+    engine = Memory()
 
 class IOCStats(Model):
 
