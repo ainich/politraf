@@ -13,33 +13,38 @@
     * service constat (start|stop|status)
 
 * Install (Debian, **Python 3 required**)
-  ```
-  sudo apt-get install tshark
-  pip3 install infi.clickhouse_orm
-  pip3 install pyshark
-  pip3 install pyyaml
-  mkdir /etc/politraf
-  cp config.yaml /etc/politraf/
-  mkdir /opt/politraf
-  cp systat.py constat.py otxget.py /opt/politraf
-  cp constat.service systat.service /etc/systemd/system/
-  systemctl daemon-reload
-  ```
-  crontab -e
-    * add line - 0 2 * * * /opt/politraf/otxget.py >/dev/null 2>&1
-    * add line - */1 * * * * /opt/politraf/iocwatch.py >/dev/null 2>&1
 
-* Clickhouse - https://clickhouse.yandex/docs/en/getting_started/index.html#installation
+    * Clickhouse - https://clickhouse.yandex/docs/en/getting_started/index.html#installation
   
-  Ubuntu | Debian
-  ------------ | -------------
-  16.04  xenial | stretch / sid
-  14.04  trusty | jessie  / sid
+      Ubuntu | Debian
+      ------------ | -------------
+      16.04  xenial | stretch / sid
+      14.04  trusty | jessie  / sid
   
-* Grafana - http://docs.grafana.org/installation/
-  * Install Clickhouse datasource for Grafana - https://grafana.com/plugins/vertamedia-clickhouse-datasource
-  * Add datasource named Clickhouse
+    * Grafana - http://docs.grafana.org/installation/
+      * Install Clickhouse datasource for Grafana - https://grafana.com/plugins/vertamedia-clickhouse-datasource
+      * Add datasource named Clickhouse
 
-* OTX AlienVault - https://otx.alienvault.com
-  * Create an account and select your feeds
-  * Set API key in /etc/politraf.cfg
+    * OTX AlienVault - https://otx.alienvault.com
+      * Create an account and select your feeds
+      * Set API key in /etc/politraf.cfg
+
+    ```
+    sudo apt-get install tshark
+    pip3 install infi.clickhouse_orm
+    pip3 install pyshark
+    pip3 install pyyaml
+    git clone https://github.com/ainich/politraf.git
+    cd politraf
+    mkdir /etc/politraf
+    cp config.yaml /etc/politraf/
+    mkdir /opt/politraf
+    cp systat.py constat.py otxget.py /opt/politraf
+    cp constat.service systat.service /etc/systemd/system/
+    systemctl daemon-reload
+      * service systat start
+      * service constat start
+    ```
+    crontab -e
+      * add line - 0 2 * * * /opt/politraf/otxget.py >/dev/null 2>&1
+      * add line - */1 * * * * /opt/politraf/iocwatch.py >/dev/null 2>&1
