@@ -23,6 +23,7 @@
   mkdir /opt/politraf
   cp systat.py constat.py otxget.py /opt/politraf
   cp constat.service systat.service /etc/systemd/system/
+  systemctl daemon-reload
   ```
   crontab -e
     * add line - 0 2 * * * /opt/politraf/otxget.py >/dev/null 2>&1
