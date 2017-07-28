@@ -29,6 +29,7 @@
       * Create an account and select your feeds
       * Set API key in /etc/politraf.cfg
 
+
     ```
     sudo apt-get install tshark
     pip3 install infi.clickhouse_orm
@@ -45,6 +46,7 @@
       * service systat start
       * service constat start
     ```
+
     crontab -e
       * add line - 0 2 * * * /opt/politraf/otxget.py >/dev/null 2>&1
       * add line - */1 * * * * /opt/politraf/iocwatch.py >/dev/null 2>&1
