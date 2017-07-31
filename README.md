@@ -5,9 +5,11 @@
   * connstat.py - connections statistic to clickhouse
   * otxget.py - Fetch IOC pulse from OTX AlienVault
   * iocwatch.py - Check traffic for IOC and report
-  * constat.service and systat.service - config for systemd
-  * politraf_clickhouse.json - grafana dashboard (Grafana 4.4)
-  * config.yaml - configuration file (interface, capture filter - https://wiki.wireshark.org/CaptureFilters)
+  * dbmodels.py - ORM clickhouse
+    * config
+      * constat.service and systat.service - config for systemd
+      * politraf_clickhouse.json - grafana dashboard (Grafana 4.4)
+      * config.yaml - configuration file (interface, capture filter - https://wiki.wireshark.org/CaptureFilters)
   * Services
     * service systat (start|stop|status)
     * service constat (start|stop|status)
