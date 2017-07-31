@@ -39,10 +39,9 @@
     git clone https://github.com/ainich/politraf.git
     cd politraf
     mkdir /etc/politraf
-    cp config.yaml /etc/politraf/
-    mkdir /opt/politraf
-    cp systat.py constat.py otxget.py /opt/politraf
-    cp constat.service systat.service /etc/systemd/system/
+    cp config/config.yaml /etc/politraf/
+    cp systat.py constat.py otxget.py dbmodels.py /opt/politraf
+    cp config/constat.service config/systat.service /etc/systemd/system/
     vim /etc/politraf/config.yaml
     systemctl daemon-reload
     systemctl start systat
