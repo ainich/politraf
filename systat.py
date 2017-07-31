@@ -23,7 +23,7 @@ with open("/etc/politraf/config.yaml", 'r') as stream:
         print(e)
 
 tz = timezone(time_zone)
-db = dbmodels.Database('sys_stat', db_url=url, username=name, password=passw, readonly=False, autocreate=True)
+db = dbmodels.Database('politraf', db_url=url, username=name, password=passw, readonly=False, autocreate=True)
 #db.create_table(CPUStats)
 #db.create_table(MEMStats)
 #db.create_table(DISKStats)

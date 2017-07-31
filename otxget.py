@@ -25,7 +25,7 @@ with open("/etc/politraf/config.yaml", 'r') as stream:
         print(exc)
 
 
-db = dbmodels.Database('ioc', db_url=url, username=name, password=passw, readonly=False, autocreate=True)
+db = dbmodels.Database('politraf', db_url=url, username=name, password=passw, readonly=False, autocreate=True)
 db.drop_table(dbmodels.IOC_OTX)
 db.create_table(dbmodels.IOC_OTX)
 

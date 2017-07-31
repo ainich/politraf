@@ -22,8 +22,7 @@ with open("/etc/politraf/config.yaml", 'r') as stream:
     except yaml.YAMLError as e:
         print(e)
 
-db = dbmodels.Database('ioc', db_url=url, username=name, password=passw, readonly=False, autocreate=True)
-db2 = dbmodels.Database('conn_stat', db_url=url, username=name, password=passw, readonly=False, autocreate=True)
+db = dbmodels.Database('politraf', db_url=url, username=name, password=passw, readonly=False, autocreate=True)
 #db.create_table(IOCStats)
 tz = timezone(time_zone)
 
@@ -36,16 +35,16 @@ today = datetime.datetime.strftime(datetime.datetime.now(tz), '%Y-%m-%d')
 def get_traf_last():
         start = time.time()
         print ("Starting fetch traffic stat ...")
-        for row in db2.select('SELECT uniq(dst_addr), * FROM conn_stat.connstats WHERE timestamp >= toDateTime('+from_time_epoch+') GROUP BY dst_addr, event_date, timestamp, protocol, src_addr, src_port, dst_port, qry_name ORDER BY timestamp'):
+        for row in db.select('SELECT uniq(dst_addr), * FROM politraf.connstats WHERE timestamp >= toDateTime('+from_time_epoch+') GROUP BY dst_addr, event_date, timestamp, protocol, src_addr, src_port, dst_port, qry_name ORDER BY timestamp'):
             timestamp = datetime.datetime.now(tz)
             if not row.qry_name == 'none':
-                for ioc in db.select('SELECT * FROM ioc.ioc_otx WHERE indicator = \''+row.qry_name+'\' ORDER BY timestamp'):
+                for ioc in db.select('SELECT * FROM politraf.ioc_otx WHERE indicator = \''+row.qry_name+'\' ORDER BY timestamp'):
                     print (row.src_addr, row.src_port, row.dst_addr, row.dst_port, row.qry_name, ioc.name, ioc.indicator, ioc.references)
                     db.insert([
                     dbmodels.IOCStats(event_date=today, timestamp=timestamp, protocol=row.protocol, src_addr=row.src_addr, src_port=row.src_port, dst_addr=row.dst_addr, dst_port=row.dst_port, qry_name=row.qry_name, indicator=ioc.indicator, name=ioc.name, references=ioc.references)
                     ])    
             else:
-                for ioc in db.select('SELECT * FROM ioc.ioc_otx WHERE indicator = \''+row.dst_addr+'\' ORDER BY timestamp'):
+                for ioc in db.select('SELECT * FROM politraf.ioc_otx WHERE indicator = \''+row.dst_addr+'\' ORDER BY timestamp'):
                     print (row.src_addr, row.src_port, row.dst_addr, row.dst_port, row.qry_name, ioc.name, ioc.indicator, ioc.references)
                     db.insert([
                     dbmodels.IOCStats(event_date=today, timestamp=timestamp, protocol=row.protocol, src_addr=row.src_addr, src_port=row.src_port, dst_addr=row.dst_addr, dst_port=row.dst_port, qry_name=row.qry_name, indicator=ioc.indicator, name=ioc.name, references=ioc.references)
