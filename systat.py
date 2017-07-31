@@ -11,13 +11,15 @@ import yaml
 with open("/etc/politraf/config.yaml", 'r') as stream:
     try:
         config = (yaml.load(stream))
-        time_zone = config['time_zone'] 
+        time_zone = config['time_zone']
+        url = config['db_url']
+        name = config['username']
+        passw = config['password']
     except yaml.YAMLError as e:
         print(e)
 
 tz = timezone(time_zone)
-
-db = dbmodels.Database('sys_stat')
+db = dbmodels.Database('sys_stat', db_url=url, username=name, password=passw, readonly=False, autocreate=True)
 #db.create_table(CPUStats)
 #db.create_table(MEMStats)
 #db.create_table(DISKStats)

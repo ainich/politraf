@@ -16,11 +16,14 @@ with open("/etc/politraf/config.yaml", 'r') as stream:
     try:
         config = (yaml.load(stream))
         OTX_KEY = config['otx_key']
+        url = config['db_url']
+        name = config['username']
+        passw = config['password']
     except yaml.YAMLError as exc:
         print(exc)
 
 
-db = dbmodels.Database('ioc')
+db = dbmodels.Database('ioc', db_url=url, username=name, password=passw, readonly=False, autocreate=True)
 db.drop_table(dbmodels.IOC_OTX)
 db.create_table(dbmodels.IOC_OTX)
 
