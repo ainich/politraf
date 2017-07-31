@@ -18,7 +18,6 @@ with open("/etc/politraf/config.yaml", 'r') as stream:
         url = config['db_url']
         name = config['username']
         passw = config['password']
-        print (interfaces)
     except yaml.YAMLError as e:
         print(e)
 
