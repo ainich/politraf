@@ -1,11 +1,12 @@
 [Unit]
-Description=Connections stat to clickhouse
+Description=Politraf Connections stat to clickhouse
 After=network.target
 
 [Service]
+GuessMainPID=yes
+WorkingDirectory=/opt/politraf
 Type=simple
-User=root
-ExecStart=/usr/local/bin/politraf/constat.py
+ExecStart=/opt/politraf/constat.py
 
 [Install]
 WantedBy=multi-user.target
