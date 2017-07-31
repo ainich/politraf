@@ -34,6 +34,7 @@
     sudo apt-get install tshark
     pip3 install infi.clickhouse_orm
     pip3 install pyshark
+    pip3 install OTXv2
     pip3 install pyyaml
     git clone https://github.com/ainich/politraf.git
     cd politraf

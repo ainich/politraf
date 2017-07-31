@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding: iso-8859-1 -*-
 # -*- coding: utf-8 -*-
-#
-# Get-OTX-IOCs
-# Retrieves IOCs from Open Threat Exchange
 #
 # Create an account and select your feeds
 # https://otx.alienvault.com
