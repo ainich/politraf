@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8
+##############################################################################
+# Politraf, connections to clickhouse
+##############################################################################
+
 import dbmodels
 import datetime
 import pyshark

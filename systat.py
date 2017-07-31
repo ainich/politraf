@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8
+##############################################################################
+# Politraf, system stat to clickhouse
+##############################################################################
+
 
 import dbmodels
 import psutil, time

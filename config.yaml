@@ -1,23 +1,32 @@
+##############################################################################
 # Politraf config
+##############################################################################
 #
 # Clickhouse
+#
 db_url: "http://localhost:8123/"
 username: default
 password:
+##############################################################################
 #
 # Promiscuous interfaces
 #
 #interface: tun0,eth0
 interface: tun0
+##############################################################################
 #
-# tshark filter
+# Tshark filter
+#
 # Light TCP 1-1024 and UDP 53
 #bpf_filter: 'tcp dst portrange 1-1024 or udp dst port 53'
 # Medium TCP AND UDP
 bpf_filter: 'src net 10.8.0.0/24 and not host 10.8.0.1'
-#
+##############################################################################
 # AlienVault open threat exchange API key
-otx_key: 
 #
+otx_key:  
+##############################################################################
 # Time zone
+#
 time_zone: Europe/Moscow
+##############################################################################

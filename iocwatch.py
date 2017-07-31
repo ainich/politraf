@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8
+##############################################################################
+# Politraf, check connections for network IOC
+##############################################################################
+
 
 import dbmodels
 import datetime

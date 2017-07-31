@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#
+##############################################################################
+# Politraf, IOC from OTX to clickhouse
+##############################################################################
 # Create an account and select your feeds
 # https://otx.alienvault.com
 
