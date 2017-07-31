@@ -3,8 +3,19 @@
 
 import dbmodels
 import psutil, time
+from pytz import timezone
 import datetime
+import yaml
 
+# Read config
+with open("/etc/politraf/config.yaml", 'r') as stream:
+    try:
+        config = (yaml.load(stream))
+        time_zone = config['time_zone'] 
+    except yaml.YAMLError as e:
+        print(e)
+
+tz = timezone(time_zone)
 
 db = dbmodels.Database('sys_stat')
 #db.create_table(CPUStats)
@@ -20,8 +31,8 @@ if __name__ == '__main__':
             stats = psutil.cpu_percent(percpu=True)
             mem = psutil.virtual_memory()
             disk = psutil.disk_usage('/')
-            timestamp = datetime.now()
-            today = datetime.strftime(datetime.now(), '%Y-%m-%d')
+            timestamp = datetime.datetime.now(tz)
+            today = datetime.datetime.strftime(datetime.datetime.now(tz), '%Y-%m-%d')
             db.insert([
                 dbmodels.CPUStats(event_date=today, timestamp=timestamp, cpu_id=cpu_id, cpu_percent=cpu_percent)
                 for cpu_id, cpu_percent in enumerate(stats)
