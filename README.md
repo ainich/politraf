@@ -42,6 +42,7 @@
     mkdir /opt/politraf
     cp systat.py constat.py otxget.py /opt/politraf
     cp constat.service systat.service /etc/systemd/system/
+    vim /etc/politraf/config.yaml
     systemctl daemon-reload
     systemctl start systat
     systemctl start constat
