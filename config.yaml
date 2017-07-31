@@ -1,6 +1,7 @@
 # Politraf config
 #
-# Promiscuous interface
+# Promiscuous interfaces
+#interface: tun0,eth0
 interface: tun0
 #
 # tshark filter

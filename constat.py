@@ -12,13 +12,15 @@ with open("/etc/politraf/config.yaml", 'r') as stream:
     try:
         config = (yaml.load(stream))
         interface = config['interface']
+        interfaces = interface.split(",")
         bpf_filter = config['bpf_filter']
-        time_zone = config['time_zone'] 
+        time_zone = config['time_zone']
+        print (interfaces)
     except yaml.YAMLError as e:
         print(e)
 
 # PyShark config
-cap = pyshark.LiveCapture(interface=interface, bpf_filter=bpf_filter)
+cap = pyshark.LiveCapture(interface=interfaces, bpf_filter=bpf_filter)
 
 db = dbmodels.Database('conn_stat')
 #db.create_table(CONNStats)
