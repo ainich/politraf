@@ -113,7 +113,7 @@
           "tableColumn": "",
           "targets": [
             {
-              "database": "ioc",
+              "database": "politraf",
               "dateColDataType": "event_date",
               "dateLoading": false,
               "dateTimeColDataType": "timestamp",
@@ -121,7 +121,7 @@
               "formattedQuery": "<font color=\"darkorange\">SELECT</font> <font color=\"darkcyan\">$timeSeries</font> <font color=\"darkorange\">as</font> t, <font color=\"navajowhite\">count</font>(<font color=\"yellow\">*</font>) <font color=\"darkorange\">FROM</font> <font color=\"darkcyan\">$table</font> <font color=\"darkorange\">WHERE</font> <font color=\"darkcyan\">$timeFilter</font> <font color=\"darkorange\">GROUP BY</font> t <font color=\"darkorange\">ORDER BY</font> t",
               "intervalFactor": 1,
               "query": "SELECT $timeSeries as t, count(*) FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
-              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 900) * 900) * 1000 as t, count(*) FROM ioc.ioc_otx WHERE event_date >= toDate(1501160537) AND timestamp >= toDateTime(1501160537) GROUP BY t ORDER BY t",
+              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 900) * 900) * 1000 as t, count(*) FROM politraf.ioc_otx WHERE event_date >= toDate(1501423575) AND timestamp >= toDateTime(1501423575) GROUP BY t ORDER BY t",
               "refId": "A",
               "resultFormat": "time_series",
               "table": "ioc_otx",
@@ -199,7 +199,7 @@
           "tableColumn": "",
           "targets": [
             {
-              "database": "ioc",
+              "database": "politraf",
               "dateColDataType": "event_date",
               "dateLoading": false,
               "dateTimeColDataType": "timestamp",
@@ -207,7 +207,7 @@
               "formattedQuery": "<font color=\"darkorange\">SELECT</font> <font color=\"darkcyan\">$timeSeries</font> <font color=\"darkorange\">as</font> t, <font color=\"navajowhite\">count</font>(<font color=\"yellow\">*</font>) <font color=\"darkorange\">FROM</font> <font color=\"darkcyan\">$table</font> <font color=\"darkorange\">WHERE</font> <font color=\"darkcyan\">$timeFilter</font> <font color=\"darkorange\">GROUP BY</font> t <font color=\"darkorange\">ORDER BY</font> t",
               "intervalFactor": 1,
               "query": "SELECT $timeSeries as t, count(*) FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
-              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 900) * 900) * 1000 as t, count(*) FROM ioc.iocstats WHERE event_date >= toDate(1501160537) AND timestamp >= toDateTime(1501160537) GROUP BY t ORDER BY t",
+              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 900) * 900) * 1000 as t, count(*) FROM politraf.iocstats WHERE event_date >= toDate(1501423575) AND timestamp >= toDateTime(1501423575) GROUP BY t ORDER BY t",
               "refId": "A",
               "resultFormat": "time_series",
               "table": "iocstats",
@@ -263,7 +263,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "database": "sys_stat",
+              "database": "politraf",
               "dateColDataType": "event_date",
               "dateLoading": false,
               "dateTimeColDataType": "timestamp",
@@ -271,7 +271,7 @@
               "formattedQuery": "<font color=\"darkorange\">SELECT</font> <font color=\"darkcyan\">$timeSeries</font> <font color=\"darkorange\">as</font> t, total, used <font color=\"darkorange\">FROM</font> <font color=\"darkcyan\">$table</font> <font color=\"darkorange\">WHERE</font> <font color=\"darkcyan\">$timeFilter</font> <font color=\"darkorange\">ORDER BY</font> t",
               "intervalFactor": 1,
               "query": "SELECT $timeSeries as t, total, used FROM $table WHERE $timeFilter ORDER BY t",
-              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 2) * 2) * 1000 as t, total, used FROM sys_stat.diskstats WHERE event_date >= toDate(1501246037) AND timestamp >= toDateTime(1501246037) ORDER BY t",
+              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 2) * 2) * 1000 as t, total, used FROM politraf.diskstats WHERE event_date >= toDate(1501509075) AND timestamp >= toDateTime(1501509075) ORDER BY t",
               "refId": "B",
               "resultFormat": "time_series",
               "table": "diskstats",
@@ -352,7 +352,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "database": "sys_stat",
+              "database": "politraf",
               "dateColDataType": "event_date",
               "dateLoading": false,
               "dateTimeColDataType": "timestamp",
@@ -360,7 +360,7 @@
               "formattedQuery": "<font color=\"darkorange\">SELECT</font> <font color=\"darkcyan\">$timeSeries</font> <font color=\"darkorange\">as</font> t, cpu_percent <font color=\"darkorange\">as</font> load <font color=\"darkorange\">FROM</font> <font color=\"darkcyan\">$table</font> <font color=\"darkorange\">WHERE</font> <font color=\"darkcyan\">$timeFilter</font> <font color=\"darkorange\">ORDER BY</font> t",
               "intervalFactor": 1,
               "query": "SELECT $timeSeries as t, cpu_percent as load FROM $table WHERE $timeFilter ORDER BY t",
-              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 2) * 2) * 1000 as t, cpu_percent as load FROM sys_stat.cpustats WHERE event_date >= toDate(1501246037) AND timestamp >= toDateTime(1501246037) ORDER BY t",
+              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 2) * 2) * 1000 as t, cpu_percent as load FROM politraf.cpustats WHERE event_date >= toDate(1501509075) AND timestamp >= toDateTime(1501509075) ORDER BY t",
               "refId": "E",
               "resultFormat": "time_series",
               "table": "cpustats",
@@ -441,7 +441,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "database": "sys_stat",
+              "database": "politraf",
               "dateColDataType": "event_date",
               "dateLoading": false,
               "dateTimeColDataType": "timestamp",
@@ -449,7 +449,7 @@
               "formattedQuery": "<font color=\"darkorange\">SELECT</font> <font color=\"darkcyan\">$timeSeries</font> <font color=\"darkorange\">as</font> t, total, used  <font color=\"darkorange\">FROM</font> <font color=\"darkcyan\">$table</font> <font color=\"darkorange\">WHERE</font> <font color=\"darkcyan\">$timeFilter</font> <font color=\"darkorange\">ORDER BY</font> t",
               "intervalFactor": 1,
               "query": "SELECT $timeSeries as t, total, used  FROM $table WHERE $timeFilter ORDER BY t",
-              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 2) * 2) * 1000 as t, total, used  FROM sys_stat.memstats WHERE event_date >= toDate(1501246037) AND timestamp >= toDateTime(1501246037) ORDER BY t",
+              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 2) * 2) * 1000 as t, total, used  FROM politraf.memstats WHERE event_date >= toDate(1501509075) AND timestamp >= toDateTime(1501509075) ORDER BY t",
               "refId": "B",
               "resultFormat": "time_series",
               "table": "memstats",
@@ -528,7 +528,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "database": "conn_stat",
+              "database": "politraf",
               "dateColDataType": "event_date",
               "dateLoading": false,
               "dateTimeColDataType": "timestamp",
@@ -536,7 +536,7 @@
               "formattedQuery": "<font color=\"darkorange\">SELECT</font> <font color=\"darkcyan\">$timeSeries</font> <font color=\"darkorange\">as</font> t, <font color=\"navajowhite\">count</font>(<font color=\"yellow\">*</font>) <font color=\"darkorange\">FROM</font> <font color=\"darkcyan\">$table</font> <font color=\"darkorange\">WHERE</font>  <font color=\"darkcyan\">$timeFilter</font> <font color=\"darkorange\">GROUP BY</font> t <font color=\"darkorange\">ORDER BY</font> t",
               "intervalFactor": 1,
               "query": "SELECT $timeSeries as t, count(*) FROM $table WHERE  $timeFilter GROUP BY t ORDER BY t",
-              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 2) * 2) * 1000 as t, count(*) FROM conn_stat.connstats WHERE  event_date >= toDate(1501246037) AND timestamp >= toDateTime(1501246037) GROUP BY t ORDER BY t",
+              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 2) * 2) * 1000 as t, count(*) FROM politraf.connstats WHERE  event_date >= toDate(1501509075) AND timestamp >= toDateTime(1501509075) GROUP BY t ORDER BY t",
               "refId": "A",
               "resultFormat": "time_series",
               "table": "connstats",
@@ -626,7 +626,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "database": "ioc",
+              "database": "politraf",
               "dateColDataType": "event_date",
               "dateLoading": false,
               "dateTimeColDataType": "timestamp",
@@ -634,7 +634,7 @@
               "formattedQuery": "<font color=\"darkorange\">SELECT</font><br />    <font color=\"darkcyan\">$timeSeries</font> <font color=\"darkorange\">as</font> t,<br />    <font color=\"navajowhite\">count</font>(<font color=\"yellow\">*</font>)<br /><font color=\"darkorange\">FROM</font> <font color=\"darkcyan\">$table</font><br /><font color=\"darkorange\">WHERE</font> <font color=\"darkcyan\">$timeFilter</font><br /><font color=\"darkorange\">GROUP BY</font><br />    t<br /><font color=\"darkorange\">ORDER BY</font> t",
               "intervalFactor": 1,
               "query": "SELECT\n    $timeSeries as t,\n    count(*)\nFROM $table\nWHERE $timeFilter\nGROUP BY\n    t\nORDER BY t",
-              "rawQuery": "SELECT     (intDiv(toUInt32(timestamp), 1) * 1) * 1000 as t,     count(*) FROM ioc.iocstats WHERE event_date >= toDate(1501246037) AND timestamp >= toDateTime(1501246037) GROUP BY     t ORDER BY t",
+              "rawQuery": "SELECT     (intDiv(toUInt32(timestamp), 1) * 1) * 1000 as t,     count(*) FROM politraf.iocstats WHERE event_date >= toDate(1501509075) AND timestamp >= toDateTime(1501509075) GROUP BY     t ORDER BY t",
               "refId": "A",
               "resultFormat": "time_series",
               "table": "iocstats",
@@ -787,7 +787,7 @@
           ],
           "targets": [
             {
-              "database": "ioc",
+              "database": "politraf",
               "dateColDataType": "event_date",
               "dateLoading": false,
               "dateTimeColDataType": "timestamp",
@@ -795,7 +795,7 @@
               "formattedQuery": "<font color=\"darkorange\">SELECT</font> <font color=\"darkcyan\">$timeSeries</font>, <font color=\"yellow\">*</font> <font color=\"darkorange\">FROM</font> <font color=\"darkcyan\">$table</font> <font color=\"darkorange\">WHERE</font> <font color=\"darkcyan\">$timeFilter</font> <font color=\"darkorange\">ORDER BY</font> <font color=\"darkcyan\">$timeSeries</font>",
               "intervalFactor": 1,
               "query": "SELECT $timeSeries, * FROM $table WHERE $timeFilter ORDER BY $timeSeries",
-              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 1) * 1) * 1000, * FROM ioc.iocstats WHERE event_date >= toDate(1501246037) AND timestamp >= toDateTime(1501246037) ORDER BY (intDiv(toUInt32(timestamp), 1) * 1) * 1000",
+              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 1) * 1) * 1000, * FROM politraf.iocstats WHERE event_date >= toDate(1501509075) AND timestamp >= toDateTime(1501509075) ORDER BY (intDiv(toUInt32(timestamp), 1) * 1) * 1000",
               "refId": "A",
               "resultFormat": "time_series",
               "table": "iocstats",
@@ -931,7 +931,7 @@
           ],
           "targets": [
             {
-              "database": "conn_stat",
+              "database": "politraf",
               "dateColDataType": "event_date",
               "dateLoading": false,
               "dateTimeColDataType": "timestamp",
@@ -939,7 +939,7 @@
               "formattedQuery": "<font color=\"darkorange\">SELECT</font><br />    <font color=\"darkseagreen\">timestamp</font>,<br />    <font color=\"yellow\">*</font><br /><font color=\"darkorange\">FROM</font> <font color=\"darkcyan\">$table</font><br /><font color=\"darkorange\">WHERE</font><br />    <font color=\"darkcyan\">$timeFilter</font><br />    <font color=\"yellow\">AND</font> qry_name <font color=\"yellow\">!=</font> <font color=\"lightgreen\">'none'</font><br /><font color=\"darkorange\">GROUP BY</font><br />    <font color=\"darkseagreen\">timestamp</font>,<br />    qry_name,<br />    dst_addr,<br />    event_date,<br />    protocol,<br />    src_addr,<br />    src_port,<br />    dst_port<br /><font color=\"darkorange\">ORDER BY</font> <font color=\"darkcyan\">$timeSeries</font>",
               "intervalFactor": 1,
               "query": "SELECT\n    timestamp,\n    *\nFROM $table\nWHERE\n    $timeFilter\n    AND qry_name != 'none'\nGROUP BY\n    timestamp,\n    qry_name,\n    dst_addr,\n    event_date,\n    protocol,\n    src_addr,\n    src_port,\n    dst_port\nORDER BY $timeSeries",
-              "rawQuery": "SELECT     timestamp,     * FROM conn_stat.connstats WHERE     event_date >= toDate(1501243337) AND timestamp >= toDateTime(1501243337)     AND qry_name != 'none' GROUP BY     timestamp,     qry_name,     dst_addr,     event_date,     protocol,     src_addr,     src_port,     dst_port ORDER BY (intDiv(toUInt32(timestamp), 5) * 5) * 1000",
+              "rawQuery": "SELECT     timestamp,     * FROM politraf.connstats WHERE     event_date >= toDate(1501506375) AND timestamp >= toDateTime(1501506375)     AND qry_name != 'none' GROUP BY     timestamp,     qry_name,     dst_addr,     event_date,     protocol,     src_addr,     src_port,     dst_port ORDER BY (intDiv(toUInt32(timestamp), 5) * 5) * 1000",
               "refId": "A",
               "resultFormat": "time_series",
               "table": "connstats",
@@ -1049,7 +1049,7 @@
           ],
           "targets": [
             {
-              "database": "conn_stat",
+              "database": "politraf",
               "dateColDataType": "event_date",
               "dateLoading": false,
               "dateTimeColDataType": "timestamp",
@@ -1057,7 +1057,7 @@
               "formattedQuery": "<font color=\"darkorange\">SELECT</font> <font color=\"darkcyan\">$timeSeries</font>, <font color=\"yellow\">*</font> <font color=\"darkorange\">FROM</font> <font color=\"darkcyan\">$table</font> <font color=\"darkorange\">WHERE</font> <font color=\"darkcyan\">$timeFilter</font> <font color=\"darkorange\">ORDER BY</font> <font color=\"darkcyan\">$timeSeries</font>",
               "intervalFactor": 1,
               "query": "SELECT $timeSeries, * FROM $table WHERE $timeFilter ORDER BY $timeSeries",
-              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 1) * 1) * 1000, * FROM conn_stat.connstats WHERE event_date >= toDate(1501246637) AND timestamp >= toDateTime(1501246637) ORDER BY (intDiv(toUInt32(timestamp), 1) * 1) * 1000",
+              "rawQuery": "SELECT (intDiv(toUInt32(timestamp), 1) * 1) * 1000, * FROM politraf.connstats WHERE event_date >= toDate(1501509675) AND timestamp >= toDateTime(1501509675) ORDER BY (intDiv(toUInt32(timestamp), 1) * 1) * 1000",
               "refId": "A",
               "resultFormat": "time_series",
               "table": "connstats",
@@ -1116,5 +1116,5 @@
   },
   "timezone": "browser",
   "title": "politraf_clickhouse",
-  "version": 52
+  "version": 57
 }
