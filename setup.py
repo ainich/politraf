@@ -37,7 +37,7 @@ try:
     shutil.copy2('dbmodels.py', '/opt/politraf/dbmodels.py')
     print ("Create database with tables")
     # Read config
-    with open("/etc/politraf/config.yaml", 'r') as stream:
+    with open("config/config.yaml", 'r') as stream:
         try:
             config = (yaml.load(stream))
             url = config['db_url']
