@@ -1,16 +1,16 @@
 sudo: enabled
 language: python
 python:
- - "3.2"
- - "3.3"
+ #- "3.2"
+ #- "3.3"
  - "3.4"
- - "3.5"
- - "3.5-dev" # 3.5 development branch
- - "3.6"
- - "3.6-dev" # 3.6 development branch
- - "3.7-dev" # 3.7 development branch
+ #- "3.5"
+ #- "3.5-dev" # 3.5 development branch
+ #- "3.6"
+ #- "3.6-dev" # 3.6 development branch
+ #- "3.7-dev" # 3.7 development branch
  # PyPy versions
- - "pypy3" # Pypy3 2.4.0
+ #- "pypy3" # Pypy3 2.4.0
 install: 
   #  - "sudo apt-get install pip3"
   - "sudo pip install -r requirements.txt"
@@ -21,7 +21,7 @@ install:
   - "sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4"
   - "sudo apt-get update"
   - "sudo apt-get install clickhouse-client clickhouse-server-common"
-script: "sudo service clickhouse-server start"
-script: "sudo ./setup.py"
-script: ./systat.py
-script: ./constat.py
+script: sudo service clickhouse-server start
+script: sudo ./setup.py
+script: sudo ./systat.py
+script: sudo ./constat.py
