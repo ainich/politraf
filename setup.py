@@ -9,17 +9,6 @@ import shutil
 import os
 import yaml
 
-# Read config
-with open("/etc/politraf/config.yaml", 'r') as stream:
-    try:
-        config = (yaml.load(stream))
-        url = config['db_url']
-        name = config['username']
-        passw = config['password']
-    except yaml.YAMLError as e:
-        print(e)
-
-
 try:
     print ("Make dir /etc/politraf")
     os.makedirs("/etc/politraf")
