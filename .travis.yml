@@ -21,7 +21,7 @@ install:
   - "sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4"
   - "sudo apt-get update"
   - "sudo apt-get install clickhouse-client clickhouse-server-common"
-  - "sudo service clickhouse-server start"
-  - "sudo ./setup.py"
+script: "sudo service clickhouse-server start"
+script: "sudo ./setup.py"
 script: ./systat.py
 script: ./constat.py
