@@ -10,20 +10,20 @@ import os
 import yaml
 
 try:
-    print ("Make dir /etc/politraf")
-    os.makedirs("/etc/politraf")
-    print ("Copy config.yaml to /etc/politraf")
-    shutil.copy2('config/config.yaml', '/etc/politraf/config.yaml')
-    print ("Make dir /opt/politraf")
-    os.makedirs("/opt/politraf")
-    print ("Setup services")
-    shutil.copy2('config/systat.service', '/etc/systemd/system/systat.service')
-    shutil.copy2('config/constat.service', '/etc/systemd/system/constat.service')
-    print ("Copy politraf files")
-    shutil.copy2('systat.py', '/opt/politraf/systat.py')
-    shutil.copy2('otxget.py', '/opt/politraf/otxget.py')
-    shutil.copy2('constat.py', '/opt/politraf/constat.py')
-    shutil.copy2('dbmodels.py', '/opt/politraf/dbmodels.py')
+    #print ("Make dir /etc/politraf")
+    #os.makedirs("/etc/politraf")
+    #print ("Copy config.yaml to /etc/politraf")
+    #shutil.copy2('config/config.yaml', '/etc/politraf/config.yaml')
+    #print ("Make dir /opt/politraf")
+    #os.makedirs("/opt/politraf")
+    #print ("Setup services")
+    #shutil.copy2('config/systat.service', '/etc/systemd/system/systat.service')
+    #shutil.copy2('config/constat.service', '/etc/systemd/system/constat.service')
+    #print ("Copy politraf files")
+    #shutil.copy2('systat.py', '/opt/politraf/systat.py')
+    #shutil.copy2('otxget.py', '/opt/politraf/otxget.py')
+    #shutil.copy2('constat.py', '/opt/politraf/constat.py')
+    #shutil.copy2('dbmodels.py', '/opt/politraf/dbmodels.py')
     print ("Create database with tables")
     # Read config
     with open("config/config.yaml", 'r') as stream:
@@ -35,6 +35,7 @@ try:
         except Exception, e:
             print(e)
     # Create tables
+
     db = dbmodels.Database('politraf', db_url=url, username=name, password=passw, readonly=False, autocreate=True)
     db.create_table(dbmodels.CONNStats)
     db.create_table(dbmodels.CPUStats)
