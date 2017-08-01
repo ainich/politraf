@@ -9,7 +9,7 @@ python:
  #- "3.6"
  #- "3.6-dev" # 3.6 development branch
  #- "3.7-dev" # 3.7 development branch
-install: 
+install:
   #  - "sudo apt-get install pip3"
   - "sudo pip install -r requirements.txt"
   - "sudo apt-get install tshark"
@@ -19,7 +19,7 @@ install:
   - "sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4"
   - "sudo apt-get update"
   - "sudo apt-get install clickhouse-client clickhouse-server-common"
-script: sudo service clickhouse-server start
+  - "sudo service clickhouse-server start"
 script: sudo ./setup.py
 script: sudo ./systat.py
 script: sudo ./constat.py
