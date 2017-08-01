@@ -10,7 +10,9 @@ python:
  - "3.7-dev" # 3.7 development branch
 install: "pip install -r requirements.txt"
 install: "sudo apt-get install tshark"
-install: "cp .clickhouse.list /etc/apt/sources.list.d/clickhouse.list"
+install: "touch clickhouse.list"
+install: "echo deb http://repo.yandex.ru/clickhouse/trusty stable main > clickhouse.list"
+install: "cp clickhouse.list /etc/apt/sources.list.d/clickhouse.list"
 install: "sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4"
 install: "sudo apt-get update"
 install: "sudo apt-get install clickhouse-client clickhouse-server-common"
