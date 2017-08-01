@@ -9,8 +9,6 @@ python:
  #- "3.6"
  #- "3.6-dev" # 3.6 development branch
  #- "3.7-dev" # 3.7 development branch
- # PyPy versions
- #- "pypy3" # Pypy3 2.4.0
 install: 
   #  - "sudo apt-get install pip3"
   - "sudo pip install -r requirements.txt"
