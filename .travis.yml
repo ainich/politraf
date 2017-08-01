@@ -8,13 +8,14 @@ python:
  - "3.6"
  - "3.6-dev" # 3.6 development branch
  - "3.7-dev" # 3.7 development branch
-install: "pip install -r requirements.txt"
-install: "sudo apt-get install tshark"
-install: "touch clickhouse.list"
-install: "echo deb http://repo.yandex.ru/clickhouse/trusty stable main > clickhouse.list"
-install: "sudo cp clickhouse.list /etc/apt/sources.list.d/clickhouse.list"
-install: "sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4"
-install: "sudo apt-get update"
-install: "sudo apt-get install clickhouse-client clickhouse-server-common"
+install: 
+  - "pip install -r requirements.txt"
+  - "sudo apt-get install tshark"
+  - "touch clickhouse.list"
+  - "echo deb http://repo.yandex.ru/clickhouse/trusty stable main > clickhouse.list"
+  - "sudo cp clickhouse.list /etc/apt/sources.list.d/clickhouse.list"
+  - "sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4"
+  - "sudo apt-get update"
+  - "sudo apt-get install clickhouse-client clickhouse-server-common"
 script: systat
 script: constat
