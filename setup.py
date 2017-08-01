@@ -21,6 +21,14 @@ with open("/etc/politraf/config.yaml", 'r') as stream:
 
 
 try:
+    # Read config
+    print ("Copy config.yaml to /etc/politraf")
+    shutil.copy2('config/config.yaml', '/etc/politraf/config.yaml1')
+    with open("/etc/politraf/config.yaml", 'r') as stream:
+        config = (yaml.load(stream))
+        url = config['db_url']
+        name = config['username']
+        passw = config['password']
     db = dbmodels.Database('politraf', db_url=url, username=name, password=passw, readonly=False, autocreate=True)
     print ("Make dir /opt/politraf")
     os.makedirs("/opt/politraf1")
