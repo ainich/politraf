@@ -10,8 +10,8 @@ python:
  - "3.7-dev" # 3.7 development branch
 install: "pip install -r requirements.txt"
 install: "sudo apt-get install tshark"
-install: sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4
-install: sudo apt-get update
-install: sudo apt-get install clickhouse-client clickhouse-server-common
+install: "sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4"
+install: "sudo apt-get update"
+install: "sudo apt-get install clickhouse-client clickhouse-server-common"
 script: systat
 script: constat
