@@ -37,11 +37,14 @@ try:
     shutil.copy2('dbmodels.py', '/opt/politraf/dbmodels.py')
     print ("Create database with tables")
     # Read config
-    open("/etc/politraf/config.yaml", 'r') as stream:
-    config = (yaml.load(stream))
-    url = config['db_url']
-    name = config['username']
-    passw = config['password']
+    with open("/etc/politraf/config.yaml", 'r') as stream:
+        try:
+            config = (yaml.load(stream))
+            url = config['db_url']
+            name = config['username']
+            passw = config['password']
+        except Exception, e:
+            print(e)
     # Create tables
     db = dbmodels.Database('politraf', db_url=url, username=name, password=passw, readonly=False, autocreate=True)
     db.create_table(dbmodels.CONNStats)
