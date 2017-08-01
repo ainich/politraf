@@ -40,14 +40,11 @@
     pip3 install pyyaml
     git clone https://github.com/ainich/politraf.git
     cd politraf
-    mkdir /etc/politraf
-    cp config/config.yaml /etc/politraf/
-    cp systat.py constat.py otxget.py dbmodels.py /opt/politraf
-    cp config/constat.service config/systat.service /etc/systemd/system/
     vim /etc/politraf/config.yaml
-    systemctl daemon-reload
-    systemctl start systat
-    systemctl start constat
+    sudo ./setup.py
+    sudo systemctl daemon-reload
+    sudo systemctl start systat
+    sudo systemctl start constat
 
     crontab -e
     0 2 * * * /opt/politraf/otxget.py >/dev/null 2>&1
