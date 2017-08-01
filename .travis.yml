@@ -17,5 +17,5 @@ install:
   - "sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4"
   - "sudo apt-get update"
   - "sudo apt-get install clickhouse-client clickhouse-server-common"
-script: systat
-script: constat
+script: ./systat.py
+script: ./constat.py
