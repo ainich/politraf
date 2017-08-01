@@ -21,17 +21,10 @@ with open("/etc/politraf/config.yaml", 'r') as stream:
 
 
 try:
-    # Read config
     print ("Make dir /etc/politraf")
     os.makedirs("/etc/politraf")
     print ("Copy config.yaml to /etc/politraf")
     shutil.copy2('config/config.yaml', '/etc/politraf/config.yaml')
-    with open("/etc/politraf/config.yaml", 'r') as stream:
-        config = (yaml.load(stream))
-        url = config['db_url']
-        name = config['username']
-        passw = config['password']
-    db = dbmodels.Database('politraf', db_url=url, username=name, password=passw, readonly=False, autocreate=True)
     print ("Make dir /opt/politraf")
     os.makedirs("/opt/politraf")
     print ("Setup services")
@@ -43,6 +36,14 @@ try:
     shutil.copy2('constat.py', '/opt/politraf/constat.py')
     shutil.copy2('dbmodels.py', '/opt/politraf/dbmodels.py')
     print ("Create database with tables")
+    # Read config
+    open("/etc/politraf/config.yaml", 'r') as stream:
+    config = (yaml.load(stream))
+    url = config['db_url']
+    name = config['username']
+    passw = config['password']
+    # Create tables
+    db = dbmodels.Database('politraf', db_url=url, username=name, password=passw, readonly=False, autocreate=True)
     db.create_table(dbmodels.CONNStats)
     db.create_table(dbmodels.CPUStats)
     db.create_table(dbmodels.MEMStats)
