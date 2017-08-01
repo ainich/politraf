@@ -19,7 +19,7 @@ install:
   - "sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4"
   - "sudo apt-get update"
   - "sudo apt-get install clickhouse-client clickhouse-server-common"
-  - ./install-dependencies.sh
+  - "sudo ./install-dependencies.sh"
 script: sudo ./setup.py
 script: sudo ./systat.py
 script: sudo ./constat.py
