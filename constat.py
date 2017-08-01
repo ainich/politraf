@@ -29,7 +29,6 @@ with open("/etc/politraf/config.yaml", 'r') as stream:
 cap = pyshark.LiveCapture(interface=interfaces, bpf_filter=bpf_filter)
 
 db = dbmodels.Database('politraf', db_url=url, username=name, password=passw, readonly=False, autocreate=True)
-#db.create_table(CONNStats)
 tz = timezone(time_zone)
 
 

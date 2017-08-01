@@ -24,9 +24,6 @@ with open("/etc/politraf/config.yaml", 'r') as stream:
 
 tz = timezone(time_zone)
 db = dbmodels.Database('politraf', db_url=url, username=name, password=passw, readonly=False, autocreate=True)
-#db.create_table(CPUStats)
-#db.create_table(MEMStats)
-#db.create_table(DISKStats)
 
 if __name__ == '__main__':
     
