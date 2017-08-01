@@ -21,5 +21,5 @@ install:
   - "sudo apt-get update"
   - "sudo apt-get install clickhouse-client clickhouse-server-common"
   - "sudo ./setup.py"
-script: ./opt/politraf/systat.py
-script: ./opt/politraf/constat.py
+script: ./systat.py
+script: ./constat.py
