@@ -11,7 +11,7 @@ python:
  # PyPy versions
  - "pypy3" # Pypy3 2.4.0
 install: 
-  - "pip3 install -r requirements.txt"
+  - "sudo pip3 install -r requirements.txt"
   - "sudo apt-get install tshark"
   - "touch clickhouse.list"
   - "echo deb http://repo.yandex.ru/clickhouse/trusty stable main > clickhouse.list"
