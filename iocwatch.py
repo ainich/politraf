@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python
 # -*- coding: utf-8
 ##############################################################################
 # Politraf, check connections for network IOC
