@@ -22,6 +22,8 @@ with open("/etc/politraf/config.yaml", 'r') as stream:
 
 try:
     # Read config
+    print ("Make dir /etc/politraf")
+    os.makedirs("/etc/politraf")
     print ("Copy config.yaml to /etc/politraf")
     shutil.copy2('config/config.yaml', '/etc/politraf/config.yaml')
     with open("/etc/politraf/config.yaml", 'r') as stream:
