@@ -10,5 +10,5 @@ python:
  - "3.7-dev" # 3.7 development branch
 install: "pip install -r requirements.txt"
 install: "sudo apt-get install tshark"
-script: systat.py
-script: constat.py
+script: systat
+script: constat
