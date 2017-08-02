@@ -11,7 +11,7 @@ addons:
       description: "Build submitted via Travis CI"
     notification_email: lx.nich@gmail.com
     build_command_prepend: ""
-    build_command: "--fs-capture-search /home/travis/build/ainich/politraf"
+    build_command: "cov-build --dir cov-int --no-command --fs-capture-search"
     branch_pattern: master
 
 sudo: enabled
@@ -39,4 +39,6 @@ before_install:
   - docker pull yandex/clickhouse-server
   - docker run -d -p 127.0.0.1:8123:8123 --name some-clickhouse-server --ulimit nofile=262144:262144 yandex/clickhouse-server:1.1.54159
   - docker ps -a
-script: pytest
+script: 
+  - pytest
+  - pytest iocwatch.py
