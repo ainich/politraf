@@ -13,12 +13,9 @@ install:
   #  - "sudo apt-get install pip3"
   - "sudo pip install -r requirements.txt"
   - "sudo apt-get install tshark"
-  - "touch clickhouse.list"
-  - "echo deb http://repo.yandex.ru/clickhouse/trusty stable main > clickhouse.list"
-  - "sudo cp clickhouse.list /etc/apt/sources.list.d/clickhouse.list"
-  - "sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4"
-  - "sudo apt-get update"
-  - "sudo apt-get install clickhouse-client clickhouse-server-common"
+  - "docker pull yandex/clickhouse-server"
+  - "docker run -d -p 127.0.0.1:9000:9000 --name some-clickhouse-server --ulimit nofile=262144:262144 yandex/clickhouse-server:1.1.54159"
+  - "docker ps -a"
 services: clickhouse
 script: sudo ./setup.py
 script: sudo ./systat.py
