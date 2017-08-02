@@ -13,6 +13,7 @@ install:
   #  - "sudo apt-get install pip3"
   - "sudo pip install -r requirements.txt"
   - "sudo apt-get install tshark"
+  - "sudo mkdir /etc/systemd"
   - "sudo mkdir /etc/systemd/system"
   - "sudo ./setup.py"
 before_install:
