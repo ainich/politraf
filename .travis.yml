@@ -16,7 +16,6 @@ install:
   - "docker pull yandex/clickhouse-server"
   - "docker run -d -p 127.0.0.1:9000:9000 --name some-clickhouse-server --ulimit nofile=262144:262144 yandex/clickhouse-server:1.1.54159"
   - "docker ps -a"
-services: clickhouse
-script: sudo ./setup.py
+  - "sudo ./setup.py"
 script: sudo ./systat.py
 script: sudo ./constat.py
