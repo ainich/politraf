@@ -13,9 +13,9 @@ install:
   #  - "sudo apt-get install pip3"
   - "sudo pip install -r requirements.txt"
   - "sudo apt-get install tshark"
-  - "docker pull yandex/clickhouse-server"
-  - "docker run -d -p 127.0.0.1:8123:8123 --name some-clickhouse-server --ulimit nofile=262144:262144 yandex/clickhouse-server:1.1.54159"
-  - "docker ps -a"
   - "sudo ./setup.py"
-script: sudo ./systat.py
-script: sudo ./constat.py
+before_install:
+  - docker pull yandex/clickhouse-server
+  - docker run -d -p 127.0.0.1:8123:8123 --name some-clickhouse-server --ulimit nofile=262144:262144 yandex/clickhouse-server:1.1.54159
+  - docker ps -a
+script: pytest
