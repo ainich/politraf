@@ -4,9 +4,6 @@ env:
    #   via the "travis encrypt" command using the project repo's public key
    - secure: "s8KTqjTnBGj/ZeJT2PsCzCW3cEcJtZ9eDD2o+YRM2+Jk/kdsIy7ef9zrqkld1JMqszlp3vFL3ci0YUsWUkNRjQfkeFKugq9Wgi2fhRuYpNdQRRlIsExe9ogqrAih+PDcz466gk8Rfr2otS4Tel9iZ7yiItQE60GtjwyKTJmgZ5GqVHS1KTd4x0wN52atM3WcU9Qk6/IS426yHWkrodYP8A+cSybf7CHMZwxOBjPwjak4P2LrXmxYCkq/Col4o4JpAAtokS1/FZBhN0tbdkzCeRDLkTTKHN7UZ/O2FIe9gf35RZrsivGSsCAyw+bRpMosyA1kANTBPwPfbzzHJz8ycIZB9fcOz6u2yCmcuZ90F8ym8DKy5oZ59Rr46lvTFrTk6R+CM3wE1jK+uoVfIL8PtjOfEo1LoGy/3nIzbwg5Z36tN7aCDVsIr6yZrlh3o8OEZVMW87u5jVKE7FqTvP8fk1nhUJgA81lbcNcujfqLAjB42Ym6YX1K+2LrpjIbU9BFLtOlJtpJFN/kW6tZ6xnUtUBw/j0WtdDp2Rus1T90PrI2jSlskicr7PYPDVLPiPRIS4uW22WuAJHD2xjgMmP/Eg9g6CYvSi+0+ETMac2DGVnDdXyUf4HLxfLtdP+TgmuSJrYQDZpuhLtvL0KoQgcI33QErtCF1XczTeCVRX5wa8s="
 
-before_install:
-      - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
-
 addons:
   coverity_scan:
     project:
@@ -16,7 +13,7 @@ addons:
     build_command_prepend: ""
     build_command:   ""
     branch_pattern: coverity_scan
-    
+
 sudo: enabled
 language: python
 python:
@@ -36,6 +33,7 @@ install:
   - "sudo mkdir /etc/systemd/system"
   - "sudo ./setup.py"
 before_install:
+  - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
   - docker pull yandex/clickhouse-server
   - docker run -d -p 127.0.0.1:8123:8123 --name some-clickhouse-server --ulimit nofile=262144:262144 yandex/clickhouse-server:1.1.54159
   - docker ps -a
