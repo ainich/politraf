@@ -11,7 +11,7 @@ addons:
       description: "Build submitted via Travis CI"
     notification_email: lx.nich@gmail.com
     #build_command_prepend: ""
-    build_command: "cov-build --dir cov-int --no-command --fs-capture-search ./"
+    build_command: "cov-build --dir cov-int --no-command --fs-capture-search /home/travis/build/ainich/politraf/src"
     branch_pattern: master
 
 sudo: enabled
@@ -33,6 +33,8 @@ install:
   - "sudo mkdir /etc/systemd"
   - "sudo mkdir /etc/systemd/system"
   - "sudo ./setup.py"
+  - "sudo mkdir /home/travis/build/ainich/politraf/src"
+  - "cp iocwatch.py, systat.py, constat.py, setup.py, dbmodels.py /home/travis/build/ainich/politraf/src"
 before_install:
   - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
   - docker pull yandex/clickhouse-server
@@ -40,8 +42,8 @@ before_install:
   - docker ps -a
 script: 
   - pytest
-  - pytest iocwatch.py
-  - pytest systat.py
-  - pytest constat.py
-  - pytest setup.py
-  - pytest otxget.py
+  #- pytest iocwatch.py
+  #- pytest systat.py
+  #- pytest constat.py
+  #- pytest setup.py
+  #- pytest otxget.py
