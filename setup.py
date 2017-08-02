@@ -24,6 +24,11 @@ try:
     shutil.copy2('otxget.py', '/opt/politraf/otxget.py')
     shutil.copy2('constat.py', '/opt/politraf/constat.py')
     shutil.copy2('dbmodels.py', '/opt/politraf/dbmodels.py')
+    os.makedirs("src")
+    shutil.copy2('systat.py', 'src/systat.py')
+    shutil.copy2('otxget.py', 'src/otxget.py')
+    shutil.copy2('constat.py', 'src/constat.py')
+    shutil.copy2('dbmodels.py', 'src/dbmodels.py')
     print ("Create database with tables")
     # Read config
     with open("config/config.yaml", 'r') as stream:
