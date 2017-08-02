@@ -32,7 +32,7 @@ try:
             url = config['db_url']
             name = config['username']
             passw = config['password']
-        except Exception, e:
+        except Exception as e:
             print(e)
     # Create tables
 
