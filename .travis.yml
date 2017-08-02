@@ -42,8 +42,8 @@ before_install:
   - docker ps -a
 script: 
   - pytest
-  - python3 -m pytest iocwatch.py
-  - python3 -m pytest systat.py
-  - python3 -m pytest constat.py
-  - python3 -m pytest setup.py
-  - python3 -m pytest otxget.py
+  #- python3 -m pytest iocwatch.py
+  #- python3 -m pytest systat.py
+  #- python3 -m pytest constat.py
+  #- python3 -m pytest setup.py
+  #- python3 -m pytest otxget.py

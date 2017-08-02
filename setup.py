@@ -30,7 +30,10 @@ try:
     shutil.copy2('otxget.py', 'src/otxget.py')
     shutil.copy2('constat.py', 'src/constat.py')
     shutil.copy2('dbmodels.py', 'src/dbmodels.py')
-    os.chmod("src", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
+    os.chmod("src/systat.py", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
+    os.chmod("src/otxget.py", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
+    os.chmod("src/constat.py", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
+    os.chmod("src/dbmodels.py", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
     print ("Create database with tables")
     # Read config
     with open("config/config.yaml", 'r') as stream:
