@@ -4,7 +4,6 @@
 # Politraf, system stat to clickhouse
 ##############################################################################
 
-
 import dbmodels
 import psutil, time
 from pytz import timezone
