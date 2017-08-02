@@ -26,15 +26,15 @@ python:
  #- "3.6-dev" # 3.6 development branch
  #- "3.7-dev" # 3.7 development branch
 install:
-  #- "sudo apt-get install python3-pip"
-  - "sudo pip install -r requirements.txt"
-  #- "sudo pip3 install -r requirements.txt"
+  - "sudo apt-get install python3-pip"
+  #- "sudo pip install -r requirements.txt"
+  - "sudo pip3 install -r requirements.txt"
   - "sudo apt-get install tshark"
   - "sudo mkdir /etc/systemd"
   - "sudo mkdir /etc/systemd/system"
   - "sudo ./setup.py"
   - "sudo mkdir /home/travis/build/ainich/politraf/src"
-  - "cp iocwatch.py, systat.py, constat.py, setup.py, dbmodels.py /home/travis/build/ainich/politraf/src"
+  - "sudo cp iocwatch.py, systat.py, constat.py, setup.py, dbmodels.py /home/travis/build/ainich/politraf/src"
 before_install:
   - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
   - docker pull yandex/clickhouse-server
