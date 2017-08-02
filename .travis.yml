@@ -12,7 +12,7 @@ addons:
     notification_email: lx.nich@gmail.com
     build_command_prepend: ""
     build_command: "--no-command"
-    branch_pattern: coverity_scan
+    branch_pattern: master
 
 sudo: enabled
 language: python
