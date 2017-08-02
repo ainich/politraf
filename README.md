@@ -1,3 +1,5 @@
+![travis](https://travis-ci.org/ainich/politraf.svg?branch=master)
+
 ![Politraf](https://politraf.ru/static/img/politraf.jpg)
 
 * Politraf
