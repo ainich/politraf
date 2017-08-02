@@ -7,6 +7,7 @@
 import dbmodels
 import shutil
 import os
+import stat
 import yaml
 
 try:
