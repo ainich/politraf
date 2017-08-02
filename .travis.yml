@@ -11,9 +11,7 @@ addons:
       description: "Build submitted via Travis CI"
     notification_email: lx.nich@gmail.com
     #build_command_prepend: ""
-    build_command: 
-     - "cov-build --dir cov-int --no-command --fs-capture-search ./"
-     - "cat /home/travis/build/ainich/politraf/cov-int/build-log.txt"
+    build_command: "cov-build --dir cov-int --no-command --fs-capture-search ./"
     branch_pattern: master
 
 sudo: enabled
@@ -28,9 +26,9 @@ python:
  #- "3.6-dev" # 3.6 development branch
  #- "3.7-dev" # 3.7 development branch
 install:
-  - "sudo apt-get install python3-pip"
+  #- "sudo apt-get install python3-pip"
   - "sudo pip install -r requirements.txt"
-  - "sudo pip3 install -r requirements.txt"
+  #- "sudo pip3 install -r requirements.txt"
   - "sudo apt-get install tshark"
   - "sudo mkdir /etc/systemd"
   - "sudo mkdir /etc/systemd/system"
@@ -42,8 +40,8 @@ before_install:
   - docker ps -a
 script: 
   - pytest
-  - python3 -m pytest iocwatch.py
-  - python3 -m pytest systat.py
-  - python3 -m pytest constat.py
-  - python3 -m pytest setup.py
-  - python3 -m pytest otxget.py
+  - pytest iocwatch.py
+  - pytest systat.py
+  - pytest constat.py
+  - pytest setup.py
+  - pytest otxget.py
