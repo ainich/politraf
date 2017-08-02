@@ -1,4 +1,4 @@
-![travis](https://travis-ci.org/ainich/politraf.svg?branch=master)
+[![Build Status](https://travis-ci.org/ainich/politraf.svg?branch=master)](https://travis-ci.org/ainich/politraf)
 
 ![Politraf](https://politraf.ru/static/img/politraf.jpg)
 
