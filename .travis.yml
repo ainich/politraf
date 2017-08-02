@@ -32,6 +32,8 @@ install:
   - "sudo mkdir /etc/systemd"
   - "sudo mkdir /etc/systemd/system"
   - "sudo ./setup.py"
+  - ls
+  - ls /home/travis/build/ainich/politraf
 before_install:
   - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
   - docker pull yandex/clickhouse-server
