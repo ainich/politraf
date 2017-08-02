@@ -11,7 +11,7 @@ addons:
       description: "Build submitted via Travis CI"
     notification_email: lx.nich@gmail.com
     #build_command_prepend: ""
-    build_command: "cov-build --dir cov-int --no-command --fs-capture-search /home/travis/build/ainich/politraf"
+    build_command: "cov-build --dir cov-int --no-command --fs-capture-search /home/travis/build/ainich/politraf/"
     branch_pattern: master
 
 sudo: enabled
@@ -26,14 +26,14 @@ python:
  #- "3.6-dev" # 3.6 development branch
  #- "3.7-dev" # 3.7 development branch
 install:
-  #- "sudo apt-get install python3-pip"
+  - "sudo apt-get install python3-pip"
   - "sudo pip install -r requirements.txt"
+  - "sudo pip3 install -r requirements.txt"
   - "sudo apt-get install tshark"
   - "sudo mkdir /etc/systemd"
   - "sudo mkdir /etc/systemd/system"
   - "sudo ./setup.py"
-  - "ls"
-  - "ls /home/travis/build/ainich/politraf"
+  - "cat /home/travis/build/ainich/politraf/cov-int/build-log.txt"
 before_install:
   - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
   - docker pull yandex/clickhouse-server
