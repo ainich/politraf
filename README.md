@@ -34,14 +34,11 @@
 
     ```
     sudo apt-get install tshark
-    pip3 install infi.clickhouse_orm
-    pip3 install pyshark
-    pip3 install OTXv2
-    pip3 install pyyaml
+    sudo pip install -r requirements.txt
     git clone https://github.com/ainich/politraf.git
     cd politraf
-    vim /etc/politraf/config.yaml
     sudo ./setup.py
+    vim /etc/politraf/config.yaml
     sudo systemctl daemon-reload
     sudo systemctl start systat
     sudo systemctl start constat
