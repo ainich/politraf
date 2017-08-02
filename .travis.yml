@@ -10,8 +10,8 @@ addons:
       name: "ainich/politraf"
       description: "Build submitted via Travis CI"
     notification_email: lx.nich@gmail.com
-    build_command_prepend: ""
-    build_command: "cov-build --no-command --fs-capture-search /home/travis/build/ainich/politraf"
+    #build_command_prepend: ""
+    build_command: "cov-build --dir cov-int --no-command --fs-capture-search /home/travis/build/ainich/politraf"
     branch_pattern: master
 
 sudo: enabled
@@ -41,8 +41,8 @@ before_install:
   - docker ps -a
 script: 
   - pytest
-  - pytest iocwatch.py
-  - pytest systat.py
-  - pytest constat.py
-  - pytest setup.py
-  - pytest otxget.py
+  - python3 -m pytest iocwatch.py
+  - python3 -m pytest systat.py
+  - python3 -m pytest constat.py
+  - python3 -m pytest setup.py
+  - python3 -m pytest otxget.py
