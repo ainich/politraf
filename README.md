@@ -36,7 +36,8 @@
 
     ```
     sudo apt-get install tshark
-    sudo pip install -r requirements.txt
+    sudo apt-get install python3-pip
+    sudo pip3 install -r requirements.txt
     git clone https://github.com/ainich/politraf.git
     cd politraf
     sudo ./setup.py
