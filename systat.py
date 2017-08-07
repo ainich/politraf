@@ -27,7 +27,6 @@ with open("/etc/politraf/config.yaml", 'r') as stream:
         passw = config['password']
     except yaml.YAMLError as e:
         logging.error("Error.",e)
-
     logging.info("Config is OK")
 
 # Init clickhouse
@@ -50,8 +49,7 @@ def database_write(stats, mem, disk, timestamp, today):
                 dbmodels.DISKStats(event_date=today, timestamp=timestamp, total=disk[0], used=disk[1])
             ])
     except Exception as e:
-        print(e)
-        #logging.error("Error.",e)
+        logging.error("Error.",e)
 
 
 def main():
