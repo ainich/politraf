@@ -9,8 +9,14 @@ import datetime
 import pyshark
 import os
 import psutil, time
+import logging
 from pytz import timezone
 import yaml
+
+
+# Set logging level
+logging.basicConfig(level = logging.INFO)
+
 
 # Read config
 with open("/etc/politraf/config.yaml", 'r') as stream:
@@ -20,17 +26,37 @@ with open("/etc/politraf/config.yaml", 'r') as stream:
         interfaces = interface.split(",")
         bpf_filter = config['bpf_filter']
         time_zone = config['time_zone']
+        tz = timezone(time_zone)
         url = config['db_url']
         name = config['username']
         passw = config['password']
     except yaml.YAMLError as e:
-        print(e)
+        logging.error("Error.",e)
+
+    logging.info("Config is OK")
+
 
 # PyShark config
-cap = pyshark.LiveCapture(interface=interfaces, bpf_filter=bpf_filter)
+try:
+    cap = pyshark.LiveCapture(interface=interfaces, bpf_filter=bpf_filter)
+except Exception as e:
+    logging.error("Error.",e)
 
-db = dbmodels.Database('politraf', db_url=url, username=name, password=passw, readonly=False, autocreate=True)
-tz = timezone(time_zone)
+
+# Init clickhouse
+try:
+    db = dbmodels.Database('politraf', db_url=url, username=name, password=passw, readonly=False, autocreate=True)
+except Exception as e:
+    logging.error("Error.",e)
+
+
+def database_write(today, timestamp, protocol, src_addr, src_port, dst_addr, dst_port, qry_name):
+    try:
+        db.insert([
+            dbmodels.CONNStats(event_date=today, timestamp=timestamp, protocol=protocol, src_addr=src_addr, src_port=src_port, dst_addr=dst_addr, dst_port=dst_port, qry_name=qry_name)
+            ])
+    except Exception as e:
+        logging.error("Error.",e)
 
 
 def print_conversation_header(pkt):
@@ -60,17 +86,20 @@ def print_conversation_header(pkt):
             
             timestamp = datetime.datetime.now(tz)
             today = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d')
-            #print (today, timestamp, protocol, src_addr, src_port, dst_addr, dst_port, qry_name)
-            db.insert([
-                dbmodels.CONNStats(event_date=today, timestamp=timestamp, protocol=protocol, src_addr=src_addr, src_port=src_port, dst_addr=dst_addr, dst_port=dst_port, qry_name=qry_name)
-                ])
-    except Exception as e:
-        print(e)
-        
-if __name__ == '__main__':
 
+            database_write(today, timestamp, protocol, src_addr, src_port, dst_addr, dst_port, qry_name)
+
+    except Exception as e:
+        logging.error("Error.",e)
+
+
+def main():
     try:
-        print ("Running tshark with: interface: "+interface+" and bpf_filter: "+bpf_filter)
+        logging.info("Running tshark with: interface: "+interface+" and bpf_filter: "+bpf_filter+ "and send connections stats to clickhouse")
         cap.apply_on_packets(print_conversation_header)
     except Exception as e:
-        print(e)
+        logging.error("Error.",e)    
+        
+
+if __name__ == '__main__':
+    main()

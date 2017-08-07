@@ -6,26 +6,56 @@
 
 import dbmodels
 import psutil, time
+import logging
 from pytz import timezone
 import datetime
 import yaml
+
+
+# Set logging level
+logging.basicConfig(level = logging.ERROR)
+
 
 # Read config
 with open("/etc/politraf/config.yaml", 'r') as stream:
     try:
         config = (yaml.load(stream))
         time_zone = config['time_zone']
+        tz = timezone(time_zone)
         url = config['db_url']
         name = config['username']
         passw = config['password']
     except yaml.YAMLError as e:
+        logging.error("Error.",e)
+
+    logging.info("Config is OK")
+
+# Init clickhouse
+try:
+    db = dbmodels.Database('politraf', db_url=url, username=name, password=passw, readonly=False, autocreate=True)
+except Exception as e:
+    logging.error("Error.",e)
+
+
+def database_write(stats, mem, disk, timestamp, today):
+    try:
+        db.insert([
+                dbmodels.CPUStats(event_date=today, timestamp=timestamp, cpu_id=cpu_id, cpu_percent=cpu_percent)
+                for cpu_id, cpu_percent in enumerate(stats)
+            ])
+        db.insert([
+                dbmodels.MEMStats(event_date=today, timestamp=timestamp, total=mem[0], used=mem[3])
+            ])
+        db.insert([
+                dbmodels.DISKStats(event_date=today, timestamp=timestamp, total=disk[0], used=disk[1])
+            ])
+    except Exception as e:
         print(e)
+        #logging.error("Error.",e)
 
-tz = timezone(time_zone)
-db = dbmodels.Database('politraf', db_url=url, username=name, password=passw, readonly=False, autocreate=True)
 
-if __name__ == '__main__':
-    
+def main():
+    logging.info("Starting send system stats to clickhouse")
     running = True
     while running:
         try:
@@ -35,17 +65,13 @@ if __name__ == '__main__':
             disk = psutil.disk_usage('/')
             timestamp = datetime.datetime.now(tz)
             today = datetime.datetime.strftime(datetime.datetime.now(tz), '%Y-%m-%d')
-            db.insert([
-                dbmodels.CPUStats(event_date=today, timestamp=timestamp, cpu_id=cpu_id, cpu_percent=cpu_percent)
-                for cpu_id, cpu_percent in enumerate(stats)
-            ])
-            db.insert([
-                dbmodels.MEMStats(event_date=today, timestamp=timestamp, total=mem[0], used=mem[3])
-            ])
-            db.insert([
-                dbmodels.DISKStats(event_date=today, timestamp=timestamp, total=disk[0], used=disk[1])
-            ])
+            
+            database_write(stats, mem, disk, timestamp, today)
+
         except Exception as e:
             print(e)
             running = False
+
+if __name__ == '__main__':
+    main()
         
