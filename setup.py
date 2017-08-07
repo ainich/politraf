@@ -4,11 +4,13 @@
 # Politraf, initial setup
 ##############################################################################
 
-import dbmodels
 import shutil
 import os
 import stat
+
 import yaml
+
+import dbmodels
 
 try:
     print ("Make dir /etc/politraf")
@@ -25,6 +27,15 @@ try:
     shutil.copy2('otxget.py', '/opt/politraf/otxget.py')
     shutil.copy2('constat.py', '/opt/politraf/constat.py')
     shutil.copy2('dbmodels.py', '/opt/politraf/dbmodels.py')
+    os.makedirs("src")
+    shutil.copy2('systat.py', 'src/systat.py')
+    shutil.copy2('otxget.py', 'src/otxget.py')
+    shutil.copy2('constat.py', 'src/constat.py')
+    shutil.copy2('dbmodels.py', 'src/dbmodels.py')
+    os.chmod("src/systat.py", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
+    os.chmod("src/otxget.py", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
+    os.chmod("src/constat.py", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
+    os.chmod("src/dbmodels.py", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
     print ("Create database with tables")
     # Read config
     with open("config/config.yaml", 'r') as stream:

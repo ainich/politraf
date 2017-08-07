@@ -6,12 +6,13 @@
 # Create an account and select your feeds
 # https://otx.alienvault.com
 
-import dbmodels
-from OTXv2 import OTXv2
-import yaml
 import datetime
 import logging
 
+from OTXv2 import OTXv2
+import yaml
+
+import dbmodels
 
 # Set logging level
 logging.basicConfig(level = logging.INFO)

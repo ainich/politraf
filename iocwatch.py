@@ -5,12 +5,14 @@
 ##############################################################################
 
 
-import dbmodels
+import time
 import datetime
+import logging
+
 from pytz import timezone
 import yaml
-import time
-import logging
+
+import dbmodels
 
 
 # Set logging level

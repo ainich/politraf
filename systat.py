@@ -4,16 +4,19 @@
 # Politraf, system stat to clickhouse
 ##############################################################################
 
-import dbmodels
-import psutil, time
-import logging
-from pytz import timezone
 import datetime
+import psutil
+import time
+import logging
+
+from pytz import timezone
 import yaml
+
+import dbmodels
 
 
 # Set logging level
-logging.basicConfig(level = logging.ERROR)
+logging.basicConfig(level = logging.INFO)
 
 
 # Read config

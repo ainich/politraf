@@ -4,15 +4,17 @@
 # Politraf, connections to clickhouse
 ##############################################################################
 
-import dbmodels
 import datetime
-import pyshark
 import os
-import psutil, time
+import psutil
+import time
 import logging
+
+import pyshark
 from pytz import timezone
 import yaml
 
+import dbmodels
 
 # Set logging level
 logging.basicConfig(level = logging.INFO)
