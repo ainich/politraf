@@ -35,10 +35,10 @@
 
 
     ```
+    git clone https://github.com/ainich/politraf.git
     sudo apt-get install tshark
     sudo apt-get install python3-pip
     sudo pip3 install -r requirements.txt
-    git clone https://github.com/ainich/politraf.git
     cd politraf
     sudo ./setup.py
     vim /etc/politraf/config.yaml
