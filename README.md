@@ -48,5 +48,5 @@
 
     crontab -e
     0 2 * * * /opt/politraf/otxget.py >/dev/null 2>&1
-    */1 * * * * /opt/politraf/iocwatch.py >/dev/null 2>&1
+    */10 * * * * /opt/politraf/iocwatch.py >/dev/null 2>&1
     ```
