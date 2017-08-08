@@ -16,7 +16,7 @@
     * service systat (start|stop|status)
     * service constat (start|stop|status)
 
-* Install (Ubuntu, Python 3)
+* Install (Ubuntu, Python 3, CPU with SSE 4.2)
 
     * Clickhouse - https://clickhouse.yandex/docs/en/getting_started/index.html#installation
   
