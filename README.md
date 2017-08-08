@@ -16,7 +16,7 @@
     * service systat (start|stop|status)
     * service constat (start|stop|status)
 
-* Install (Debian, **Python 3 required**)
+* Install (Ubuntu, Python 3)
 
     * Clickhouse - https://clickhouse.yandex/docs/en/getting_started/index.html#installation
   
