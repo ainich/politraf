@@ -16,7 +16,7 @@ import dbmodels
 
 
 # Set logging level
-logging.basicConfig(level = logging.INFO)
+logging.basicConfig(level = logging.DEBUG)
 
 
 # Read config
@@ -42,7 +42,7 @@ except Exception as e:
 
 # 5 min time
 to_time = datetime.datetime.now(tz)
-from_time = (datetime.datetime.now(tz) - datetime.timedelta(minutes=1)).replace(microsecond=0)
+from_time = (datetime.datetime.now(tz) - datetime.timedelta(minutes=10)).replace(microsecond=0)
 from_time_epoch = str(from_time.timestamp())
 today = datetime.datetime.strftime(datetime.datetime.now(tz), '%Y-%m-%d')
 
@@ -52,12 +52,14 @@ def get_traf_last():
             logging.info("Starting fetch traffic stat ...")
             for row in db.select('SELECT uniq(dst_addr), * FROM politraf.connstats WHERE timestamp >= toDateTime('+from_time_epoch+') GROUP BY dst_addr, event_date, timestamp, protocol, src_addr, src_port, dst_port, qry_name ORDER BY timestamp'):
                 timestamp = datetime.datetime.now(tz)
-                if not row.qry_name == 'none':
+                if not row.qry_name == 'none' and "arp" not in row.qry_name:
+                    logging.info(row.qry_name)
                     for ioc in db.select('SELECT * FROM politraf.ioc_otx WHERE indicator = \''+row.qry_name+'\' ORDER BY timestamp'):
                         db.insert([
                         dbmodels.IOCStats(event_date=today, timestamp=timestamp, protocol=row.protocol, src_addr=row.src_addr, src_port=row.src_port, dst_addr=row.dst_addr, dst_port=row.dst_port, qry_name=row.qry_name, indicator=ioc.indicator, name=ioc.name, references=ioc.references)
                         ])    
                 else:
+                    logging.info(row.dst_addr)
                     for ioc in db.select('SELECT * FROM politraf.ioc_otx WHERE indicator = \''+row.dst_addr+'\' ORDER BY timestamp'):
                         db.insert([
                         dbmodels.IOCStats(event_date=today, timestamp=timestamp, protocol=row.protocol, src_addr=row.src_addr, src_port=row.src_port, dst_addr=row.dst_addr, dst_port=row.dst_port, qry_name=row.qry_name, indicator=ioc.indicator, name=ioc.name, references=ioc.references)
