@@ -52,7 +52,7 @@ def get_traf_last():
             logging.info("Starting fetch traffic stat ...")
             for row in db.select('SELECT uniq(dst_addr), * FROM politraf.connstats WHERE timestamp >= toDateTime('+from_time_epoch+') GROUP BY dst_addr, event_date, timestamp, protocol, src_addr, src_port, dst_port, qry_name ORDER BY timestamp'):
                 timestamp = datetime.datetime.now(tz)
-                if not row.qry_name == 'none' and "arp" not in row.qry_name:
+                if "none" not in row.qry_name and "arp" not in row.qry_name:
                     logging.debug(row.qry_name)
                     for ioc in db.select('SELECT * FROM politraf.ioc_otx WHERE indicator = \''+row.qry_name+'\' ORDER BY timestamp'):
                         db.insert([
