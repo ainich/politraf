@@ -42,7 +42,7 @@ except Exception as e:
 
 # 5 min time
 to_time = datetime.datetime.now(tz)
-from_time = (datetime.datetime.now(tz) - datetime.timedelta(minutes=10)).replace(microsecond=0)
+from_time = (datetime.datetime.now(tz) - datetime.timedelta(minutes=2)).replace(microsecond=0)
 from_time_epoch = str(from_time.timestamp())
 today = datetime.datetime.strftime(datetime.datetime.now(tz), '%Y-%m-%d')
 

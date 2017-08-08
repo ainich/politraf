@@ -38,8 +38,8 @@
     git clone https://github.com/ainich/politraf.git
     sudo apt-get install tshark
     sudo apt-get install python3-pip
-    sudo pip3 install -r requirements.txt
     cd politraf
+    sudo pip3 install -r requirements.txt
     sudo ./setup.py
     vim /etc/politraf/config.yaml
     sudo systemctl daemon-reload
@@ -48,5 +48,5 @@
 
     crontab -e
     0 2 * * * /opt/politraf/otxget.py >/dev/null 2>&1
-    */10 * * * * /opt/politraf/iocwatch.py >/dev/null 2>&1
+    */2 * * * * /opt/politraf/iocwatch.py >/dev/null 2>&1
     ```
