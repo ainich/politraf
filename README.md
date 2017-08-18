@@ -2,20 +2,6 @@
 
 ![Politraf](https://politraf.ru/static/img/politraf.jpg)
 
-* Politraf
-  * systat.py - system statistic to clickhouse
-  * connstat.py - connections statistic to clickhouse
-  * otxget.py - Fetch IOC pulse from OTX AlienVault
-  * iocwatch.py - Check traffic for IOC and report
-  * dbmodels.py - ORM clickhouse
-  * config
-    * constat.service and systat.service - config for systemd
-    * politraf_clickhouse.json - grafana dashboard (Grafana 4.4)
-    * config.yaml - configuration file (interface, capture filter - https://wiki.wireshark.org/CaptureFilters, etc)
-  * Services
-    * service systat (start|stop|status)
-    * service constat (start|stop|status)
-
 * Install (Ubuntu, Python 3, CPU with SSE 4.2)
 
     * Clickhouse - https://clickhouse.yandex/docs/en/getting_started/index.html#installation
@@ -51,3 +37,17 @@
     0 2 * * * /opt/politraf/otxget.py >/dev/null 2>&1
     */2 * * * * /opt/politraf/iocwatch.py >/dev/null 2>&1
     ```
+
+* src/
+  * systat.py - system statistic to clickhouse
+  * connstat.py - connections statistic to clickhouse
+  * otxget.py - Fetch IOC pulse from OTX AlienVault
+  * iocwatch.py - Check traffic for IOC and report
+  * dbmodels.py - ORM clickhouse
+* config/
+  * constat.service and systat.service - config for systemd
+  * politraf_clickhouse.json - grafana dashboard (Grafana 4.4)
+  * config.yaml - configuration file (interface, capture filter - https://wiki.wireshark.org/CaptureFilters, etc)
+* Services
+  * service systat (start|stop|status)
+  * service constat (start|stop|status)
