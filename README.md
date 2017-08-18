@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ainich/politraf.svg?branch=master)](https://travis-ci.org/ainich/politraf) [![GitHub release](https://img.shields.io/github/release/qubyte/rubidium.svg)]()
+[![Build Status](https://travis-ci.org/ainich/politraf.svg?branch=master)](https://travis-ci.org/ainich/politraf) [![GitHub tag](https://img.shields.io/github/tag/expressjs/express.svg)]()
 
 ![Politraf](https://politraf.ru/static/img/politraf.jpg)
 
