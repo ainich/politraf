@@ -1,7 +1,5 @@
 [![Build Status](https://travis-ci.org/ainich/politraf.svg?branch=master)](https://travis-ci.org/ainich/politraf) [![GitHub release](https://img.shields.io/github/release/ainich/politraf.svg)](https://github.com/ainich/politraf/issues) [![GitHub issues](https://img.shields.io/github/issues/ainich/politraf.svg)](https://github.com/ainich/politraf/issues)
 
-![Politraf](https://politraf.ru/static/img/politraf.jpg)
-
 * Install (Ubuntu, Python 3, CPU with SSE 4.2)
 
     * Clickhouse - https://clickhouse.yandex/docs/en/getting_started/index.html#installation
@@ -48,6 +46,3 @@
   * constat.service and systat.service - config for systemd
   * politraf_clickhouse.json - grafana dashboard (Grafana 4.4)
   * config.yaml - configuration file (interface, capture filter - https://wiki.wireshark.org/CaptureFilters, etc)
-* Services
-  * service systat (start|stop|status)
-  * service constat (start|stop|status)
