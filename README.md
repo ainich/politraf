@@ -28,7 +28,7 @@
     cd politraf
     sudo pip3 install -r requirements.txt
     sudo ./setup.py
-    vim /etc/politraf/config.yaml
+    sudo vi /etc/politraf/config.yaml
     sudo systemctl daemon-reload
     sudo systemctl start systat
     sudo systemctl start constat
