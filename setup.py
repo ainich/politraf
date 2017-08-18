@@ -10,7 +10,7 @@ import stat
 
 import yaml
 
-import dbmodels
+import src/dbmodels
 
 try:
     print ("Make dir /etc/politraf")
@@ -23,19 +23,14 @@ try:
     shutil.copy2('config/systat.service', '/etc/systemd/system/systat.service')
     shutil.copy2('config/constat.service', '/etc/systemd/system/constat.service')
     print ("Copy politraf files")
-    shutil.copy2('systat.py', '/opt/politraf/systat.py')
-    shutil.copy2('otxget.py', '/opt/politraf/otxget.py')
-    shutil.copy2('constat.py', '/opt/politraf/constat.py')
-    shutil.copy2('dbmodels.py', '/opt/politraf/dbmodels.py')
-    os.makedirs("src")
-    shutil.copy2('systat.py', 'src/systat.py')
-    shutil.copy2('otxget.py', 'src/otxget.py')
-    shutil.copy2('constat.py', 'src/constat.py')
-    shutil.copy2('dbmodels.py', 'src/dbmodels.py')
-    os.chmod("src/systat.py", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
-    os.chmod("src/otxget.py", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
-    os.chmod("src/constat.py", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
-    os.chmod("src/dbmodels.py", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
+    shutil.copy2('src/systat.py', '/opt/politraf/systat.py')
+    shutil.copy2('src/otxget.py', '/opt/politraf/otxget.py')
+    shutil.copy2('src/constat.py', '/opt/politraf/constat.py')
+    shutil.copy2('src/dbmodels.py', '/opt/politraf/dbmodels.py')
+    #os.chmod("src/systat.py", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
+    #os.chmod("src/otxget.py", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
+    #os.chmod("src/constat.py", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
+    #os.chmod("src/dbmodels.py", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
     print ("Create database with tables")
     # Read config
     with open("config/config.yaml", 'r') as stream:
