@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/ainich/politraf.svg?branch=master)](https://travis-ci.org/ainich/politraf) [![GitHub release](https://img.shields.io/github/release/ainich/politraf.svg)](https://github.com/ainich/politraf/issues) [![GitHub issues](https://img.shields.io/github/issues/ainich/politraf.svg)](https://github.com/ainich/politraf/issues)
 
+![Politraf](https://politraf.ru/static/img/politraf.jpg)
+
 * Install (Ubuntu, Python 3, CPU with SSE 4.2)
 
     * Clickhouse - https://clickhouse.yandex/docs/en/getting_started/index.html#installation
