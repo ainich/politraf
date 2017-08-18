@@ -26,7 +26,7 @@ try:
     shutil.copy2('src/systat.py', '/opt/politraf/systat.py')
     shutil.copy2('src/otxget.py', '/opt/politraf/otxget.py')
     shutil.copy2('src/constat.py', '/opt/politraf/constat.py')
-    shutil.copy2('src/dbmodels.py', '/opt/politraf/dbmodels.py')
+    shutil.copy2('dbmodels.py', '/opt/politraf/dbmodels.py')
     #os.chmod("src/systat.py", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
     #os.chmod("src/otxget.py", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
     #os.chmod("src/constat.py", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
