@@ -10,7 +10,7 @@ import stat
 
 import yaml
 
-import src/dbmodels
+import dbmodels
 
 try:
     print ("Make dir /etc/politraf")
