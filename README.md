@@ -11,8 +11,14 @@
       16.04  xenial | stretch / sid
       14.04  trusty | jessie  / sid
   
-    * Grafana - http://docs.grafana.org/installation/
-      * Install Clickhouse datasource for Grafana - https://grafana.com/plugins/vertamedia-clickhouse-datasource
+    * Grafana
+      * Add to /etc/apt/sources.list - deb https://packagecloud.io/grafana/stable/debian/ jessie main
+      ```
+      curl https://packagecloud.io/gpg.key | sudo apt-key add -
+      sudo apt-get update
+      sudo apt-get install grafana
+      grafana-cli plugins install vertamedia-clickhouse-datasource (Install Clickhouse datasource for Grafana)
+      ```
       * Add datasource named Clickhouse
       * Add dashboard from https://grafana.com/dashboards/2996
 
