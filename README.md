@@ -28,6 +28,7 @@
     * Grafana - http://docs.grafana.org/installation/
       * Install Clickhouse datasource for Grafana - https://grafana.com/plugins/vertamedia-clickhouse-datasource
       * Add datasource named Clickhouse
+      * Add dashboard from /comfig/politraf_clickhouse.json
 
     * OTX AlienVault - https://otx.alienvault.com
       * Create an account and select your feeds
