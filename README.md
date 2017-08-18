@@ -2,7 +2,7 @@
 
 ![Politraf](https://politraf.ru/static/img/politraf.jpg)
 
-* Install (Ubuntu 14.04 - trusty OR Ubuntu 16.04  xenial OR Debian 8 - jessie NOT Debian 9, Python 3, CPU with SSE 4.2)
+* Install (Ubuntu 14.04 - trusty OR Ubuntu 16.04  xenial OR Debian 8 - jessie NOT Debian 9, Python 3, <font color="red">CPU with SSE 4.2</font>)
 
     * Clickhouse
       * Add to /etc/apt/sources.list - deb http://repo.yandex.ru/clickhouse/trusty stable main
@@ -28,7 +28,7 @@
       sudo apt-get install grafana
       grafana-cli plugins install vertamedia-clickhouse-datasource
       ```
-      
+
       * Add datasource named Clickhouse
       * Add dashboard from https://grafana.com/dashboards/2996
 
