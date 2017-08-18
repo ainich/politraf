@@ -37,13 +37,3 @@
     0 2 * * * /opt/politraf/otxget.py >/dev/null 2>&1
     */2 * * * * /opt/politraf/iocwatch.py >/dev/null 2>&1
     ```
-
-* src/
-  * systat.py - system statistic to clickhouse
-  * connstat.py - connections statistic to clickhouse
-  * otxget.py - Fetch IOC pulse from OTX AlienVault
-  * iocwatch.py - Check traffic for IOC and report
-  * dbmodels.py - ORM clickhouse
-* config/
-  * constat.service and systat.service - config for systemd
-  * config.yaml - configuration file (interface, capture filter - https://wiki.wireshark.org/CaptureFilters, etc)
