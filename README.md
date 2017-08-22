@@ -5,7 +5,6 @@
 * Install (Ubuntu 14.04 - trusty OR Ubuntu 16.04  xenial OR Debian 8 - jessie, Python 3, **CPU with SSE 4.2**)
 
     * Clickhouse
-      * Add to /etc/apt/sources.list - "deb http://repo.yandex.ru/clickhouse/trusty stable main"
 
       Ubuntu | Debian | action
       ------------ | ------------- | -------------
