@@ -31,10 +31,6 @@
       * Add datasource named Clickhouse
       * Add dashboard from https://grafana.com/dashboards/2996
 
-    * OTX AlienVault - https://otx.alienvault.com
-      * Create an account and select your feeds
-      * Set API key in /etc/politraf.cfg
-
 
     ```
     git clone https://github.com/ainich/politraf.git
@@ -47,7 +43,14 @@
     sudo systemctl daemon-reload
     sudo systemctl start systat
     sudo systemctl start constat
+    ```
 
+    * OTX AlienVault - https://otx.alienvault.com
+      * Create an account and select your feeds
+      * Set API key in /etc/politraf.cfg
+      * ./otxget.py
+    
+    ```
     crontab -e
     0 2 * * * /opt/politraf/otxget.py >/dev/null 2>&1
     */2 * * * * /opt/politraf/iocwatch.py >/dev/null 2>&1
