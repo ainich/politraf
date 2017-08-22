@@ -8,7 +8,7 @@
       * Add to /etc/apt/sources.list - "deb http://repo.yandex.ru/clickhouse/trusty stable main"
 
       Ubuntu | Debian | action
-      ------------ | -------------
+      ------------ | ------------- | -------------
       16.04  xenial | 9 stretch | Add to /etc/apt/sources.list - deb http://repo.yandex.ru/clickhouse/xenial stable main
       14.04  trusty | 8 jessie | Add to /etc/apt/sources.list - deb http://repo.yandex.ru/clickhouse/trusty stable main
       
