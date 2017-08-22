@@ -5,7 +5,7 @@
 * Install (Ubuntu 14.04 - trusty OR Ubuntu 16.04  xenial OR Debian 8 - jessie NOT Debian 9, Python 3, **CPU with SSE 4.2**)
 
     * Clickhouse
-      * Add to /etc/apt/sources.list - deb http://repo.yandex.ru/clickhouse/trusty stable main
+      * Add to /etc/apt/sources.list - "deb http://repo.yandex.ru/clickhouse/trusty stable main"
 
       Ubuntu | Debian | action
       ------------ | -------------
@@ -20,7 +20,7 @@
 
   
     * Grafana
-      * Add to /etc/apt/sources.list - deb https://packagecloud.io/grafana/stable/debian/ jessie main
+      * Add to /etc/apt/sources.list - "deb https://packagecloud.io/grafana/stable/debian/ jessie main"
 
       ```
       curl https://packagecloud.io/gpg.key | sudo apt-key add -
