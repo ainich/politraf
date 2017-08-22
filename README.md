@@ -7,10 +7,10 @@
     * Clickhouse
       * Add to /etc/apt/sources.list - deb http://repo.yandex.ru/clickhouse/trusty stable main
 
-      Ubuntu | Debian
+      Ubuntu | Debian | action
       ------------ | -------------
-      16.04  xenial | 9 stretch / sid
-      14.04  trusty | 8 jessie  / sid
+      16.04  xenial | 9 stretch | Add to /etc/apt/sources.list - deb http://repo.yandex.ru/clickhouse/xenial stable main
+      14.04  trusty | 8 jessie | Add to /etc/apt/sources.list - deb http://repo.yandex.ru/clickhouse/trusty stable main
       
       ```
       sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4
