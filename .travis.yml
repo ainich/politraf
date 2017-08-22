@@ -13,6 +13,7 @@ install:
   - "sudo apt-get install python3-pip"
   #- "sudo pip install -r requirements.txt"
   - "sudo pip3 install -r requirements.txt"
+  - "pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
   - "sudo apt-get install tshark"
   - "sudo mkdir /etc/systemd"
   - "sudo mkdir /etc/systemd/system"
