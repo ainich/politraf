@@ -54,7 +54,7 @@
       * ./otxget.py
     
     ```
-    crontab -e
+    sudo crontab -e
     0 2 * * * /opt/politraf/otxget.py >/dev/null 2>&1
     */2 * * * * /opt/politraf/iocwatch.py >/dev/null 2>&1
     ```
