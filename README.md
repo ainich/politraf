@@ -25,7 +25,7 @@
       curl https://packagecloud.io/gpg.key | sudo apt-key add -
       sudo apt-get update
       sudo apt-get install grafana
-      grafana-cli plugins install vertamedia-clickhouse-datasource
+      sudo grafana-cli plugins install vertamedia-clickhouse-datasource
       ```
       
       * http on port 3000
