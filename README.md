@@ -49,7 +49,7 @@
 
     * OTX AlienVault - https://otx.alienvault.com
       * Create an account and select your feeds
-      * Set API key in /etc/politraf.cfg
+      * Set API key in /etc/politraf/config.yaml
       * ./otxget.py
     
     ```
