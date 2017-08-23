@@ -28,7 +28,7 @@
       grafana-cli plugins install vertamedia-clickhouse-datasource
       ```
 
-      * Add datasource named Clickhouse https://grafana.com/plugins/vertamedia-clickhouse-datasource
+      * Add datasource named Clickhouse
       * Add dashboard from https://grafana.com/dashboards/2996
 
 
