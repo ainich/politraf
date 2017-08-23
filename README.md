@@ -38,6 +38,7 @@
     sudo apt-get install python3-pip
     cd politraf
     sudo pip3 install -r requirements.txt
+    sudo pip3 install --upgrade six
     sudo ./setup.py
     sudo vi /etc/politraf/config.yaml
     sudo systemctl daemon-reload
