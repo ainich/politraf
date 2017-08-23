@@ -27,7 +27,8 @@
       sudo apt-get install grafana
       grafana-cli plugins install vertamedia-clickhouse-datasource
       ```
-
+      
+      * http on port 3000
       * Add datasource named Clickhouse
       * Add dashboard from https://grafana.com/dashboards/2996
 
