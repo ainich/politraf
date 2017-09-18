@@ -3,3 +3,4 @@ pyshark
 OTXv2
 pyyaml
 psutil
+vulners
