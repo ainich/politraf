@@ -5,6 +5,28 @@ from infi.clickhouse_orm.fields import *
 from infi.clickhouse_orm.engines import MergeTree
 from infi.clickhouse_orm.engines import Memory
 
+
+class OPEN_PORTS(Model):
+
+    event_date = DateField()
+    timestamp = DateTimeField()
+    os = StringField()
+    os_v = StringField()
+    srv = StringField()
+    addr = StringField()
+    port = StringField()
+    product = StringField()
+    version = StringField()
+    descr = StringField()
+    vdesc = StringField()
+    title = StringField()
+    cvelist = StringField()
+    score = Float32Field()
+
+    
+    engine = MergeTree('event_date', ('os', 'os_v', 'srv', 'addr', 'port', 'product', 'version', 'descr', 'vdesc', 'score'))
+    #engine = Memory()
+
 class IOC_OTX(Model):
 
     event_date = DateField()
