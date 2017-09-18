@@ -53,8 +53,15 @@
       * Set API key in /etc/politraf/config.yaml
       * ./otxget.py
     
+    * Censys.io - https://censys.io/
+      * Create an account
+      * Set API key in /etc/politraf/config.yaml
+      * Set network to scan
+      * ./ext_cscan.py
+
     ```
     sudo crontab -e
     0 2 * * * /opt/politraf/otxget.py >/dev/null 2>&1
     */2 * * * * /opt/politraf/iocwatch.py >/dev/null 2>&1
+    0 2 * * * /opt/politraf/ext_cscan.py >/dev/null 2>&1
     ```
