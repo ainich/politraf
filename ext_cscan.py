@@ -44,7 +44,7 @@ class CENSYSReceiver():
         # Init clickhouse
         try:
             self.db = dbmodels.Database('politraf', db_url=url, username=name, password=passw, readonly=False, autocreate=True)
-            #self.db.drop_table(dbmodels.OPEN_PORTS)
+            self.db.drop_table(dbmodels.OPEN_PORTS)
             self.db.create_table(dbmodels.OPEN_PORTS)
         except Exception as e:
             logging.error("Error.",e)
@@ -99,6 +99,10 @@ class CENSYSReceiver():
                             service = "http"
                             if host_info.json()[hit]["http"]["get"]["metadata"].get('description'):
                                 product =  host_info.json()[hit]["http"]["get"]["metadata"]["product"]
+                                if product == "httpd":
+                                    product = "Apache"
+                                if product == "nginx":
+                                    product = "Nginx"
                                 if host_info.json()[hit]["http"]["get"]["metadata"].get('version'):
                                     version =  host_info.json()[hit]["http"]["get"]["metadata"]["version"]
                         if host_info.json()[hit].get('https'):
