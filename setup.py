@@ -50,5 +50,6 @@ try:
     db.create_table(dbmodels.MEMStats)
     db.create_table(dbmodels.DISKStats)
     db.create_table(dbmodels.IOCStats)
+    db.create_table(dbmodels.OPEN_PORTS)
 except Exception as e:
     print(e)
