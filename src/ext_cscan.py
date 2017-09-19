@@ -35,8 +35,9 @@ with open("/etc/politraf/config.yaml", 'r') as stream:
             print ("Set an API key in /etc/politraf/config.yaml. Go to https://censys.io create an account and get your own API key")
             sys.exit(0)
     except yaml.YAMLError as e:
-        logging.error("Error.",e)
+        logging.error("Error.", e)
     logging.info("Config is OK")
+
 
 class CENSYSReceiver():
 
@@ -47,7 +48,7 @@ class CENSYSReceiver():
             self.db.drop_table(dbmodels.OPEN_PORTS)
             self.db.create_table(dbmodels.OPEN_PORTS)
         except Exception as e:
-            logging.error("Error.",e)
+            logging.error("Error.", e)
 
     def censys_query_net(self, api_url, api_cuid, api_csecret, subnet):
         logging.info("Starting read from censys ...")
@@ -66,7 +67,7 @@ class CENSYSReceiver():
                 logging.error(self.cresp.status_code)
             logging.info("Read hosts list from censys.io complete ...")
         except Exception as e:
-            logging.error("Error.",e)
+            logging.error("Error.", e)
 
     def censys_query_host(self, api_url, api_cuid, api_csecret):
         try:
@@ -78,8 +79,7 @@ class CENSYSReceiver():
                     logging.error(self.host_info.status_code)
                 self.vulners_query()
         except Exception as e:
-            logging.error("Error.",e)                
-
+            logging.error("Error.", e)
 
     def vulners_query(self):
         try:
@@ -91,7 +91,7 @@ class CENSYSReceiver():
             product = "None"
             version = "None"
             vdesc = "None"
-            title ="None"
+            title = "None"
             cvelist = "None"
             score = 0
             service = "None"
@@ -112,19 +112,19 @@ class CENSYSReceiver():
                     if self.host_info.json()[hit].get('http'):
                         service = "http"
                         if self.host_info.json()[hit]["http"]["get"]["metadata"].get('description'):
-                            product =  self.host_info.json()[hit]["http"]["get"]["metadata"]["product"]
+                            product = self.host_info.json()[hit]["http"]["get"]["metadata"]["product"]
                             if product == "httpd":
                                 product = "Apache"
                             if self.host_info.json()[hit]["http"]["get"]["metadata"].get('version'):
-                                version =  self.host_info.json()[hit]["http"]["get"]["metadata"]["version"]
+                                version = self.host_info.json()[hit]["http"]["get"]["metadata"]["version"]
                     if self.host_info.json()[hit].get('https'):
                         service = "https"
                     if self.host_info.json()[hit].get('ftp'):
                         service = "ftp"
                         if self.host_info.json()[hit]["ftp"]["banner"]["metadata"].get('description'):
-                            product =  self.host_info.json()[hit]["ftp"]["banner"]["metadata"]["product"]
+                            product = self.host_info.json()[hit]["ftp"]["banner"]["metadata"]["product"]
                             if self.host_info.json()[hit]["ftp"]["banner"]["metadata"].get('version'):
-                                version =  self.host_info.json()[hit]["ftp"]["banner"]["metadata"]["version"]
+                                version = self.host_info.json()[hit]["ftp"]["banner"]["metadata"]["version"]
                     if self.host_info.json()[hit].get('smb'):
                         service = "smb"
                         if self.host_info.json()[hit]["smb"]["banner"]["metadata"].get('description'):
@@ -133,14 +133,11 @@ class CENSYSReceiver():
                     for key in self.host_info.json()[hit].keys():
                         if service == "None":
                             service = key
-                        #log_a = (os, os_v, service, self.addr, hit, product, version, descr)
-                        #logging.info(log_a)
                         # get vulners info
                         if product != "None" and version != "None":
                             vulners_api = vulners.Vulners()
                             try:
                                 results = vulners_api.softwareVulnerabilities(product, version)
-                                #exploit_list = results.get('exploit')
                                 vulnerabilities_list = [results.get(keys) for keys in results if keys not in ['info', 'blog', 'bugbounty']]
                                 vulns = iter(vulnerabilities_list)
                                 for i in vulns:
@@ -148,10 +145,7 @@ class CENSYSReceiver():
                                     for v in vulns2:
                                         vdesc = v[0]["description"]
                                         title = v[0]["title"]
-                                        #cvelist = v[0]["cvelist"]
                                         score = v[0]["cvss"]["score"]
-                                        #print(v)
-                                    #next(vulns)
                             except:
                                 pass
                         log = (os, os_v, service, self.addr, hit, product, version, descr, score, title)
@@ -173,20 +167,18 @@ class CENSYSReceiver():
                 self.write_to_clickhouse()
 
         except Exception as e:
-            logging.error("Error.",e)
+            logging.error("Error.", e)
 
     def write_to_clickhouse(self):
         try:
             timestamp = datetime.datetime.now(tz)
             today = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d')
-            self.db.insert([dbmodels.OPEN_PORTS(event_date=today, timestamp=timestamp, os = self.os,
+            self.db.insert([dbmodels.OPEN_PORTS(event_date=today, timestamp=timestamp, os=self.os,
                           os_v = self.os_v, srv = self.service, addr = self.addr, port = self.hit,
                           product = self.product, version = self.version, descr = self.descr,
                           vdesc = self.vdesc, title = self.title, cvelist = self.cvelist, score = self.score)])
         except Exception as e:
-            logging.error("Error.",e)
-
-
+            logging.error("Error.", e)
 
 
 def main():
@@ -203,8 +195,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-
-
-
