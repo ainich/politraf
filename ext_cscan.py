@@ -44,7 +44,7 @@ class CENSYSReceiver():
         # Init clickhouse
         try:
             self.db = dbmodels.Database('politraf', db_url=url, username=name, password=passw, readonly=False, autocreate=True)
-            self.db.drop_table(dbmodels.OPEN_PORTS)
+            #self.db.drop_table(dbmodels.OPEN_PORTS)
             self.db.create_table(dbmodels.OPEN_PORTS)
         except Exception as e:
             logging.error("Error.",e)
