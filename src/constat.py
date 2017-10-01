@@ -28,7 +28,7 @@ with open("/etc/politraf/config.yaml", 'r') as stream:
         interfaces = interface.split(",")
         bpf_filter = config['bpf_filter']
         time_zone = config['time_zone']
-        tz = timezone(time_zone)
+        tz = time_zone
         url = config['db_url']
         name = config['username']
         passw = config['password']
