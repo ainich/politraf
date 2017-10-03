@@ -4,3 +4,4 @@ OTXv2
 pyyaml
 psutil
 vulners
+netaddr

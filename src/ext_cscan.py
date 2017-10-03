@@ -22,7 +22,7 @@ logging.basicConfig(level = logging.INFO)
 with open("/etc/politraf/config.yaml", 'r') as stream:
     try:
         config = (yaml.load(stream))
-        CAPI_URL = config['CAPI_URL']
+        #CAPI_URL = config['CAPI_URL']
         CUID = config['CUID']
         CSECRET = config['CSECRET']
         SUBNET = config['SUBNET']
@@ -50,7 +50,7 @@ class CENSYSReceiver():
         except Exception as e:
             logging.error("Error.", e)
 
-    def censys_query_net(self, api_url, api_cuid, api_csecret, subnet):
+    def censys_query_net(self, api_cuid, api_csecret, subnet):
         logging.info("Starting read from censys ...")
         try:
             ip = IPNetwork(subnet)
@@ -62,19 +62,19 @@ class CENSYSReceiver():
             to_censys = "ip:[" + first_ip + " TO " + last_ip + "]"
             q = {"query": to_censys}
             logging.info(q)
-            self.cresp = requests.post(CAPI_URL+"/search/ipv4", data=json.dumps(q), auth=(CUID, CSECRET), timeout=360)
+            self.cresp = requests.post("https://censys.io/api/v1/search/ipv4", data=json.dumps(q), auth=(CUID, CSECRET), timeout=360)
             if self.cresp.status_code != 200:
                 logging.error(self.cresp.status_code)
             logging.info("Read hosts list from censys.io complete ...")
         except Exception as e:
             logging.error("Error.", e)
 
-    def censys_query_host(self, api_url, api_cuid, api_csecret):
+    def censys_query_host(self, api_cuid, api_csecret):
         try:
             for hit in self.cresp.json()["results"]:
-                time.sleep(1)
+                time.sleep(20)
                 self.addr = str(hit["ip"])
-                self.host_info = requests.get(CAPI_URL+"/view/ipv4/"+self.addr, auth=(CUID, CSECRET), timeout=360)
+                self.host_info = requests.get("https://censys.io/api/v1/view/ipv4/"+self.addr, auth=(CUID, CSECRET), timeout=360)
                 if self.host_info.status_code != 200:
                     logging.error(self.host_info.status_code)
                 self.vulners_query()
@@ -187,8 +187,8 @@ def main():
     censys_receiver = CENSYSReceiver(url=url, name=name, password=passw)
 
     # Retrieve the info about network
-    censys_receiver.censys_query_net(api_url=CAPI_URL, api_cuid=CUID, api_csecret=CSECRET, subnet=SUBNET)
-    censys_receiver.censys_query_host(api_url=CAPI_URL, api_cuid=CUID, api_csecret=CSECRET)
+    censys_receiver.censys_query_net(api_cuid=CUID, api_csecret=CSECRET, subnet=SUBNET)
+    censys_receiver.censys_query_host(api_cuid=CUID, api_csecret=CSECRET)
 
     logging.info("Read from censys and vulners complete")
 
