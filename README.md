@@ -28,6 +28,7 @@
       sudo apt-get update
       sudo apt-get install grafana
       sudo grafana-cli plugins install vertamedia-clickhouse-datasource
+      sudo grafana-server restart
       ```
       
       * http on port 3000
