@@ -12,5 +12,5 @@ def socket(request):
 
 
 def test_server_connect(socket):
-    socket.connect(('localhost', 8123))
+    socket.connect(('127.0.0.1', 8123))
     assert socket
