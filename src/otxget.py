@@ -27,7 +27,7 @@ with open("/etc/politraf/config.yaml", 'r') as stream:
         name = config['username']
         passw = config['password']
     except yaml.YAMLError as e:
-        logging.error("Error.",e)
+        logging.error(e)
     logging.info("Config is OK")
 
 # Init clickhouse
@@ -36,7 +36,7 @@ try:
     db.drop_table(dbmodels.IOC_OTX)
     db.create_table(dbmodels.IOC_OTX)
 except Exception as e:
-    logging.error("Error.",e)
+    logging.error(e)
 
 
 class OTXReceiver():
@@ -45,14 +45,14 @@ class OTXReceiver():
         try:
             self.otx = OTXv2(api_key)
         except Exception as e:
-            logging.error("Error.",e)
+            logging.error(e)
 
     def get_iocs_last(self):
         logging.info("Starting OTX feed download ...")
         try:
             self.events = self.otx.getall()
         except Exception as e:
-            logging.error("Error.",e)
+            logging.error(e)
         logging.info("Download complete - %s events received" % len(self.events))
 
     def write_iocs(self):
@@ -76,11 +76,11 @@ class OTXReceiver():
                             today = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d')
                             db.insert([dbmodels.IOC_OTX(event_date=today, timestamp=timestamp, indicator=indicator, name=name, references=references)])
                     except Exception as e:
-                        logging.error("Error.",e)
+                        logging.error(e)
                         pass
 
             except Exception as e:
-                logging.error("Error.",e)
+                logging.error(e)
 
 def main():
     if len(OTX_KEY) != 64:

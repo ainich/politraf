@@ -41,14 +41,14 @@ with open("/etc/politraf/config.yaml", 'r') as stream:
 try:
     cap = pyshark.LiveCapture(interface=interfaces, bpf_filter=bpf_filter)
 except Exception as e:
-    logging.error("Error.",e)
+    logging.error(e)
 
 
 # Init clickhouse
 try:
     db = dbmodels.Database('politraf', db_url=url, username=name, password=passw, readonly=False, autocreate=True)
 except Exception as e:
-    logging.error("Error.",e)
+    logging.error(e)
 
 
 def database_write(today, timestamp, protocol, src_addr, src_port, dst_addr, dst_port, qry_name):
@@ -57,7 +57,7 @@ def database_write(today, timestamp, protocol, src_addr, src_port, dst_addr, dst
             dbmodels.CONNStats(event_date=today, timestamp=timestamp, protocol=protocol, src_addr=src_addr, src_port=src_port, dst_addr=dst_addr, dst_port=dst_port, qry_name=qry_name)
             ])
     except Exception as e:
-        logging.error("Error.",e)
+        logging.error(e)
 
 
 def print_conversation_header(pkt):
@@ -91,7 +91,7 @@ def print_conversation_header(pkt):
             database_write(today, timestamp, protocol, src_addr, src_port, dst_addr, dst_port, qry_name)
 
     except Exception as e:
-        logging.error("Error.",e)
+        logging.error(e)
 
 
 def main():
@@ -99,6 +99,6 @@ def main():
         logging.info("Running tshark with: interface: "+interface+" and bpf_filter: "+bpf_filter+ " and send connections stats to clickhouse")
         cap.apply_on_packets(print_conversation_header)
     except Exception as e:
-        logging.error("Error.",e)
+        logging.error(e)
 if __name__ == '__main__':
     main()

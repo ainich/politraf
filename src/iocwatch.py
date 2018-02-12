@@ -37,7 +37,7 @@ with open("/etc/politraf/config.yaml", 'r') as stream:
 try:
     db = dbmodels.Database('politraf', db_url=url, username=name, password=passw, readonly=False, autocreate=True)
 except Exception as e:
-    logging.error("Error.",e)
+    logging.error(e)
 
 
 # 5 min time
@@ -66,7 +66,7 @@ def get_traf_last():
             time_to_end = end - start
             print('Time to all events ', time_to_end)
         except Exception as e:
-            logging.error("Error.",e)
+            logging.error(e)
 
 
 def main():

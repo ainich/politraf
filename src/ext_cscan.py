@@ -35,7 +35,7 @@ with open("/etc/politraf/config.yaml", 'r') as stream:
             print ("Set an API key in /etc/politraf/config.yaml. Go to https://censys.io create an account and get your own API key")
             sys.exit(0)
     except yaml.YAMLError as e:
-        logging.error("Error.", e)
+        logging.error(e)
     logging.info("Config is OK")
 
 
@@ -48,7 +48,7 @@ class CENSYSReceiver():
             self.db.drop_table(dbmodels.OPEN_PORTS)
             self.db.create_table(dbmodels.OPEN_PORTS)
         except Exception as e:
-            logging.error("Error.", e)
+            logging.error(e)
 
     def censys_query_net(self, api_cuid, api_csecret, subnet):
         logging.info("Starting read from censys ...")
@@ -67,7 +67,7 @@ class CENSYSReceiver():
                 logging.error(self.cresp.status_code)
             logging.info("Read hosts list from censys.io complete ...")
         except Exception as e:
-            logging.error("Error.", e)
+            logging.error(e)
 
     def censys_query_host(self, api_cuid, api_csecret):
         try:
@@ -79,7 +79,7 @@ class CENSYSReceiver():
                     logging.error(self.host_info.status_code)
                 self.vulners_query()
         except Exception as e:
-            logging.error("Error.", e)
+            logging.error(e)
 
     def vulners_query(self):
         try:
@@ -167,7 +167,7 @@ class CENSYSReceiver():
                 self.write_to_clickhouse()
 
         except Exception as e:
-            logging.error("Error.", e)
+            logging.error(e)
 
     def write_to_clickhouse(self):
         try:
@@ -178,7 +178,7 @@ class CENSYSReceiver():
                           product = self.product, version = self.version, descr = self.descr,
                           vdesc = self.vdesc, title = self.title, cvelist = self.cvelist, score = self.score)])
         except Exception as e:
-            logging.error("Error.", e)
+            logging.error(e)
 
 
 def main():

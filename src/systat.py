@@ -29,15 +29,14 @@ with open("/etc/politraf/config.yaml", 'r') as stream:
         name = config['username']
         passw = config['password']
     except yaml.YAMLError as e:
-        logging.error("Error.",e)
+        logging.error(e)
     logging.info("Config is OK")
 
 # Init clickhouse
 try:
     db = dbmodels.Database('politraf', db_url=url, username=name, password=passw, readonly=False, autocreate=True)
 except Exception as e:
-    logging.error("Error.",e)
-
+    logging.error(e)
 
 def database_write(stats, mem, disk, timestamp, today):
     try:
@@ -52,8 +51,7 @@ def database_write(stats, mem, disk, timestamp, today):
                 dbmodels.DISKStats(event_date=today, timestamp=timestamp, total=disk[0], used=disk[1])
             ])
     except Exception as e:
-        logging.error("Error.",e)
-
+        logging.error(e)
 
 def main():
     logging.info("Starting send system stats to clickhouse")
@@ -73,5 +71,4 @@ def main():
             running = False
 
 if __name__ == '__main__':
-    main()
-        
+    main()        
