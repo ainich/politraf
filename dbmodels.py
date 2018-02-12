@@ -1,4 +1,4 @@
-from infi.clickhouse_orm import models, fields, engines
+#from infi.clickhouse_orm import models, fields, engines
 from infi.clickhouse_orm.database import Database
 from infi.clickhouse_orm.models import Model
 from infi.clickhouse_orm.fields import *
@@ -23,7 +23,6 @@ class OPEN_PORTS(Model):
     cvelist = StringField()
     score = Float32Field()
 
-    
     engine = MergeTree('event_date', ('os', 'os_v', 'srv', 'addr', 'port', 'product', 'version', 'descr', 'vdesc', 'score'))
     #engine = Memory()
 
