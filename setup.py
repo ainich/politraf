@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python3.6
 # -*- coding: utf-8
 ##############################################################################
 # Politraf, initial setup
@@ -27,6 +27,7 @@ try:
     shutil.copy2('src/otxget.py', '/opt/politraf/otxget.py')
     shutil.copy2('src/constat.py', '/opt/politraf/constat.py')
     shutil.copy2('src/ext_cscan.py', '/opt/politraf/ext_cscan.py')
+    shutil.copy2('src/iocwatch.py', '/opt/politraf/iocwatch.py')
     shutil.copy2('dbmodels.py', '/opt/politraf/dbmodels.py')
     #os.chmod("src/systat.py", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
     #os.chmod("src/otxget.py", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
