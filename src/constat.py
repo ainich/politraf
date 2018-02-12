@@ -33,7 +33,7 @@ with open("/etc/politraf/config.yaml", 'r') as stream:
         name = config['username']
         passw = config['password']
     except yaml.YAMLError as e:
-        logging.error("Error.",e)
+        logging.error("Error." , e)
     logging.info("Config is OK")
 
 
