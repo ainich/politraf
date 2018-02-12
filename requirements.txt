@@ -1,6 +1,6 @@
 infi.clickhouse_orm==0.9.8
 pyshark==0.3.7.11
-OTXv2
+OTXv2==1.2
 pyyaml
 psutil
 vulners
