@@ -21,7 +21,7 @@ logging.basicConfig(level = logging.INFO)
 # Read config
 with open("/etc/politraf/config.yaml", 'r') as stream:
     try:
-        config = (yaml.load(stream))
+        config = (yaml.safe_load(stream))
         #CAPI_URL = config['CAPI_URL']
         CUID = config['CUID']
         CSECRET = config['CSECRET']

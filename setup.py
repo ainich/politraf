@@ -37,7 +37,7 @@ try:
     # Read config
     with open("config/config.yaml", 'r') as stream:
         try:
-            config = (yaml.load(stream))
+            config = (yaml.safe_load(stream))
             url = config['db_url']
             name = config['username']
             passw = config['password']

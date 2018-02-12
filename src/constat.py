@@ -23,7 +23,7 @@ logging.basicConfig(level = logging.INFO)
 # Read config
 with open("/etc/politraf/config.yaml", 'r') as stream:
     try:
-        config = (yaml.load(stream))
+        config = (yaml.safe_load(stream))
         interface = config['interface']
         interfaces = interface.split(",")
         bpf_filter = config['bpf_filter']

@@ -22,7 +22,7 @@ logging.basicConfig(level = logging.INFO)
 # Read config
 with open("/etc/politraf/config.yaml", 'r') as stream:
     try:
-        config = (yaml.load(stream))
+        config = (yaml.safe_load(stream))
         time_zone = config['time_zone']
         tz = timezone(time_zone)
         url = config['db_url']
