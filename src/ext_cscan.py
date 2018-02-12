@@ -146,8 +146,9 @@ class CENSYSReceiver():
                                         vdesc = v[0]["description"]
                                         title = v[0]["title"]
                                         score = v[0]["cvss"]["score"]
-                            except:
-                                pass
+                            except Exception as e:
+                                logging.error(e)
+                                #pass
                         log = (os, os_v, service, self.addr, hit, product, version, descr, score, title)
                         logging.info(log)
                 self.os = os
