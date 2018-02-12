@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/ainich/politraf.svg?branch=master)](https://travis-ci.org/ainich/politraf)
+[![Updates](https://pyup.io/repos/github/ainich/politraf/shield.svg)](https://pyup.io/repos/github/ainich/politraf/)
+
 
 ![Politraf](https://raw.githubusercontent.com/ainich/politraf/master/politraf.jpg)
 
