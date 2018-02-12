@@ -1,5 +1,5 @@
 infi.clickhouse_orm==0.9.8
-pyshark
+pyshark==0.3.7.11
 OTXv2
 pyyaml
 psutil
