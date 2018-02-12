@@ -66,7 +66,6 @@ def main():
             disk = psutil.disk_usage('/')
             timestamp = datetime.datetime.now(tz)
             today = datetime.datetime.strftime(datetime.datetime.now(tz), '%Y-%m-%d')
-            
             database_write(stats, mem, disk, timestamp, today)
 
         except Exception as e:

@@ -65,7 +65,6 @@ class OTXReceiver():
                 for indicator in event["indicators"]:
 
                     try:
-                        
                         if indicator["type"] in ('domain', 'hostname', 'IPv4', 'IPv6', 'CIDR'):
                             indicator = indicator["indicator"]
                             name = event["name"]

@@ -5,9 +5,9 @@
 ##############################################################################
 
 import datetime
-import os
-import psutil
-import time
+#import os
+#import psutil
+#import time
 import logging
 
 import pyshark
@@ -84,7 +84,6 @@ def print_conversation_header(pkt):
                     qry_name = pkt.http.host
                 else:
                     qry_name = "none"
-            
             local = pytz.timezone(tz)
             timestamp = local.localize(datetime.datetime.now())
             today = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d')
@@ -102,6 +101,5 @@ def main():
     except Exception as e:
         logging.error("Error.",e)    
         
-
 if __name__ == '__main__':
     main()

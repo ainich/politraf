@@ -6,7 +6,7 @@
 
 import shutil
 import os
-import stat
+#import stat
 
 import yaml
 
