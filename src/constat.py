@@ -99,7 +99,6 @@ def main():
         logging.info("Running tshark with: interface: "+interface+" and bpf_filter: "+bpf_filter+ " and send connections stats to clickhouse")
         cap.apply_on_packets(print_conversation_header)
     except Exception as e:
-        logging.error("Error.",e)    
-        
+        logging.error("Error.",e)
 if __name__ == '__main__':
     main()
