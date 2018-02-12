@@ -4,4 +4,4 @@ OTXv2==1.2
 pyyaml==3.12
 psutil==5.4.3
 vulners==1.0
-netaddr
+netaddr==0.7.19
