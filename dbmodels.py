@@ -20,7 +20,6 @@ class OPEN_PORTS(Model):
     title = StringField()
     cvelist = StringField()
     score = Float32Field()
-
     engine = MergeTree('event_date', ('os', 'os_v', 'srv', 'addr', 'port', 'product', 'version', 'descr', 'vdesc', 'score'))
     #engine = Memory()
 
@@ -47,7 +46,6 @@ class IOCStats(Model):
     indicator = StringField()
     name = StringField()
     references = StringField()
-
     engine = MergeTree('event_date', ('timestamp', 'protocol', 'src_addr', 'src_port', 'dst_addr', 'dst_port', 'qry_name', 'indicator', 'name', 'references'))
 
 class CPUStats(Model):
@@ -56,7 +54,6 @@ class CPUStats(Model):
     timestamp = DateTimeField()
     cpu_id = UInt16Field()
     cpu_percent = Float32Field()
-
     engine = MergeTree('event_date', ('cpu_id', 'cpu_percent', 'timestamp'))
 
 class MEMStats(Model):
@@ -65,7 +62,6 @@ class MEMStats(Model):
     timestamp = DateTimeField()
     total = Float32Field()
     used = Float32Field()
-
     engine = MergeTree('event_date', ('total', 'used', 'timestamp'))
 
 class DISKStats(Model):
@@ -74,7 +70,6 @@ class DISKStats(Model):
     timestamp = DateTimeField()
     total = Float32Field()
     used = Float32Field()
-
     engine = MergeTree('event_date', ('total', 'used', 'timestamp'))
 
 class CONNStats(Model):
@@ -87,5 +82,4 @@ class CONNStats(Model):
     dst_addr = StringField()
     dst_port = Float32Field()
     qry_name = StringField()
-    
     engine = MergeTree('event_date', ('timestamp', 'protocol', 'src_addr', 'src_port', 'dst_addr', 'dst_port', 'qry_name'))
