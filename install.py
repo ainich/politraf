@@ -4,41 +4,78 @@
 # Politraf, initial setup
 ##############################################################################
 
+from subprocess import call
 import shutil
 import os
-#import stat
+import time
 
 import yaml
 
 import dbmodels
 
+green='\033[32m'
+greene='\033[0m'
+orange='\033[33m'
+orangee='\033[0m'
+blue='\033[34m'
+
+
 try:
-    print ("Make dir /etc/politraf")
+    print (green + 'Install Clickhouse and Grafana' + greene)
+    call(["apt-gett", "update"])
+    call(["apt-get", "install" , "grafana"])
+    call(["apt-get", "install" , "clickhouse-client" , "clickhouse-server-common"])
+    call(["grafana-cli", "plugins" , "install" , "vertamedia-clickhouse-datasource"])
+    print (green + 'Done' + greene)
+except Exception as e:
+    print(orange, e, orangee)
+
+try:
+    print (green + "Install requirements" + greene)
+    call(["apt-get", "install" , "tshark"])
+    call(["apt-get", "install" , "python3-pip"])
+    call(["export", "LC_ALL=C"])
+    call(["pip3", "install" , "-r" , "requirements.txt"])
+    call(["pip3", "install" , "--upgrade six"])
+    print (green + 'Done' + greene)
+except Exception as e:
+    print(orange, e, orangee)
+
+try:
+    print (green + "Start Clickhouse and Grafana" + greene)
+    call(["service", "clickhouse-server" , "restart"])
+    call(["service", "grafana-server" , "restart"])
+    print (green + 'Done' + greene)
+except Exception as e:
+    print(orange, e, orangee)
+
+try:
+    print (green +"Make dir /etc/politraf" + greene)
     os.makedirs("/etc/politraf")
-    print ("Done")
+    print (green + 'Done' + greene)
 except Exception as e:
-    print(e)
+    print(orange, e, orangee)
 try:
-    print ("Copy config.yaml to /etc/politraf")
+    print (green +"Copy config.yaml to /etc/politraf" + greene)
     shutil.copy2('config/config.yaml', '/etc/politraf/config.yaml')
-    print ("Done")
+    print (green + 'Done' + greene)
 except Exception as e:
-    print(e)
+    print(orange, e, orangee)
 try:
-    print ("Make dir /opt/politraf")
+    print (green + 'Make dir /opt/politraf' + greene)
     os.makedirs("/opt/politraf")
-    print ("Done")
+    print (green + 'Done' + greene)
 except Exception as e:
-    print(e)
+    print(orange, e, orangee)
 try:
-    print ("Setup services")
+    print (green +'Setup services' + greene)
     shutil.copy2('config/systat.service', '/etc/systemd/system/systat.service')
     shutil.copy2('config/constat.service', '/etc/systemd/system/constat.service')
-    print ("Done")
+    print (green + 'Done' + greene)
 except Exception as e:
-    print(e)
+    print(orange, e, orangee)
 try:
-    print ("Copy politraf files")
+    print (green + 'Copy politraf files' + greene)
     shutil.copy2('src/systat.py', '/opt/politraf/systat.py')
     shutil.copy2('src/otxget.py', '/opt/politraf/otxget.py')
     shutil.copy2('src/constat.py', '/opt/politraf/constat.py')
@@ -49,11 +86,12 @@ try:
     #os.chmod("src/otxget.py", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
     #os.chmod("src/constat.py", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
     #os.chmod("src/dbmodels.py", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
-    print ("Done")
+    print (green + 'Done' + greene)
 except Exception as e:
-    print(e)
+    print(orange, e, orangee)
 try:
-    print ("Create database with tables")
+    print (green + 'Wait for clickhouse init and create database with tables' + greene)
+    time.sleep(10)
     # Read config
     with open("config/config.yaml", 'r') as stream:
         try:
@@ -62,7 +100,7 @@ try:
             name = config['username']
             passw = config['password']
         except Exception as e:
-            print(e)
+            print(orange, e, orangee)
     # Create tables
 
     db = dbmodels.Database('politraf', db_url=url, username=name, password=passw, readonly=False, autocreate=True)
@@ -72,6 +110,6 @@ try:
     db.create_table(dbmodels.DISKStats)
     db.create_table(dbmodels.IOCStats)
     db.create_table(dbmodels.OPEN_PORTS)
-    print ("Done")
+    print (green + 'Done' + greene)
 except Exception as e:
-    print(e)
+    print(orange, e, orangee)
