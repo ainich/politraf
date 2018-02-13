@@ -9,6 +9,13 @@ import shutil
 import os
 import time
 
+
+green='\033[32m'
+greene='\033[0m'
+orange='\033[33m'
+orangee='\033[0m'
+blue='\033[34m'
+
 try:
     print (green + "Install requirements" + greene)
     call(["apt-get", "install" , "tshark"])
@@ -21,13 +28,6 @@ except Exception as e:
     print(orange, e, orangee)
 
 import dbmodels
-
-green='\033[32m'
-greene='\033[0m'
-orange='\033[33m'
-orangee='\033[0m'
-blue='\033[34m'
-
 
 try:
     print (green + 'Install Clickhouse and Grafana' + greene)
