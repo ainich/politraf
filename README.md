@@ -58,7 +58,6 @@
     * Add dashboard from https://grafana.com/api/dashboards/2996/revisions/1/download
     * Add dashboard from https://grafana.com/api/dashboards/3248/revisions/2/download
 
-  ```
   * Setup cron jobs 
     ```
     sudo crontab -e
