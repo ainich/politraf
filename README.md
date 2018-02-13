@@ -20,11 +20,11 @@
         sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4
         ```
   
-      * Grafana
-        ```
-        echo 'deb https://packagecloud.io/grafana/stable/debian/ jessie main' | sudo tee -a /etc/apt/sources.list
-        curl https://packagecloud.io/gpg.key | sudo apt-key add -
-        ```
+    * Grafana
+      ```
+      echo 'deb https://packagecloud.io/grafana/stable/debian/ jessie main' | sudo tee -a /etc/apt/sources.list
+      curl https://packagecloud.io/gpg.key | sudo apt-key add -
+      ```
 
   * Install Politraf
     ```
