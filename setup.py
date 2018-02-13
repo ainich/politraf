@@ -15,13 +15,25 @@ import dbmodels
 try:
     print ("Make dir /etc/politraf")
     os.makedirs("/etc/politraf")
+except Exception as e:
+    print(e)
+try:
     print ("Copy config.yaml to /etc/politraf")
     shutil.copy2('config/config.yaml', '/etc/politraf/config.yaml')
+except Exception as e:
+    print(e)
+try:
     print ("Make dir /opt/politraf")
     os.makedirs("/opt/politraf")
+except Exception as e:
+    print(e)
+try:
     print ("Setup services")
     shutil.copy2('config/systat.service', '/etc/systemd/system/systat.service')
     shutil.copy2('config/constat.service', '/etc/systemd/system/constat.service')
+except Exception as e:
+    print(e)
+try:
     print ("Copy politraf files")
     shutil.copy2('src/systat.py', '/opt/politraf/systat.py')
     shutil.copy2('src/otxget.py', '/opt/politraf/otxget.py')
@@ -33,6 +45,9 @@ try:
     #os.chmod("src/otxget.py", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
     #os.chmod("src/constat.py", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
     #os.chmod("src/dbmodels.py", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
+except Exception as e:
+    print(e)
+try:
     print ("Create database with tables")
     # Read config
     with open("config/config.yaml", 'r') as stream:
