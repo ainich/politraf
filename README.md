@@ -56,8 +56,8 @@
   * Grafana setup
     * http on port 3000 with admin:admin
     * Add datasource named Clickhouse
-    * Add dashboard from https://grafana.com/dashboards/2996
-    * Add dashboard from https://grafana.com/dashboards/3248
+    * Add dashboard from https://grafana.com/api/dashboards/2996/revisions/1/download
+    * Add dashboard from https://grafana.com/api/dashboards/3248/revisions/2/download
 
   ```
   sudo crontab -e
