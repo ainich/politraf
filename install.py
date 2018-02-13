@@ -20,7 +20,8 @@ blue='\033[34m'
 try:
     print (green + "Install requirements" + greene)
     call(["apt-get", "install" , "tshark"])
-    Popen('export LC_ALL=C', shell=True, executable='/bin/bash')
+    os.putenv("LC_ALL", "C")
+    #Popen('export LC_ALL=C', shell=True, executable='/bin/bash')
     call(["apt-get", "install" , "python3-pip"])
     call(["pip3", "install" , "-r" , "requirements.txt"])
     call(["pip3", "install" , "--upgrade six"])
@@ -32,7 +33,7 @@ import dbmodels
 
 try:
     print (green + 'Install Clickhouse and Grafana' + greene)
-    call(["apt-gett", "update"])
+    call(["apt-get", "update"])
     call(["apt-get", "install" , "grafana"])
     call(["apt-get", "install" , "clickhouse-client" , "clickhouse-server-common"])
     call(["grafana-cli", "plugins" , "install" , "vertamedia-clickhouse-datasource"])
