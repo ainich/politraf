@@ -9,8 +9,6 @@ import shutil
 import os
 import time
 
-import yaml
-
 import dbmodels
 
 green='\033[32m'
