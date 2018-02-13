@@ -14,7 +14,7 @@
           ```
           echo 'deb http://repo.yandex.ru/clickhouse/xenial stable main' | sudo tee -a /etc/apt/sources.list
           ```
-          * Ubuntu 14.04  trusty 
+          * Ubuntu 14.04  Trusty 
           ```
           echo 'deb http://repo.yandex.ru/clickhouse/trusty' | sudo tee -a /etc/apt/sources.list
           ```
