@@ -10,27 +10,22 @@
     * Add repository
 
       * Clickhouse
-          * Ubuntu 16.04 Xenial
+        * Ubuntu 16.04 Xenial
           ```
           echo 'deb http://repo.yandex.ru/clickhouse/xenial stable main' | sudo tee -a /etc/apt/sources.list
           sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4
           ```
-          * Ubuntu 14.04  Trusty 
+        * Ubuntu 14.04  Trusty 
           ```
           echo 'deb http://repo.yandex.ru/clickhouse/trusty' | sudo tee -a /etc/apt/sources.list
           sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4
           ```
   
-    * Grafana
-      ```
-      echo 'deb https://packagecloud.io/grafana/stable/debian/ jessie main' | sudo tee -a /etc/apt/sources.list
-      curl https://packagecloud.io/gpg.key | sudo apt-key add -
-      ```
-      
-      * http on port 3000 with admin:admin
-      * Add datasource named Clickhouse
-      * Add dashboard from https://grafana.com/dashboards/2996
-      * Add dashboard from https://grafana.com/dashboards/3248
+      * Grafana
+        ```
+        echo 'deb https://packagecloud.io/grafana/stable/debian/ jessie main' | sudo tee -a /etc/apt/sources.list
+        curl https://packagecloud.io/gpg.key | sudo apt-key add -
+        ```
 
   * Install Politraf
       ```
@@ -57,6 +52,12 @@
     * Set API key in /etc/politraf/config.yaml
     * Set network to scan
     * ./ext_cscan.py
+
+  * Grafana setup
+    * http on port 3000 with admin:admin
+    * Add datasource named Clickhouse
+    * Add dashboard from https://grafana.com/dashboards/2996
+    * Add dashboard from https://grafana.com/dashboards/3248
 
   ```
   sudo crontab -e
