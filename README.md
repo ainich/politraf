@@ -7,19 +7,18 @@
 
 * Install (Ubuntu 14.04 - trusty OR Ubuntu 16.04  xenial OR Debian 8 - jessie, **Python 3, CPU with SSE 4.2**)
 
-    * Add repository
-
-      * Clickhouse
-        * Ubuntu 16.04 Xenial
-          ```
-          echo 'deb http://repo.yandex.ru/clickhouse/xenial stable main' | sudo tee -a /etc/apt/sources.list
-          sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4
-          ```
-        * Ubuntu 14.04  Trusty 
-          ```
-          echo 'deb http://repo.yandex.ru/clickhouse/trusty' | sudo tee -a /etc/apt/sources.list
-          sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4
-          ```
+  * Add repository
+    * Clickhouse
+      * Ubuntu 16.04 Xenial
+        ```
+        echo 'deb http://repo.yandex.ru/clickhouse/xenial stable main' | sudo tee -a /etc/apt/sources.list
+        sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4
+        ```
+      * Ubuntu 14.04  Trusty 
+        ```
+        echo 'deb http://repo.yandex.ru/clickhouse/trusty' | sudo tee -a /etc/apt/sources.list
+        sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4
+        ```
   
       * Grafana
         ```
@@ -28,19 +27,19 @@
         ```
 
   * Install Politraf
-      ```
-      sudo ./install.py
-      ```
+    ```
+    sudo ./install.py
+    ```
   * Configure (Tshark interface, etc)
-      ```
-      sudo vi /etc/politraf/config.yaml
-      ```
+    ```
+    sudo vi /etc/politraf/config.yaml
+    ```
   * Start daemons
-      ```
-      sudo systemctl daemon-reload
-      sudo systemctl start systat
-      sudo systemctl start constat
-      ```
+    ```
+    sudo systemctl daemon-reload
+    sudo systemctl start systat
+    sudo systemctl start constat
+    ```
 
   * OTX AlienVault - https://otx.alienvault.com
     * Create an account and select your feeds
@@ -60,8 +59,12 @@
     * Add dashboard from https://grafana.com/api/dashboards/3248/revisions/2/download
 
   ```
-  sudo crontab -e
-  0 2 * * * /opt/politraf/otxget.py >/dev/null 2>&1
-  */2 * * * * /opt/politraf/iocwatch.py >/dev/null 2>&1
-  0 2 * * * /opt/politraf/ext_cscan.py >/dev/null 2>&1
-  ```
+  * Setup cron jobs 
+    ```
+    sudo crontab -e
+    ```
+    ```
+    0 2 * * * /opt/politraf/otxget.py >/dev/null 2>&1
+    */2 * * * * /opt/politraf/iocwatch.py >/dev/null 2>&1
+    0 2 * * * /opt/politraf/ext_cscan.py >/dev/null 2>&1
+    ```
