@@ -6,7 +6,6 @@
 
 from subprocess import call
 import shutil
-import os
 
 
 green='\033[32m'
