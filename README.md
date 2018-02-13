@@ -43,6 +43,7 @@
     sudo apt-get install tshark
     sudo apt-get install python3-pip
     cd politraf
+    export LC_ALL=C
     sudo pip3 install -r requirements.txt
     sudo pip3 install --upgrade six
     sudo ./setup.py
