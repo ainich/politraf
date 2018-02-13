@@ -9,10 +9,13 @@
 
     * Clickhouse
 
-      Ubuntu | Debian | action
-      ------------ | ------------- | -------------
-      16.04  xenial | - | echo 'deb http://repo.yandex.ru/clickhouse/xenial stable main' | sudo tee -a /etc/apt/sources.list
-      14.04  trusty | 8 jessie | echo 'deb http://repo.yandex.ru/clickhouse/trusty' | sudo tee -a /etc/apt/sources.list
+      * Ubuntu 16.04 Xenial
+      ```
+      echo 'deb http://repo.yandex.ru/clickhouse/xenial stable main' | sudo tee -a /etc/apt/sources.list
+      ```
+      * Ubuntu 14.04  trusty 
+      ```
+      echo 'deb http://repo.yandex.ru/clickhouse/trusty' | sudo tee -a /etc/apt/sources.list
       ```
       sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4
       sudo apt-get update
