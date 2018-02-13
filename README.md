@@ -11,9 +11,8 @@
 
       Ubuntu | Debian | action
       ------------ | ------------- | -------------
-      16.04  xenial | - | Add to /etc/apt/sources.list - "deb http://repo.yandex.ru/clickhouse/xenial stable main"
-      14.04  trusty | 8 jessie | Add to /etc/apt/sources.list - "deb http://repo.yandex.ru/clickhouse/trusty stable main"
-      
+      16.04  xenial | - | echo 'deb http://repo.yandex.ru/clickhouse/xenial stable main' | sudo tee -a /etc/apt/sources.list
+      14.04  trusty | 8 jessie | echo 'deb http://repo.yandex.ru/clickhouse/trusty' | sudo tee -a /etc/apt/sources.list
       ```
       sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4
       sudo apt-get update
