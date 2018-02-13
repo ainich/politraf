@@ -9,6 +9,17 @@ import shutil
 import os
 import time
 
+try:
+    print (green + "Install requirements" + greene)
+    call(["apt-get", "install" , "tshark"])
+    call(["apt-get", "install" , "python3-pip"])
+    call(["export", "LC_ALL=C"])
+    call(["pip3", "install" , "-r" , "requirements.txt"])
+    call(["pip3", "install" , "--upgrade six"])
+    print (green + 'Done' + greene)
+except Exception as e:
+    print(orange, e, orangee)
+
 import dbmodels
 
 green='\033[32m'
@@ -24,17 +35,6 @@ try:
     call(["apt-get", "install" , "grafana"])
     call(["apt-get", "install" , "clickhouse-client" , "clickhouse-server-common"])
     call(["grafana-cli", "plugins" , "install" , "vertamedia-clickhouse-datasource"])
-    print (green + 'Done' + greene)
-except Exception as e:
-    print(orange, e, orangee)
-
-try:
-    print (green + "Install requirements" + greene)
-    call(["apt-get", "install" , "tshark"])
-    call(["apt-get", "install" , "python3-pip"])
-    call(["export", "LC_ALL=C"])
-    call(["pip3", "install" , "-r" , "requirements.txt"])
-    call(["pip3", "install" , "--upgrade six"])
     print (green + 'Done' + greene)
 except Exception as e:
     print(orange, e, orangee)
