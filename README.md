@@ -36,7 +36,7 @@
       sudo service grafana-server restart
       ```
       
-      * http on port 3000
+      * http on port 3000 with admin:admin
       * Add datasource named Clickhouse
       * Add dashboard from https://grafana.com/dashboards/2996
       * Add dashboard from https://grafana.com/dashboards/3248
