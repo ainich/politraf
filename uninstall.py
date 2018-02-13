@@ -55,3 +55,5 @@ try:
     print (green + 'Done' + greene)
 except Exception as e:
     print(orange, e, orangee)
+
+print (orange + "! remove cron commands manually (crontab -e) !")
