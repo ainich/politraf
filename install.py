@@ -20,7 +20,7 @@ blue='\033[34m'
 try:
     print (green + "Install requirements" + greene)
     call(["apt-get", "install" , "tshark"])
-    Popen(['/bin/bash', '-c', 'export LC_ALL=C'])
+    Popen('export LC_ALL=C', shell=True, executable='/bin/bash')
     call(["apt-get", "install" , "python3-pip"])
     call(["pip3", "install" , "-r" , "requirements.txt"])
     call(["pip3", "install" , "--upgrade six"])
