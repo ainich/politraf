@@ -92,18 +92,8 @@ except Exception as e:
 try:
     print (green + 'Wait for clickhouse init and create database with tables' + greene)
     time.sleep(10)
-    # Read config
-    with open("config/config.yaml", 'r') as stream:
-        try:
-            config = (yaml.safe_load(stream))
-            url = config['db_url']
-            name = config['username']
-            passw = config['password']
-        except Exception as e:
-            print(orange, e, orangee)
     # Create tables
-
-    db = dbmodels.Database('politraf', db_url=url, username=name, password=passw, readonly=False, autocreate=True)
+    db = dbmodels.Database('politraf', db_url="http://127.0.0.1:8123/", username=default, password=passw, readonly=False, autocreate=True)
     db.create_table(dbmodels.CONNStats)
     db.create_table(dbmodels.CPUStats)
     db.create_table(dbmodels.MEMStats)
