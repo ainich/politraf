@@ -17,6 +17,7 @@
       ```
       echo 'deb http://repo.yandex.ru/clickhouse/trusty' | sudo tee -a /etc/apt/sources.list
       ```
+      ```
       sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4
       sudo apt-get update
       sudo apt-get install clickhouse-client clickhouse-server-common
