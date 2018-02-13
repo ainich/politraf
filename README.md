@@ -7,33 +7,24 @@
 
 * Install (Ubuntu 14.04 - trusty OR Ubuntu 16.04  xenial OR Debian 8 - jessie, **Python 3, CPU with SSE 4.2**)
 
-    * Clickhouse
+    * Add repository
 
-      * Add repository
+      * Clickhouse
           * Ubuntu 16.04 Xenial
           ```
           echo 'deb http://repo.yandex.ru/clickhouse/xenial stable main' | sudo tee -a /etc/apt/sources.list
+          sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4
           ```
           * Ubuntu 14.04  Trusty 
           ```
           echo 'deb http://repo.yandex.ru/clickhouse/trusty' | sudo tee -a /etc/apt/sources.list
+          sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4
           ```
-      ```
-      sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4
-      sudo apt-get update
-      sudo apt-get install clickhouse-client clickhouse-server-common
-      sudo service clickhouse-server start
-      ```
-
   
     * Grafana
       ```
       echo 'deb https://packagecloud.io/grafana/stable/debian/ jessie main' | sudo tee -a /etc/apt/sources.list
       curl https://packagecloud.io/gpg.key | sudo apt-key add -
-      sudo apt-get update
-      sudo apt-get install grafana
-      sudo grafana-cli plugins install vertamedia-clickhouse-datasource
-      sudo service grafana-server restart
       ```
       
       * http on port 3000 with admin:admin
@@ -41,42 +32,35 @@
       * Add dashboard from https://grafana.com/dashboards/2996
       * Add dashboard from https://grafana.com/dashboards/3248
 
-    * Install Politraf srcripts
-        ```
-        git clone https://github.com/ainich/politraf.git
-        sudo apt-get install tshark
-        sudo apt-get install python3-pip
-        cd politraf
-        export LC_ALL=C
-        sudo pip3 install -r requirements.txt
-        sudo pip3 install --upgrade six
-        sudo ./setup.py
-        ```
-    * Configure (Tshark interface, etc)
-        ```
-        sudo vi /etc/politraf/config.yaml
-        ```
-    * Start daemons
-        ```
-        sudo systemctl daemon-reload
-        sudo systemctl start systat
-        sudo systemctl start constat
-        ```
+  * Install Politraf
+      ```
+      sudo ./install.py
+      ```
+  * Configure (Tshark interface, etc)
+      ```
+      sudo vi /etc/politraf/config.yaml
+      ```
+  * Start daemons
+      ```
+      sudo systemctl daemon-reload
+      sudo systemctl start systat
+      sudo systemctl start constat
+      ```
 
-    * OTX AlienVault - https://otx.alienvault.com
-      * Create an account and select your feeds
-      * Set API key in /etc/politraf/config.yaml
-      * ./otxget.py
+  * OTX AlienVault - https://otx.alienvault.com
+    * Create an account and select your feeds
+    * Set API key in /etc/politraf/config.yaml
+    * ./otxget.py
     
-    * Censys.io - https://censys.io/
-      * Create an account
-      * Set API key in /etc/politraf/config.yaml
-      * Set network to scan
-      * ./ext_cscan.py
+  * Censys.io - https://censys.io/
+    * Create an account
+    * Set API key in /etc/politraf/config.yaml
+    * Set network to scan
+    * ./ext_cscan.py
 
-    ```
-    sudo crontab -e
-    0 2 * * * /opt/politraf/otxget.py >/dev/null 2>&1
-    */2 * * * * /opt/politraf/iocwatch.py >/dev/null 2>&1
-    0 2 * * * /opt/politraf/ext_cscan.py >/dev/null 2>&1
-    ```
+  ```
+  sudo crontab -e
+  0 2 * * * /opt/politraf/otxget.py >/dev/null 2>&1
+  */2 * * * * /opt/politraf/iocwatch.py >/dev/null 2>&1
+  0 2 * * * /opt/politraf/ext_cscan.py >/dev/null 2>&1
+  ```
