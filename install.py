@@ -93,7 +93,7 @@ try:
     print (green + 'Wait for clickhouse init and create database with tables' + greene)
     time.sleep(10)
     # Create tables
-    db = dbmodels.Database('politraf', db_url="http://127.0.0.1:8123/", username=default, password=passw, readonly=False, autocreate=True)
+    db = dbmodels.Database('politraf', db_url="http://127.0.0.1:8123/", username="default", password="", readonly=False, autocreate=True)
     db.create_table(dbmodels.CONNStats)
     db.create_table(dbmodels.CPUStats)
     db.create_table(dbmodels.MEMStats)
