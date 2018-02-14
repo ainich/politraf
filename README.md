@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/ainich/politraf.svg?branch=master)](https://travis-ci.org/ainich/politraf)
 [![Updates](https://pyup.io/repos/github/ainich/politraf/shield.svg)](https://pyup.io/repos/github/ainich/politraf/)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/1f170d9dc59343daacae8bdb505468c2)](https://www.codacy.com/app/ainich/politraf?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ainich/politraf&amp;utm_campaign=Badge_Grade)
+[![Maintainability](https://api.codeclimate.com/v1/badges/169ee46e7eff778a80fe/maintainability)](https://codeclimate.com/github/ainich/politraf/maintainability)
 
 
 ![Politraf](https://raw.githubusercontent.com/ainich/politraf/master/politraf.jpg)
