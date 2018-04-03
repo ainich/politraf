@@ -38,13 +38,13 @@
   * OTX AlienVault - https://otx.alienvault.com
     * Create an account and select your feeds
     * Set API key in /etc/politraf/config.yaml
-    * ./otxget.py
+    * /op/politraf/otxget.py
     
   * Censys.io - https://censys.io/
     * Create an account
     * Set API key in /etc/politraf/config.yaml
     * Set network to scan
-    * ./ext_cscan.py
+    * /opt/politraf/ext_cscan.py
 
   * Grafana setup
     * http on port 3000 with admin:admin
