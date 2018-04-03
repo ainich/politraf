@@ -10,17 +10,10 @@
 
   * Add repository
     * Clickhouse
-      * Ubuntu 16.04 Xenial
-        ```
-        echo 'deb http://repo.yandex.ru/clickhouse/xenial stable main' | sudo tee -a /etc/apt/sources.list
-        sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4
-        ```
-      * Ubuntu 14.04  Trusty 
-        ```
-        echo 'deb http://repo.yandex.ru/clickhouse/trusty' | sudo tee -a /etc/apt/sources.list
-        sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4
-        ```
-  
+      ```
+      echo 'deb http://repo.yandex.ru/clickhouse/deb/stable/ main/' | sudo tee -a /etc/apt/sources.list
+      sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4
+      ```
     * Grafana
       ```
       echo 'deb https://packagecloud.io/grafana/stable/debian/ jessie main' | sudo tee -a /etc/apt/sources.list
