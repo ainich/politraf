@@ -95,6 +95,7 @@ try:
     # Create tables
     db = dbmodels.Database('politraf', db_url="http://127.0.0.1:8123/", username="default", password="", readonly=False, autocreate=True)
     db.create_table(dbmodels.CONNStats)
+    db.create_table(dbmodels.CONNStats_buffer)
     db.create_table(dbmodels.CPUStats)
     db.create_table(dbmodels.MEMStats)
     db.create_table(dbmodels.DISKStats)

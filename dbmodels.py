@@ -91,7 +91,6 @@ class DISKStats(Model):
     engine = MergeTree('event_date', ('total', 'used', 'timestamp'))
 
 class CONNStats(Model):
-
     event_date = DateField()
     timestamp = DateTimeField()
     protocol = StringField()
@@ -100,5 +99,19 @@ class CONNStats(Model):
     dst_addr = StringField()
     dst_port = Float32Field()
     qry_name = StringField()
-    
-    engine = MergeTree('event_date', ('timestamp', 'protocol', 'src_addr', 'src_port', 'dst_addr', 'dst_port', 'qry_name'))
+
+    engine = MergeTree('event_date',
+                       ('timestamp', 'protocol', 'src_addr', 'src_port', 'dst_addr', 'dst_port', 'qry_name'))
+
+
+class CONNStats_buffer(Model):
+    event_date = DateField()
+    timestamp = DateTimeField()
+    protocol = StringField()
+    src_addr = StringField()
+    src_port = Float32Field()
+    dst_addr = StringField()
+    dst_port = Float32Field()
+    qry_name = StringField()
+
+    ENGINE = Buffer('connstats', 16, 10, 100, 10000, 1000000, 10000000, 100000000)
