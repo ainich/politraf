@@ -56,6 +56,12 @@ try:
 except Exception as e:
     print(orange, e, orangee)
 try:
+    print (green +"Make dir /etc/politraf/current" + greene)
+    os.makedirs("/etc/politraf/current")
+    print (green + 'Done' + greene)
+except Exception as e:
+    print(orange, e, orangee)
+try:
     print (green +"Copy config.yaml to /etc/politraf" + greene)
     shutil.copy2('config/config.yaml', '/etc/politraf/config.yaml')
     print (green + 'Done' + greene)
@@ -79,9 +85,13 @@ try:
     shutil.copy2('src/systat.py', '/opt/politraf/systat.py')
     shutil.copy2('src/otxget.py', '/opt/politraf/otxget.py')
     shutil.copy2('src/constat.py', '/opt/politraf/constat.py')
+    shutil.copy2('src/csv_load_to_db.py', '/opt/politraf/csv_load_to_db.py')
     shutil.copy2('src/ext_cscan.py', '/opt/politraf/ext_cscan.py')
     shutil.copy2('src/iocwatch.py', '/opt/politraf/iocwatch.py')
     shutil.copy2('dbmodels.py', '/opt/politraf/dbmodels.py')
+    shutil.copy2('src/ioc_self_get.py', '/opt/politraf/ioc_self_get.py')
+    shutil.copy2('src/ioc_self_watch.py', '/opt/politraf/ioc_self_watch.py')
+    shutil.copy2('src/self_ioc_list.csv', '/opt/politraf/self_ioc_list.csv')
     #os.chmod("src/systat.py", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
     #os.chmod("src/otxget.py", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
     #os.chmod("src/constat.py", stat.S_IRUSR | stat.S_IRGRP | stat.S_IROTH)
