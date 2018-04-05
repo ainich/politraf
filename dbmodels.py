@@ -4,6 +4,7 @@ from infi.clickhouse_orm.models import Model
 from infi.clickhouse_orm.fields import *
 from infi.clickhouse_orm.engines import MergeTree
 from infi.clickhouse_orm.engines import Memory
+from infi.clickhouse_orm.engines import Buffer
 
 
 class OPEN_PORTS(Model):
@@ -89,6 +90,7 @@ class DISKStats(Model):
     used = Float32Field()
 
     engine = MergeTree('event_date', ('total', 'used', 'timestamp'))
+
 
 class CONNStats(Model):
     event_date = DateField()

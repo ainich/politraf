@@ -16,7 +16,7 @@ import dbmodels
 
 
 # Set logging level
-logging.basicConfig(level = logging.INFO)
+logging.basicConfig(level = logging.ERROR)
 
 
 # Read config
@@ -50,18 +50,14 @@ def get_traf_last():
         try:
             start = time.time()
             logging.info("Starting fetch traffic stat ...")
-            for row in db.select('SELECT uniq(dst_addr), * FROM politraf.connstats WHERE timestamp >= toDateTime('+from_time_epoch+') GROUP BY dst_addr, event_date, timestamp, protocol, src_addr, src_port, dst_port, qry_name ORDER BY timestamp'):
-                timestamp = datetime.datetime.now(tz)
-                if "none" not in row.qry_name and "arp" not in row.qry_name:
-                    logging.debug(row.qry_name)
-                    for ioc in db.select('SELECT * FROM politraf.ioc_otx WHERE indicator = \''+row.qry_name+'\' ORDER BY timestamp'):
-                        db.insert([dbmodels.IOCStats(event_date=today, timestamp=timestamp, protocol=row.protocol, src_addr=row.src_addr, src_port=row.src_port, dst_addr=row.dst_addr, dst_port=row.dst_port, qry_name=row.qry_name, indicator=ioc.indicator, name=ioc.name, references=ioc.references)])
-                else:
-                    logging.debug(row.dst_addr)
-                    for ioc in db.select('SELECT * FROM politraf.ioc_otx WHERE indicator = \''+row.dst_addr+'\' ORDER BY timestamp'):
-                        db.insert([
-                        dbmodels.IOCStats(event_date=today, timestamp=timestamp, protocol=row.protocol, src_addr=row.src_addr, src_port=row.src_port, dst_addr=row.dst_addr, dst_port=row.dst_port, qry_name=row.qry_name, indicator=ioc.indicator, name=ioc.name, references=ioc.references)
-                        ])
+            for row in db.select(
+                    'SELECT dst_addr, src_addr, qry_name, protocol, src_port, dst_port FROM politraf.connstats_buffer WHERE timestamp >= toDateTime(' + from_time_epoch + ') GROUP BY dst_addr, src_addr, qry_name, protocol, src_port, dst_port'):
+                for ioc in db.select('SELECT * FROM politraf.ioc_otx WHERE indicator = \''+row.qry_name+'\' OR indicator = \''+row.dst_addr+'\''):
+                    db.insert([dbmodels.IOCStats(event_date=today, timestamp=to_time, protocol=row.protocol, src_addr=row.src_addr, src_port=row.src_port, dst_addr=row.dst_addr, dst_port=row.dst_port, qry_name=row.qry_name, indicator=ioc.indicator, name=ioc.name, references=ioc.references)])
+                #for ioc in db.select('SELECT * FROM politraf.ioc_otx WHERE indicator = \''+row.dst_addr+'\' ORDER BY timestamp'):
+                #    db.insert([
+                #        dbmodels.IOCStats(event_date=today, timestamp=to_time, protocol=row.protocol, src_addr=row.src_addr, src_port=row.src_port, dst_addr=row.dst_addr, dst_port=row.dst_port, qry_name=row.qry_name, indicator=ioc.indicator, name=ioc.name, references=ioc.references)
+                #        ])
             end = time.time()
             time_to_end = end - start
             print('Time to all events ', time_to_end)
