@@ -51,6 +51,12 @@
     * Add datasource named Clickhouse
     * Add dashboard from https://grafana.com/api/dashboards/2996/revisions/1/download
     * Add dashboard from https://grafana.com/api/dashboards/3248/revisions/2/download
+    
+  * Custom IoC import
+    ```
+    vim /opt/politraf/self_ioc_list.csv
+    /opt/politraf/ioc_self_get.py
+    ```
 
   * Setup cron jobs 
     ```
@@ -58,6 +64,9 @@
     ```
     ```
     0 2 * * * /opt/politraf/otxget.py >/dev/null 2>&1
+    0 3 * * * /opt/politraf/ioc_self_get.py >/dev/null 2>&1
     */2 * * * * /opt/politraf/iocwatch.py >/dev/null 2>&1
+    */2 * * * * /opt/politraf/ioc_self_watch.py >/dev/null 2>&1
+    */1 * * * * /opt/politraf/csv_load_to_db.py >/dev/null 2>&1
     0 2 * * * /opt/politraf/ext_cscan.py >/dev/null 2>&1
     ```
