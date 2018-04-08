@@ -39,3 +39,5 @@ SUBNET: 185.46.11.0/24
 #
 time_zone: Europe/Moscow
 ##############################################################################
+ioc_file: /opt/politraf/self_ioc_list.csv
+traf_file: /opt/politraf/current/traff.csv

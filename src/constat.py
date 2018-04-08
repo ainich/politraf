@@ -26,7 +26,7 @@ logging.basicConfig(level = logging.ERROR)
 with open("/etc/politraf/config.yaml", 'r') as stream:
     try:
         config = (yaml.safe_load(stream))
-        TRAF_FILE = config['ioc_file']
+        TRAF_FILE = config['traf_file']
         interface = config['interface']
         interfaces = interface.split(",")
         bpf_filter = config['bpf_filter']

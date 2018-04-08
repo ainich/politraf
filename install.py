@@ -24,7 +24,7 @@ try:
     #Popen('export LC_ALL=C', shell=True, executable='/bin/bash')
     call(["apt-get", "install" , "python3-pip"])
     call(["pip3", "install" , "-r" , "requirements.txt"])
-    call(["pip3", "install" , "--upgrade six"])
+    call(["pip3", "install" , "--upgrade", "six"])
     print (green + 'Done' + greene)
 except Exception as e:
     print(orange, e, orangee)
@@ -56,8 +56,8 @@ try:
 except Exception as e:
     print(orange, e, orangee)
 try:
-    print (green +"Make dir /etc/politraf/current" + greene)
-    os.makedirs("/etc/politraf/current")
+    print (green +"Make dir /opt/politraf/current" + greene)
+    os.makedirs("/opt/politraf/current")
     print (green + 'Done' + greene)
 except Exception as e:
     print(orange, e, orangee)
@@ -101,7 +101,7 @@ except Exception as e:
     print(orange, e, orangee)
 try:
     print (green + 'Wait for clickhouse init and create database with tables' + greene)
-    time.sleep(10)
+    time.sleep(15)
     # Create tables
     db = dbmodels.Database('politraf', db_url="http://127.0.0.1:8123/", username="default", password="", readonly=False, autocreate=True)
     db.create_table(dbmodels.CONNStats)
