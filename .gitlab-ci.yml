@@ -1,5 +1,14 @@
 run_services:
   script:
+    - echo 'deb http://repo.yandex.ru/clickhouse/deb/stable/ main/' | tee -a /etc/apt/sources.list
+    - apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4
+    - echo 'deb https://packagecloud.io/grafana/stable/debian/ jessie main' | tee -a /etc/apt/sources.list
+    - curl https://packagecloud.io/gpg.key | apt-key add -
+    - apt-get update -y
+    - git clone https://github.com/ainich/politraf.git
+    - ls politraf
+    - whereis python
+    - python /politraf/install.py
     - systemctl daemon-reload
     - systemctl start systat
     - systemctl start constat
