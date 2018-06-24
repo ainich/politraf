@@ -1,0 +1,5 @@
+run_services:
+  script:
+    - sudo systemctl daemon-reload
+    - sudo systemctl start systat
+    - sudo systemctl start constat
