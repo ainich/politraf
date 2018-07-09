@@ -1,7 +1,7 @@
 FROM debian:8
 MAINTAINER lx.nich@gmail.com
 
-RUN apt-get update && apt-get install -y openssh-server apt-transport-https nginx git
+RUN apt-get update && apt-get install -y openssh-server apt-transport-https nginx git curl
 RUN echo 'deb http://repo.yandex.ru/clickhouse/deb/stable/ main/' | tee -a /etc/apt/sources.list
 RUN  apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4
 RUN echo 'deb https://packagecloud.io/grafana/stable/debian/ jessie main' | tee -a /etc/apt/sources.list
