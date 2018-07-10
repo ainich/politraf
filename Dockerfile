@@ -11,6 +11,10 @@ RUN git clone https://gitlab.com/ainich/politraf.git
 RUN pip3 install -r /politraf/requirements.txt
 RUN apt-get install -y apt-utils
 RUN python3 /politraf/install_for_docker.py
+RUN systemctl enable grafana-server
+RUN systemctl enable clickhouse-server
+RUN systemctl enable systat
+RUN systemctl enable constat
 
 EXPOSE 22 80
 

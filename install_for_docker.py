@@ -64,12 +64,6 @@ try:
 except Exception as e:
     print(orange, e, orangee)
 try:
-    print (green + 'Make dir /opt/politraf' + greene)
-    os.makedirs("/opt/politraf")
-    print (green + 'Done' + greene)
-except Exception as e:
-    print(orange, e, orangee)
-try:
     print (green +'Setup services' + greene)
     shutil.copy2('/politraf/config/systat.service', '/etc/systemd/system/systat.service')
     shutil.copy2('/politraf/config/constat.service', '/etc/systemd/system/constat.service')

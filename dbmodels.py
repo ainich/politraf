@@ -116,4 +116,4 @@ class CONNStats_buffer(Model):
     dst_port = Float32Field()
     qry_name = StringField()
 
-    ENGINE = Buffer('connstats', 16, 10, 100, 10000, 1000000, 10000000, 100000000)
+    engine = Buffer('connstats', 16, 10, 100, 10000, 1000000, 10000000, 100000000)
