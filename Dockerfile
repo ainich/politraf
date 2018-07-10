@@ -1,7 +1,7 @@
 FROM debian:8
 MAINTAINER lx.nich@gmail.com
 
-RUN apt-get update && apt-get install -y openssh-server apt-transport-https nginx git curl python3 python3-pip libxml2-dev libxslt1-dev python-dev python3-dev python3-lxml grafana clickhouse-client clickhouse-server-common
+RUN apt-get update && apt-get install -y openssh-server apt-transport-https nginx git curl python3 python3-pip libxml2-dev libxslt1-dev python-dev python3-dev python3-lxml
 RUN echo 'deb http://repo.yandex.ru/clickhouse/deb/stable/ main/' | tee -a /etc/apt/sources.list
 RUN  apt-key adv --keyserver keyserver.ubuntu.com --recv E0C56BD4
 RUN echo 'deb https://packagecloud.io/grafana/stable/debian/ jessie main' | tee -a /etc/apt/sources.list
