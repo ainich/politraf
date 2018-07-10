@@ -22,8 +22,6 @@ try:
     call(["apt-get", "install" , "tshark"])
     os.putenv("LC_ALL", "C")
     #Popen('export LC_ALL=C', shell=True, executable='/bin/bash')
-    call(["apt-get", "install" , "python3-pip"])
-    call(["pip3", "install" , "-r" , "requirements.txt"])
     call(["pip3", "install" , "--upgrade", "six"])
     print (green + 'Done' + greene)
 except Exception as e:
@@ -32,10 +30,7 @@ except Exception as e:
 import dbmodels
 
 try:
-    print (green + 'Install Clickhouse and Grafana' + greene)
-    call(["apt-get", "update"])
-    call(["apt-get", "install" , "grafana"])
-    call(["apt-get", "install" , "clickhouse-client" , "clickhouse-server-common"])
+    print (green + 'Install Clickhouse plugin for Grafana' + greene)
     call(["grafana-cli", "plugins" , "install" , "vertamedia-clickhouse-datasource"])
     print (green + 'Done' + greene)
 except Exception as e:
@@ -43,6 +38,7 @@ except Exception as e:
 
 try:
     print (green + "Start Clickhouse and Grafana" + greene)
+    call(["systemctl", "daemon-reload"])
     call(["service", "clickhouse-server" , "restart"])
     call(["service", "grafana-server" , "restart"])
     print (green + 'Done' + greene)
