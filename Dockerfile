@@ -14,6 +14,7 @@ RUN systemctl enable grafana-server
 RUN systemctl enable clickhouse-server
 RUN systemctl enable systat
 RUN systemctl enable constat
+CMD ["service grafana-server start", "service clickhouse-server start", "service systat start", "service constat start"]
 
-EXPOSE 22 80
+EXPOSE 22 3000
 
