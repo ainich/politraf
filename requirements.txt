@@ -1,4 +1,4 @@
-infi.clickhouse_orm==1.0.0
+infi.clickhouse_orm==1.0.3
 pyshark==0.4.1
 OTXv2==1.2
 pyyaml==3.13
