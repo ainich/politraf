@@ -24,7 +24,6 @@ class OPEN_PORTS(Model):
     cvelist = StringField()
     score = Float32Field()
 
-    
     engine = MergeTree('event_date', ('os', 'os_v', 'srv', 'addr', 'port', 'product', 'version', 'descr', 'vdesc', 'score'))
     #engine = Memory()
 

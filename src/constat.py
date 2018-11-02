@@ -57,7 +57,7 @@ except Exception as e:
 def database_write(today, timestamp, protocol, src_addr, src_port, dst_addr, dst_port, qry_name):
     try:
         db.insert([
-            dbmodels.CONNStats_buffer(event_date=today, timestamp=timestamp, protocol=protocol, src_addr=src_addr, src_port=src_port, dst_addr=dst_addr, dst_port=dst_port, qry_name=qry_name)
+            dbmodels.CONNStats(event_date=today, timestamp=timestamp, protocol=protocol, src_addr=src_addr, src_port=src_port, dst_addr=dst_addr, dst_port=dst_port, qry_name=qry_name)
             ])
     except Exception as e:
         logging.error(e)
@@ -113,21 +113,22 @@ def print_conversation_header(pkt):
         today = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d')
 
         # prepare data for bulk
-        data_buffer = []
-        insert_data = dbmodels.CONNStats_buffer(
-            event_date=today,
-            timestamp=timestamp,
-            protocol=protocol,
-            src_addr=src_addr,
-            src_port=src_port,
-            dst_addr=dst_addr,
-            dst_port=dst_port,
-            qry_name=qry_name
-            )
+        #data_buffer = []
+        #insert_data = dbmodels.CONNStats_buffer(
+        #    event_date=today,
+        #    timestamp=timestamp,
+        #    protocol=protocol,
+        #    src_addr=src_addr,
+        #    src_port=src_port,
+        #    dst_addr=dst_addr,
+        #    dst_port=dst_port,
+        #    qry_name=qry_name
+        #    )
         # appends data into couple
         #data_buffer.append(insert_data)
         #database_write_bulk(data_buffer)
-        csv_file_write(today, timestamp, protocol, src_addr, src_port, dst_addr, dst_port, qry_name)
+        #csv_file_write(today, timestamp, protocol, src_addr, src_port, dst_addr, dst_port, qry_name)
+        database_write(today, timestamp, protocol, src_addr, src_port, dst_addr, dst_port, qry_name)
         #print(today, timestamp, protocol, src_addr, src_port, dst_addr, dst_port, qry_name)
         #print(str(insert_data))
         end = time.time()
