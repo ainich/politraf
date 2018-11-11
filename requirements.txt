@@ -1,5 +1,5 @@
 infi.clickhouse_orm
-pyshark==0.4.1
+pyshark==0.4.2.1
 OTXv2==1.2
 pyyaml==3.13
 psutil==5.4.6
